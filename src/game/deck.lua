@@ -113,16 +113,18 @@ function Deck:mousemoved(x, y)
 end
 
 function Deck:mousepressed(x, y, button)
-	if self.x > x or x > self.x + cWidth or
-			self.y > y or y > self.y + cHeight then	
+	if self.x >= x or x >= self.x + self.w or
+			self.y >= y or y >= self.y + self.h then	
 		return
 	end
 	
-	if button == 1 then
-		self:addActionToBottom('flip')
-	elseif button == 2 then
-		self:addActionToBottom('stab')
-	end
+	--if button == 1 then
+		--self:addActionToBottom('flip')
+	--elseif button == 2 then
+		--self:addActionToBottom('stab')
+	--end
+	
+	print('holla')
 end
 
 return Deck
