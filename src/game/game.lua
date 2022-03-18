@@ -1,6 +1,7 @@
 local Deck = require 'src.game.deck'
 local ValueHint = require 'src.game.valueHint'
 local TypeHint = require 'src.game.typeHint'
+local ScoreManager = require 'src.game.scoreManager'
 
 local Manager = require 'src.game.manager'
 
@@ -9,6 +10,8 @@ local Game = {}
 function Game:enter()
 	self.decks = Manager()
 	self.hints = Manager()
+	
+	self.scoreManager = ScoreManager()
 	
 	self:setupGame()
 end
@@ -61,10 +64,10 @@ function Game:setupGame()
 	local typeHint4 = self.hints:add(TypeHint(960, 835, 'horizontal', deck3, deck4))
 	
 		-- Register OnCardChange event
-	deck1:registerOnCardChangedEvent(valueHint1, valueHint2, typeHint1, typeHint2)
-	deck2:registerOnCardChangedEvent(valueHint1, valueHint3, typeHint1, typeHint3)
-	deck3:registerOnCardChangedEvent(valueHint2, valueHint4, typeHint2, typeHint4)
-	deck4:registerOnCardChangedEvent(valueHint3, valueHint4, typeHint3, typeHint4)
+	deck1:registerOnCardChangedEvent(valueHint1, valueHint2, typeHint1, typeHint2, scoreManager)
+	deck2:registerOnCardChangedEvent(valueHint1, valueHint3, typeHint1, typeHint3, scoreManager)
+	deck3:registerOnCardChangedEvent(valueHint2, valueHint4, typeHint2, typeHint4, scoreManager)
+	deck4:registerOnCardChangedEvent(valueHint3, valueHint4, typeHint3, typeHint4, scoreManager)
 end
 
 function Game:update(dt)
@@ -83,6 +86,8 @@ function Game:draw()
 
 	self.decks:draw()
 	self.hints:draw()
+	
+	self.scoreManager:draw()
 	
 	love.graphics.setColor(1, 1, 1)
 	Suit.draw()

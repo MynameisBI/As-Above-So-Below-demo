@@ -1,11 +1,13 @@
 local Card = Class('Card')
 
-function Card:initialize(name, value, score, group, type, event, sprite)
+function Card:initialize(name, value, score, triValue, group, type, event, sprite)
 	self.name = name
 	
 	self.value = value
 	
 	self.score = score or value
+	
+	self.triValue = triValue or 0
 	
 	self.group = group
 	

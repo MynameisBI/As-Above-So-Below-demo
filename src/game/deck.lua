@@ -38,14 +38,10 @@ function Deck:initialize(x, y, scoreOx, scoreOy)
 	self.isFlipping = false
 end
 
-function Deck:addCard(name, value, score, group, type, event, sprite)
-	table.insert(self.cards, Card(name, value, score, group, type, event, sprite))
-end
-
 function Deck:addCard(id)
 	local cardInfo = DATA.cardInfos[id]
 	table.insert(self.cards,
-			Card(cardInfo.name, cardInfo.value, cardInfo.score,
+			Card(cardInfo.name, cardInfo.value, cardInfo.score, cardInfo.triValue,
 					cardInfo.group, cardInfo.type,
 					cardInfo.event,
 					cardInfo.sprite)
@@ -101,6 +97,9 @@ function Deck:executeNextAction()
 					self.timer:tween(flipAnimationInfo.flipTime/2, self.vertices[2], {self.w, 0}, 'linear')
 					self.timer:tween(flipAnimationInfo.flipTime/2, self.vertices[3], {self.w, self.h}, 'linear')
 					self.timer:tween(flipAnimationInfo.flipTime/2, self.vertices[4], {0, self.h}, 'linear')
+					
+					Gamestate.current().scoreManager:modifyScore(self.currentFlippedCard.score)
+					Gamestate.current().scoreManager:modifyTriPrimaObtained(self.currentFlippedCard.triValue)
 					
 					self:onActionEnded()
 				end)
