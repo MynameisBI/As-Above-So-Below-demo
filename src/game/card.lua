@@ -16,6 +16,7 @@ function Card:initialize(name, value, score, triValue, group, type, event, sprit
 	self.event = event 
 	
 	self.sprite = Sprites.cards.front[sprite]
+	self.valueTextColor = {0, 0, 0}
 end
 
 return Card

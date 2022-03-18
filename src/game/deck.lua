@@ -5,7 +5,7 @@ local Deck = Class('Deck')
 -- Flip animation info
 local flipAnimationInfo = {
 	flipTime = 0.3,
-	delayToFade = 0.7,
+	delayToFade = 1.1,
 	fadeTime = 0.3,
 	maxOy = 100
 }
@@ -31,6 +31,7 @@ function Deck:initialize(x, y, scoreOx, scoreOy)
 	self.vertices = {{self.w, 0, 0, 0, 1, 1, 1}, {0, 0, 1, 0, 1, 1, 1},
 			{0, self.h, 1, 1, 1, 1, 1}, {self.w, self.h, 0, 1, 1, 1, 1}}
 	self.mesh = love.graphics.newMesh(self.vertices, 'fan')
+	self.canvas = love.graphics.newCanvas(self.w, self.h)
 	self.currentFlippedCard = nil
 	self.currentFlippedCardOpacity = 1
 	self.currentFlippedCardOy = 0
@@ -147,9 +148,6 @@ function Deck:update(dt)
 end
 
 function Deck:draw()
-	love.graphics.setColor(0.4, 0.4, 0.4)
-	love.graphics.rectangle('fill', self.x, self.y, self.w, self.h)
-	
 	if #self.cards >= 1 then
 		local sprite = Sprites.cards.back
 		love.graphics.setColor(1, 1, 1)
@@ -158,16 +156,32 @@ function Deck:draw()
 				sprite:getWidth(), 0)
 	end
 	
+	
 	if self.currentFlippedCard ~= nil then
 		self.mesh:setVertices(self.vertices)
 		if self.currentFlippedSprite == nil then
 			self.mesh:setTexture(Sprites.cards.back)
 		else
-			self.mesh:setTexture(self.currentFlippedSprite)
+			love.graphics.setCanvas(self.canvas)
+				love.graphics.setColor(1, 1, 1)
+				love.graphics.draw(self.currentFlippedSprite, 0, 0,
+						0, self.w / self.currentFlippedCard.sprite:getWidth(), self.h / self.currentFlippedCard.sprite:getHeight())
+						
+						
+				local defaultFont = love.graphics.getFont()
+				love.graphics.setColor(self.currentFlippedCard.valueTextColor)
+				love.graphics.setFont(Fonts.cardValue)
+				love.graphics.print(tostring(self.currentFlippedCard.value), 45, 273, -- 206, 15 dep hon
+						0, 1, 1,
+						Fonts.cardValue:getWidth(tostring(self.currentFlippedCard.value))/2, 0)
+				love.graphics.setFont(defaultFont)
+			love.graphics.setCanvas()
+			self.mesh:setTexture(self.canvas)
 		end
 		love.graphics.setColor(1, 1, 1, self.currentFlippedCardOpacity)
 		love.graphics.draw(self.mesh, self.x, self.y - self.currentFlippedCardOy)
 	end
+	
 	
 	love.graphics.setColor(1, 1, 1)
 	love.graphics.print(string.format('x%d', #self.cards), self.x + self.scoreOx, self.y + self.scoreOy)
@@ -183,7 +197,14 @@ function Deck:mousepressed(x, y, button)
 		return
 	end
 	
-	if not self.isFlipping then
+	local isFlipping = false
+	for _, deck in ipairs(Gamestate.current().decks.entities) do
+		if deck.isFlipping then
+			isFlipping = true
+			break
+		end
+	end
+	if not isFlipping then
 		if button == 1 then
 			self:addActionToBottom('flip')
 			self:addActionToBottom('fade flipped card')

@@ -23,4 +23,8 @@ Audios = {
 	stab = love.audio.newSource('assets/audio/remove.wav', 'static'),
 }
 
+Fonts = {
+	cardValue = love.graphics.newFont('assets/fonts/Olondon_.otf', 40)
+}
+
 lAYOUT = love.graphics.newImage('assets/layout-01.png')
