@@ -8,10 +8,10 @@ function TypeHint:initialize(x, y, dir, leftDeck, rightDeck)
 	self.leftDeck, self.rightDeck = leftDeck, rightDeck
 	
 	self.hint = nil
-	self:onCardChange()
+	self:onCardChanged()
 end
 
-function TypeHint:onCardChange()
+function TypeHint:onCardChanged()
 	if #self.leftDeck.cards <= 0 or #self.rightDeck.cards <= 0 then
 		self.hint = ''
 		return 1

@@ -1,10 +1,15 @@
 require 'globals'
 require 'assets'
 
+DATA = require 'data'
+
 Game = require 'src.game.game'
 Menu = require 'src.menu.menu'
 
+
 function love.load()
+	math.randomseed(os.time())
+
 	Gamestate.registerEvents()
 	Gamestate.switch(Game)
 end

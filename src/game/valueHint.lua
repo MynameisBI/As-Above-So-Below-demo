@@ -8,10 +8,10 @@ function ValueHint:initialize(x, y, dir, leftDeck, rightDeck)
 	self.leftDeck, self.rightDeck = leftDeck, rightDeck
 	
 	self.hint = nil
-	self:onCardChange()
+	self:onCardChanged()
 end
 
-function ValueHint:onCardChange()
+function ValueHint:onCardChanged()
 	if #self.leftDeck.cards <= 0 or #self.rightDeck.cards <= 0 then
 		self.hint = ''
 		return 1
@@ -21,8 +21,8 @@ function ValueHint:onCardChange()
 end
 
 function ValueHint:getHint(leftCard, rightCard)
-	if leftCard.value < rightCard.type then return '<'
-	elseif leftCard.group > rightCard.group then return '>'
+	if leftCard.value < rightCard.value then return '<'
+	elseif leftCard.value > rightCard.value then return '>'
 	else return '='
 	end
 end

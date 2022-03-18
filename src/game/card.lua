@@ -13,7 +13,7 @@ function Card:initialize(name, value, score, group, type, event, sprite)
 	
 	self.event = event 
 	
-	self.frontSprite = Sprites.cards.front[sprite]
+	self.sprite = Sprites.cards.front[sprite]
 end
 
 return Card

@@ -1,17 +1,19 @@
 return {
-	base = {
+	deck = {
+		base = {
 		'b', 'be',
-	},
-	mixed = {
-		'ge', 'ge', 'ge',
-		'g', 'g', 'g', 'g', 'g',
-		'f1', 'f2', 'f3', 'f4',
-		'w1', 'w2', 'w3', 'w4',
-		'e1', 'e2', 'e3', 'e4',
-		'a1', 'a2', 'a3', 'a4',
+		},
+		mixed = {
+			'ge', 'ge', 'ge',
+			'g', 'g', 'g', 'g', 'g',
+			'f1', 'f2', 'f3', 'f4',
+			'w1', 'w2', 'w3', 'w4',
+			'e1', 'e2', 'e3', 'e4',
+			'a1', 'a2', 'a3', 'a4',
+		}
 	},
 	
-	cardClasses = {
+	cardInfos = {
 		f1 = {
 			name = 'Fire 1',
 			value = 1,
