@@ -45,7 +45,7 @@ function Deck:addCard(id)
 			Card(cardInfo.name, cardInfo.value, cardInfo.score, cardInfo.triValue,
 					cardInfo.group, cardInfo.type,
 					cardInfo.event,
-					cardInfo.sprite)
+					cardInfo.sprite, cardInfo.valueTextColor)
 			)
 end
 

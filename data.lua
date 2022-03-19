@@ -151,6 +151,7 @@ return {
 			group = 'black',
 			type = 'black',
 			sprite = 'black',
+			valueTextColor = {1, 1, 1},
 		},
 		be = {
 			name = 'Black Event 0',
@@ -161,6 +162,7 @@ return {
 				deck:stab('self', 2)
 			end,
 			sprite = 'black',
+			valueTextColor = {1, 1, 1},
 		},
 	},
 }

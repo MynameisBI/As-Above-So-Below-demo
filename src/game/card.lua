@@ -1,6 +1,6 @@
 local Card = Class('Card')
 
-function Card:initialize(name, value, score, triValue, group, type, event, sprite)
+function Card:initialize(name, value, score, triValue, group, type, event, sprite, valueTextColor)
 	self.name = name
 	
 	self.value = value
@@ -16,7 +16,7 @@ function Card:initialize(name, value, score, triValue, group, type, event, sprit
 	self.event = event 
 	
 	self.sprite = Sprites.cards.front[sprite]
-	self.valueTextColor = {0, 0, 0}
+	self.valueTextColor = valueTextColor or {0, 0, 0}
 end
 
 return Card
