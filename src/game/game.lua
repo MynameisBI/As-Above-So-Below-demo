@@ -53,15 +53,15 @@ function Game:setupGame()
 
 
 	-- Follow the deck initialization with the hints
-	local valueHint1 = self.hints:add(ValueHint(960, 410, 'horizontal', deck1, deck2))
-	local valueHint2 = self.hints:add(ValueHint(814, 558, 'vertical', deck1, deck3))
-	local valueHint3 = self.hints:add(ValueHint(1105, 558, 'vertical', deck2, deck4))
-	local valueHint4 = self.hints:add(ValueHint(960, 700, 'horizontal', deck3, deck4))
-	
-	local typeHint1 = self.hints:add(TypeHint(960, 275, 'horizontal', deck1, deck2))
-	local typeHint2 = self.hints:add(TypeHint(680, 558, 'vertical', deck1, deck3))
+	local typeHint1 = self.hints:add(TypeHint(958, 270, 'horizontal', deck1, deck2))
+	local typeHint2 = self.hints:add(TypeHint(676, 554, 'vertical', deck1, deck3))
 	local typeHint3 = self.hints:add(TypeHint(1242, 558, 'vertical', deck2, deck4))
-	local typeHint4 = self.hints:add(TypeHint(960, 835, 'horizontal', deck3, deck4))
+	local typeHint4 = self.hints:add(TypeHint(962, 836, 'horizontal', deck3, deck4))
+	
+	local valueHint1 = self.hints:add(ValueHint(956, 410, 'horizontal', deck1, deck2))
+	local valueHint2 = self.hints:add(ValueHint(812, 556, 'vertical', deck1, deck3))
+	local valueHint3 = self.hints:add(ValueHint(1108, 556, 'vertical', deck2, deck4))
+	local valueHint4 = self.hints:add(ValueHint(962, 704, 'horizontal', deck3, deck4))
 	
 		-- Register OnCardChange event
 	deck1:registerOnCardChangedEvent(valueHint1, valueHint2, typeHint1, typeHint2, scoreManager)
@@ -74,8 +74,10 @@ function Game:update(dt)
 	self.decks:update(dt)
 	self.hints:update(dt)
 	
-	if Suit.Button('toggle debug', 400, 400, 100, 30).hit then
-		IS_DEBUG = not IS_DEBUG
+	if Suit.Button('toggle debug', 250, 400, 200, 80).hit then
+		Settings.isDebug = not Settings.isDebug
+	elseif Suit.Button('toggle card automatically fade', 250, 520, 200, 80).hit then
+		Settings.cardAutomaticallyFadeAway = not Settings.cardAutomaticallyFadeAway
 	end
 end
 

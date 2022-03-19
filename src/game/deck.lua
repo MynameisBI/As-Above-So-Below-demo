@@ -78,7 +78,9 @@ end
 function Deck:executeNextAction()
 	local action = self.actionQueue[1]
 	
-	if action == 'flip' or action == 'stab' then
+	if action == 'flip' or action == 'remove' then
+		print('flip card '..tostring(self.cards[1].name))
+	
 		self.currentFlippedCard = table.remove(self.cards, 1)
 		
 		self.isFlipping = true
@@ -106,23 +108,28 @@ function Deck:executeNextAction()
 				end)
 				
 	elseif action == 'fade flipped card' then
-		self.timer:after(flipAnimationInfo.delayToFade, 
+		local delay
+		if Settings.cardAutomaticallyFadeAway then delay = flipAnimationInfo.delayToFade
+		else delay = 0.05
+		end
+		self.timer:after(delay, 
 				function()
 					self.timer:tween(flipAnimationInfo.fadeTime, self,
 							{currentFlippedCardOpacity = 0, currentFlippedCardOy = flipAnimationInfo.maxOy}, 'linear',
 							function()
 								self.timer:after(0.1,
 										function()
-											self.currentFlippedSprite = nil
-										
-											self.currentFlippedCardOpacity = 1
-											self.currentFlippedCardOy = 0
 											self.vertices[1][1], self.vertices[1][2] = self.w, 0
 											self.vertices[2][1], self.vertices[2][2] = 0, 0
 											self.vertices[3][1], self.vertices[3][2] = 0, self.h
 											self.vertices[4][1], self.vertices[4][2] = self.w, self.h
-											
+										
+											self.currentFlippedCard = nil
+											self.currentFlippedCardOpacity = 1
+											self.currentFlippedCardOy = 0
+											self.currentFlippedSprite = nil
 											self.isFlipping = false
+											
 											self:onActionEnded()
 											self:emitOnCardChangedEvent()
 										end)
@@ -197,21 +204,28 @@ function Deck:mousepressed(x, y, button)
 		return
 	end
 	
-	local isFlipping = false
+	if self.isInAction then return end
+	
+	local isAnyDeckFlipping = false
 	for _, deck in ipairs(Gamestate.current().decks.entities) do
 		if deck.isFlipping then
-			isFlipping = true
+			isAnyDeckFlipping = true
 			break
 		end
 	end
-	if not isFlipping then
-		if button == 1 then
-			self:addActionToBottom('flip')
-			self:addActionToBottom('fade flipped card')
-		elseif button == 2 then
-			self:addActionToBottom('stab')
-			self:addActionToBottom('fade flipped card')
-		end
+	
+	local mainAction
+	if button == 1 then mainAction = 'flip'
+	elseif button == 2 then mainAction = 'remove'
+	end
+	
+	if not isAnyDeckFlipping and Settings.cardAutomaticallyFadeAway then
+		self:addActionToBottom(mainAction)
+		self:addActionToBottom('fade flipped card')
+	elseif not isAnyDeckFlipping and not Settings.cardAutomaticallyFadeAway then
+		self:addActionToBottom(mainAction)
+	elseif isAnyDeckFlipping and self.currentFlippedCard ~= nil then
+		self:addActionToBottom('fade flipped card')
 	end
 end
 

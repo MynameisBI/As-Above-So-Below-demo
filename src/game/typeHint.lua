@@ -31,10 +31,13 @@ function TypeHint:update(dt)
 end
 
 function TypeHint:draw()
-	local f = love.graphics.getFont()
-	local t = 'tHint:\n'..self.hint
-	love.graphics.setColor(1, 1, 1)
-	love.graphics.print(t, self.x - f:getWidth(t)/2, self.y - f:getHeight())
+	if self.hint == nil then return end
+	
+	local sprite = Sprites.hints.typeHints[self.dir][self.hint]
+	if sprite ~= nil then
+		love.graphics.setColor(1, 1, 1)
+		love.graphics.draw(sprite, self.x, self.y, 0, 0.5, 0.5, sprite:getWidth() / 2, sprite:getHeight() / 2)
+	end
 end
 
 return TypeHint

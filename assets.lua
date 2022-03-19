@@ -14,6 +14,32 @@ Sprites = {
 			['black event 2'] = love.graphics.newImage('assets/cards/black_event_2.png'),
 		}
 	},
+	hints = {
+		typeHints = {
+			horizontal = {
+				['='] = love.graphics.newImage('assets/hints/tHint_hor_==.png'),
+				['~'] = love.graphics.newImage('assets/hints/tHint_hor_~.png'),
+				['=/='] = love.graphics.newImage('assets/hints/tHint_hor_~=.png'),
+			},
+			vertical = {
+				['='] = love.graphics.newImage('assets/hints/tHint_ver_==.png'),
+				['~'] = love.graphics.newImage('assets/hints/tHint_ver_~.png'),
+				['=/='] = love.graphics.newImage('assets/hints/tHint_ver_~=.png'),
+			}
+		},
+		valueHints = {
+			horizontal = {
+				['='] = love.graphics.newImage('assets/hints/vHint_hor_=.png'),
+				['<'] = love.graphics.newImage('assets/hints/vHint_hor_right.png'),
+				['>'] = love.graphics.newImage('assets/hints/vHint_hor_left.png'),
+			},
+			vertical = {
+				['='] = love.graphics.newImage('assets/hints/vHint_ver_=.png'),
+				['<'] = love.graphics.newImage('assets/hints/vHint_ver_down.png'),
+				['>'] = love.graphics.newImage('assets/hints/vHint_ver_up.png'),
+			}
+		},
+	},
 	background = love.graphics.newImage('assets/game_background.png'),
 	menu = love.graphics.newImage('assets/menu.png')
 }

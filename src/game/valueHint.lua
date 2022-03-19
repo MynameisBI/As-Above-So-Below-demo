@@ -31,10 +31,11 @@ function ValueHint:update(dt)
 end
 
 function ValueHint:draw()
-	local f = love.graphics.getFont()
-	local t = 'vHint:\n'..self.hint
-	love.graphics.setColor(1, 1, 1)
-	love.graphics.print(t, self.x - f:getWidth(t)/2, self.y - f:getHeight())
+	local sprite = Sprites.hints.valueHints[self.dir][self.hint]
+	if sprite ~= nil then
+		love.graphics.setColor(1, 1, 1)
+		love.graphics.draw(sprite, self.x, self.y, 0, 0.5, 0.5, sprite:getWidth() / 2, sprite:getHeight() / 2)
+	end
 end
 
 return ValueHint

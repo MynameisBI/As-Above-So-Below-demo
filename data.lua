@@ -98,6 +98,7 @@ return {
 			value = 4,
 			group = 'element',
 			type = 'earth',
+			sprite = 'earth',
 		},
 
 		a1 = {
