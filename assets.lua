@@ -45,8 +45,11 @@ Sprites = {
 }
 
 Audios = {
+	select = love.audio.newSource('assets/audio/select.wav', 'static'),
 	flip = love.audio.newSource('assets/audio/Card-flip-sound-effect.mp3', 'static'),
-	stab = love.audio.newSource('assets/audio/remove.wav', 'static'),
+	remove = love.audio.newSource('assets/audio/remove.wav', 'static'),
+	positive = love.audio.newSource('assets/audio/positive.wav', 'static'),
+	negative = love.audio.newSource('assets/audio/negative.wav', 'static'),
 }
 
 Fonts = {

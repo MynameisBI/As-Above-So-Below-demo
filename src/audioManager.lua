@@ -1,7 +1,8 @@
 local AudioManager = {}
 
 function AudioManager:play(name, volume)
-	love.audio.play(Audios[name])
+	Audios[name]:stop()
+	Audios[name]:play()
 end
 
 return AudioManager

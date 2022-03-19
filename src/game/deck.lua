@@ -94,6 +94,10 @@ function Deck:executeNextAction()
 		
 		self.timer:after(flipAnimationInfo.flipTime/2 + 0.01,
 				function()
+					if action == 'flip' then AudioManager:play('flip')
+					elseif action == 'remove' then AudioManager:play('remove')
+					end
+				
 					self.currentFlippedSprite = self.currentFlippedCard.sprite
 				
 					self.timer:tween(flipAnimationInfo.flipTime/2, self.vertices[1], {0, 0}, 'linear')
@@ -114,6 +118,10 @@ function Deck:executeNextAction()
 		end
 		self.timer:after(delay, 
 				function()
+					if self.currentFlippedCard:isPositive() then AudioManager:play('positive')
+					else AudioManager:play('negative')
+					end
+				
 					self.timer:tween(flipAnimationInfo.fadeTime, self,
 							{currentFlippedCardOpacity = 0, currentFlippedCardOy = flipAnimationInfo.maxOy}, 'linear',
 							function()
@@ -222,8 +230,10 @@ function Deck:mousepressed(x, y, button)
 	if not isAnyDeckFlipping and Settings.cardAutomaticallyFadeAway then
 		self:addActionToBottom(mainAction)
 		self:addActionToBottom('fade flipped card')
+		AudioManager:play('select')
 	elseif not isAnyDeckFlipping and not Settings.cardAutomaticallyFadeAway then
 		self:addActionToBottom(mainAction)
+		AudioManager:play('select')
 	elseif isAnyDeckFlipping and self.currentFlippedCard ~= nil then
 		self:addActionToBottom('fade flipped card')
 	end

@@ -3,9 +3,10 @@ require 'assets'
 
 DATA = require 'data'
 
+AudioManager = require 'src.audioManager'
+
 Game = require 'src.game.game'
 Menu = require 'src.menu.menu'
-
 
 function love.load()
 	math.randomseed(os.time())

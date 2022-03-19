@@ -19,4 +19,12 @@ function Card:initialize(name, value, score, triValue, group, type, event, sprit
 	self.valueTextColor = valueTextColor or {0, 0, 0}
 end
 
+function Card:isPositive()
+	if self.group == 'element' or self.group == 'gold' then
+		return true
+	elseif self.group == 'black' then
+		return false
+	end
+end
+
 return Card
