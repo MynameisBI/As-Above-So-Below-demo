@@ -34,7 +34,7 @@ function ValueHint:draw()
 	local sprite = Sprites.hints.valueHints[self.dir][self.hint]
 	if sprite ~= nil then
 		love.graphics.setColor(1, 1, 1)
-		love.graphics.draw(sprite, self.x, self.y, 0, 0.5, 0.5, sprite:getWidth() / 2, sprite:getHeight() / 2)
+		love.graphics.draw(sprite, self.x, self.y, 0, 0.75, 0.75, sprite:getWidth() / 2, sprite:getHeight() / 2)
 	end
 end
 

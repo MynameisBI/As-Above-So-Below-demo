@@ -160,7 +160,7 @@ return {
 			group = 'black',
 			type = 'black event',
 			event = function(self, deck)
-				deck:stab('self', 2)
+				deck.autoAddRemoveLeft = deck.autoAddRemoveLeft + 2
 			end,
 			sprite = 'black',
 			valueTextColor = {1, 1, 1},

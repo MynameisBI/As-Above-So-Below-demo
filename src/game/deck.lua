@@ -37,6 +37,8 @@ function Deck:initialize(x, y, scoreOx, scoreOy)
 	self.currentFlippedCardOy = 0
 	self.currentFlippedSprite = nil
 	self.isFlipping = false
+	
+	self.autoAddRemoveLeft = 0
 end
 
 function Deck:addCard(id)
@@ -79,9 +81,9 @@ function Deck:executeNextAction()
 	local action = self.actionQueue[1]
 	
 	if action == 'flip' or action == 'remove' then
-		print('flip card '..tostring(self.cards[1].name))
-	
 		self.currentFlippedCard = table.remove(self.cards, 1)
+		
+		if self.currentFlippedCard == nil then return end
 		
 		self.isFlipping = true
 		
@@ -105,8 +107,14 @@ function Deck:executeNextAction()
 					self.timer:tween(flipAnimationInfo.flipTime/2, self.vertices[3], {self.w, self.h}, 'linear')
 					self.timer:tween(flipAnimationInfo.flipTime/2, self.vertices[4], {0, self.h}, 'linear')
 					
-					Gamestate.current().scoreManager:modifyScore(self.currentFlippedCard.score)
-					Gamestate.current().scoreManager:modifyTriPrimaObtained(self.currentFlippedCard.triValue)
+					if action == 'flip' then
+						Gamestate.current().scoreManager:modifyScore(self.currentFlippedCard.score)
+						Gamestate.current().scoreManager:modifyTriPrimaObtained(self.currentFlippedCard.triValue)
+						
+						if self.currentFlippedCard.event ~= nil then
+							self.currentFlippedCard:event(self)
+						end
+					end
 					
 					self:onActionEnded()
 				end)
@@ -125,7 +133,7 @@ function Deck:executeNextAction()
 					self.timer:tween(flipAnimationInfo.fadeTime, self,
 							{currentFlippedCardOpacity = 0, currentFlippedCardOy = flipAnimationInfo.maxOy}, 'linear',
 							function()
-								self.timer:after(0.1,
+								self.timer:after(0.05,
 										function()
 											self.vertices[1][1], self.vertices[1][2] = self.w, 0
 											self.vertices[2][1], self.vertices[2][2] = 0, 0
@@ -164,11 +172,21 @@ end
 
 function Deck:draw()
 	if #self.cards >= 1 then
-		local sprite = Sprites.cards.back
-		love.graphics.setColor(1, 1, 1)
-		love.graphics.draw(sprite, self.x, self.y,
-				0, - self.w / sprite:getWidth(), self.h / sprite:getHeight(),
-				sprite:getWidth(), 0)
+		if not Settings.isDebug then
+			local sprite = Sprites.cards.back
+			love.graphics.setColor(1, 1, 1)
+			love.graphics.draw(sprite, self.x, self.y,
+					0, - self.w / sprite:getWidth(), self.h / sprite:getHeight(),
+					sprite:getWidth(), 0)
+		else
+			local sprite = self.cards[1].sprite
+			love.graphics.setColor(1, 1, 1)
+			love.graphics.draw(sprite, self.x, self.y,
+					0, - self.w / sprite:getWidth(), self.h / sprite:getHeight(),
+					sprite:getWidth(), 0)
+			love.graphics.setColor(0.2, 0.2, 0.2, 0.6)
+			love.graphics.rectangle('fill', self.x, self.y, self.w, self.h)
+		end
 	end
 	
 	
@@ -198,8 +216,11 @@ function Deck:draw()
 	end
 	
 	
+	local t = string.format('%d', #self.cards)
+	love.graphics.setFont(Fonts.cardsLeft)
 	love.graphics.setColor(1, 1, 1)
-	love.graphics.print(string.format('x%d', #self.cards), self.x + self.scoreOx, self.y + self.scoreOy)
+	love.graphics.print(t, self.x + self.scoreOx, self.y + self.scoreOy,
+			0, 1, 1, Fonts.cardsLeft:getWidth(t) / 2, Fonts.cardsLeft:getHeight() / 2)
 end
 
 function Deck:mousemoved(x, y)
@@ -230,12 +251,16 @@ function Deck:mousepressed(x, y, button)
 	if not isAnyDeckFlipping and Settings.cardAutomaticallyFadeAway then
 		self:addActionToBottom(mainAction)
 		self:addActionToBottom('fade flipped card')
-		AudioManager:play('select')
+		
 	elseif not isAnyDeckFlipping and not Settings.cardAutomaticallyFadeAway then
 		self:addActionToBottom(mainAction)
-		AudioManager:play('select')
+		
 	elseif isAnyDeckFlipping and self.currentFlippedCard ~= nil then
 		self:addActionToBottom('fade flipped card')
+		if self.autoAddRemoveLeft >= 1 then
+			self.autoAddRemoveLeft = self.autoAddRemoveLeft - 1
+			self:addActionToBottom('remove')
+		end
 	end
 end
 

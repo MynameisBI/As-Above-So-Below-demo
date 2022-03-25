@@ -18,10 +18,10 @@ end
 
 function Game:setupGame()
 	-- Initialize all the decks
-	local deck1 = self.decks:add(Deck(630, 170, -60, 150))
-	local deck2 = self.decks:add(Deck(1060, 170, 280, 150))
-	local deck3 = self.decks:add(Deck(630, 635, -60, 150))
-	local deck4 = self.decks:add(Deck(1060, 635, 280, 150))
+	local deck1 = self.decks:add(Deck(630, 170, -58, 150))
+	local deck2 = self.decks:add(Deck(1060, 170, 284, 150))
+	local deck3 = self.decks:add(Deck(630, 635, -58, 164))
+	local deck4 = self.decks:add(Deck(1060, 635, 284, 164))
 
 		-- add base cards
 	for i, deck in ipairs(self.decks.entities) do
