@@ -41,7 +41,17 @@ Sprites = {
 		},
 	},
 	background = love.graphics.newImage('assets/game_background.png'),
-	menu = love.graphics.newImage('assets/menu.png')
+	menu = love.graphics.newImage('assets/menu.png'),
+	world = {
+		arab = love.graphics.newImage('assets/world/arab.png'),
+		eastAsia = love.graphics.newImage('assets/world/east_asia.png'),
+		egypt = love.graphics.newImage('assets/world/egypt.png'),
+		europe = love.graphics.newImage('assets/world/europe.png'),
+		greece = love.graphics.newImage('assets/world/greece.png'),
+		india = love.graphics.newImage('assets/world/india.png'),
+		
+		worldMap = love.graphics.newImage('assets/world/world_map.png')
+	}
 }
 
 Audios = {
