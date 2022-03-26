@@ -41,7 +41,9 @@ Sprites = {
 		},
 	},
 	background = love.graphics.newImage('assets/game_background.png'),
+	
 	menu = love.graphics.newImage('assets/menu.png'),
+	
 	world = {
 		arab = love.graphics.newImage('assets/world/arab.png'),
 		eastAsia = love.graphics.newImage('assets/world/east_asia.png'),
@@ -51,6 +53,18 @@ Sprites = {
 		india = love.graphics.newImage('assets/world/india.png'),
 		
 		worldMap = love.graphics.newImage('assets/world/world_map.png')
+	},
+	
+	level = {
+		levelMap = love.graphics.newImage('assets/level/level_map.png'),
+		
+		tutorialLevel = love.graphics.newImage('assets/level/tutorial_level.png'),
+		tradingPlace = love.graphics.newImage('assets/level/trading_place.png'),
+		normalLevelGate = love.graphics.newImage('assets/level/normal_level_gate.png'),
+		normalLevelBridge = love.graphics.newImage('assets/level/normal_level_bridge.png'),
+		normalLevelChurch = love.graphics.newImage('assets/level/normal_level_church.png'),
+		normalLevelTavern = love.graphics.newImage('assets/level/normal_level_tavern.png'),
+		castleLevel = love.graphics.newImage('assets/level/castle_level.png'),
 	}
 }
 

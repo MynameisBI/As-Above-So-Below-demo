@@ -4,7 +4,7 @@ local Manager = require 'src.world.manager'
 local World = {}
 
 function World:enter()
-	self.wonders = Manager(Wonder(Sprites.world.europe, 494, 320))
+	self.wonders = Manager(Wonder(Sprites.world.europe, 1340, 700))
 end
 
 function World:update(dt)
@@ -13,8 +13,7 @@ end
 
 function World:draw()
 	love.graphics.setColor(1, 1, 1)
-	love.graphics.draw(Sprites.world.worldMap, 0, 0,
-			0, 1920 / Sprites.world.worldMap:getWidth(), 1080 / Sprites.world.worldMap:getHeight())
+	love.graphics.draw(Sprites.world.worldMap)
 
 	self.wonders:draw()
 end

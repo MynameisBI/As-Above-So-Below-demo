@@ -1,11 +1,13 @@
 local Wonder = Class('Wonder')
 
+local inGameSpriteSize = 1
+
 function Wonder:initialize(sprite, x, y, w, h)
 	assert(sprite)
 	
 	self.sprite = sprite
 	self.x, self.y = x or 0, y or 0
-	self.w, self.h = w or sprite:getWidth() * 0.5, h or sprite:getHeight() * 0.5
+	self.w, self.h = w or sprite:getWidth() * inGameSpriteSize, h or sprite:getHeight() * inGameSpriteSize
 	
 	self.size = 1
 	self.targetSize = 1
@@ -33,7 +35,8 @@ end
 
 function Wonder:draw()
 	love.graphics.setColor(1, 1, 1)
-	love.graphics.draw(self.sprite, self.x, self.y, 0, self.size * 0.5, self.size * 0.5,
+	love.graphics.draw(self.sprite, self.x, self.y,
+			0, self.size * inGameSpriteSize, self.size * inGameSpriteSize,
 			self.sprite:getWidth() / 2, self.sprite:getHeight() / 2)
 end
 
@@ -63,8 +66,7 @@ function Wonder:mousereleased(x, y, button)
 end
 
 function Wonder:hit(x, y, button)
-	--Gamestate.switch()
-	print('sup boi')
+	Gamestate.switch(Level)
 end
 
 return Wonder

@@ -5,9 +5,10 @@ DATA = require 'data'
 
 AudioManager = require 'src.audioManager'
 
-Game = require 'src.game.game'
 Menu = require 'src.menu.menu'
 World = require 'src.world.world'
+Level = require 'src.level.level'
+Game = require 'src.game.game'
 
 function love.load()
 	math.randomseed(os.time())
