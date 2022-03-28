@@ -3,7 +3,7 @@ local Manager = require 'src.level.manager'
 
 local Level = {}
 
-local wheelSpeed = 130
+local scrollSpeed = 940
 
 function Level:enter()
 	self.icons = Manager(Icon(Sprites.level.castleLevel, 960, 460),
@@ -14,12 +14,21 @@ function Level:enter()
 	self.camera = Camera.new()
 	self.targetY = self.camera.y
 	self.halfScreenHeight = self.targetY
+	self.screenHeight = self.halfScreenHeight * 2
 	self.smoother = Camera.smooth.linear(7800)
 end
 
 function Level:update(dt)
 	self.icons:update(dt)
 	
+	local mouseX, mouseY = love.mouse.getPosition()
+	if mouseY < 14 then
+		self.targetY = self.targetY - scrollSpeed * dt
+		self.targetY = math.max(self.targetY, self.halfScreenHeight)
+	elseif mouseY > self.screenHeight - 14 then
+		self.targetY = self.targetY + scrollSpeed * dt
+		self.targetY = math.min(self.targetY, 1570 - self.halfScreenHeight)
+	end
 	self.camera:lockY(self.targetY, self.smoother)
 end
 
@@ -35,25 +44,31 @@ function Level:draw()
 end
 
 function Level:mousemoved(x, y)
-	self.icons:mousemoved(x, y)
+	local worldX, worldY = self.camera:mousePosition()
+
+	self.icons:mousemoved(worldX, worldY)
 end
 
 function Level:mousepressed(x, y, button)
-	self.icons:mousepressed(x, y, button)
+	local worldX, worldY = self.camera:mousePosition()
+
+	self.icons:mousepressed(worldX, worldY, button)
 end
 
 function Level:mousereleased(x, y, button)
-	self.icons:mousereleased(x, y, button)
+	local worldX, worldY = self.camera:mousePosition()
+
+	self.icons:mousereleased(worldX, worldY, button)
 end
 
 function Level:wheelmoved(x, y)
-	if y > 0 then
-		self.targetY = self.targetY - wheelSpeed
-		self.targetY = math.max(self.targetY, self.halfScreenHeight)
-	elseif y < 0 then
-		self.targetY = self.targetY + wheelSpeed
-		self.targetY = math.min(self.targetY, 1570 - self.halfScreenHeight)
-	end
+	--if y > 0 then
+		--self.targetY = self.targetY - wheelSpeed
+		--self.targetY = math.max(self.targetY, self.halfScreenHeight)
+	--elseif y < 0 then
+		--self.targetY = self.targetY + wheelSpeed
+		--self.targetY = math.min(self.targetY, 1570 - self.halfScreenHeight)
+	--end
 end
 
 return Level

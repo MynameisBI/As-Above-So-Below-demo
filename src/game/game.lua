@@ -53,15 +53,15 @@ function Game:setupGame()
 
 
 	-- Follow the deck initialization with the hints
-	local typeHint1 = self.hints:add(TypeHint(958, 270, 'horizontal', deck1, deck2))
-	local typeHint2 = self.hints:add(TypeHint(676, 554, 'vertical', deck1, deck3))
-	local typeHint3 = self.hints:add(TypeHint(1242, 558, 'vertical', deck2, deck4))
-	local typeHint4 = self.hints:add(TypeHint(962, 836, 'horizontal', deck3, deck4))
+	local typeHint1 = self.hints:add(TypeHint(956, 274, 'horizontal', deck1, deck2))
+	local typeHint2 = self.hints:add(TypeHint(680, 554, 'vertical', deck1, deck3))
+	local typeHint3 = self.hints:add(TypeHint(1240, 556, 'vertical', deck2, deck4))
+	local typeHint4 = self.hints:add(TypeHint(960, 834, 'horizontal', deck3, deck4))
 	
 	local valueHint1 = self.hints:add(ValueHint(956, 410, 'horizontal', deck1, deck2))
-	local valueHint2 = self.hints:add(ValueHint(812, 556, 'vertical', deck1, deck3))
+	local valueHint2 = self.hints:add(ValueHint(812, 554, 'vertical', deck1, deck3))
 	local valueHint3 = self.hints:add(ValueHint(1108, 556, 'vertical', deck2, deck4))
-	local valueHint4 = self.hints:add(ValueHint(962, 704, 'horizontal', deck3, deck4))
+	local valueHint4 = self.hints:add(ValueHint(962, 700, 'horizontal', deck3, deck4))
 	
 		-- Register OnCardChange event
 	deck1:registerOnCardChangedEvent(valueHint1, valueHint2, typeHint1, typeHint2, scoreManager)

@@ -78,7 +78,7 @@ Audios = {
 
 Fonts = {
 	cardValue = love.graphics.newFont('assets/fonts/Olondon_.otf', 40),
-	score = love.graphics.newFont('assets/fonts/Olondon_.otf', 60),
+	score = love.graphics.newFont('assets/fonts/Olondon_.otf', 70),
 	cardsLeft = love.graphics.newFont('assets/fonts/Olondon_.otf', 52),
 }
 

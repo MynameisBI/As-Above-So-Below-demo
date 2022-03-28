@@ -6,7 +6,7 @@ end
 
 function Menu:update(dt)
 	if self.suit:Button('PLAY', 600, 580, 300, 200).hit then
-		Gamestate.switch(Game)
+		Gamestate.switch(World)
 	end
 end
 
