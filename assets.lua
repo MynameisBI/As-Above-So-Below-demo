@@ -68,6 +68,48 @@ Sprites = {
 	}
 }
 
+function newAnimator(imagePath, frameWidth, frameHeight, frameAmmount, frameIndexes, durations, onLoop)
+	local animator = {}
+	
+	local image = love.graphics.newImage(imagePath)
+	
+	local grid = Anim8.newGrid(frameWidth, frameHeight, image:getWidth(), image:getHeight())
+	
+	local frames
+	if frameIndexes == nil then frames = grid('1-'..tostring(frameAmmount), 1)
+	else frames = grid(unpack(frameIndexes))
+	end
+	
+	local animation = Anim8.newAnimation(frames, durations, onLoop)
+	
+	local update = function(self, dt)
+		self.animation:update(dt)
+	end
+	local draw = function(self, x, y, r, sx, sy, ox, oy, kx, ky)
+		self.animation:draw(self.image, x, y, r, sx, sy, frameWidth/2, frameHeight/2, kx, ky)
+	end
+	
+	return {image = image, grid = grid, animation = animation, update = update, draw = draw}
+end
+Animators = {
+	explosions = {
+		goldEvent = newAnimator('assets/animations/explosion_GE.png', 96, 96, 28, nil, 0.02, 'pauseAtStart'),
+		element = newAnimator('assets/animations/explosion_element.png', 64, 64, 33, nil, 0.02, 'pauseAtStart'),
+		done = newAnimator('assets/animations/done_element.png', 133, 133, 60, nil, 0.02, 'pauseAtStart')
+	},
+	flames = {
+		goldEvent = newAnimator('assets/animations/flame_GE.png', 96, 96, 60, nil, 0.02),
+		fire = newAnimator('assets/animations/element_fire.png', 68, 9, 60,
+				{'1-10',1, '1-10',2 ,'1-10',3 ,'1-10',4, '1-10',5 ,'1-10',6}, 0.02),
+		air = newAnimator('assets/animations/element_air.png', 84, 9, 60,
+				{'1-10',1, '1-10',2 ,'1-10',3 ,'1-10',4, '1-10',5 ,'1-10',6}, 0.02),
+		water = newAnimator('assets/animations/element_water.png', 84, 9, 60,
+				{'1-10',1, '1-10',2 ,'1-10',3 ,'1-10',4, '1-10',5 ,'1-10',6}, 0.02),
+		earth = newAnimator('assets/animations/element_earth.png', 65, 9, 60,
+				{'1-10',1, '1-10',2 ,'1-10',3 ,'1-10',4, '1-10',5 ,'1-10',6}, 0.02),
+	}
+}
+
 Audios = {
 	select = love.audio.newSource('assets/audio/select.wav', 'static'),
 	flip = love.audio.newSource('assets/audio/Card-flip-sound-effect.mp3', 'static'),

@@ -2,6 +2,7 @@ local Deck = require 'src.game.deck'
 local ValueHint = require 'src.game.valueHint'
 local TypeHint = require 'src.game.typeHint'
 local ScoreManager = require 'src.game.scoreManager'
+local Tracker = require 'src.game.tracker'
 
 local Manager = require 'src.game.manager'
 
@@ -12,6 +13,8 @@ function Game:enter()
 	self.hints = Manager()
 	
 	self.scoreManager = ScoreManager()
+	
+	self.tracker = Tracker()
 	
 	self:setupGame()
 end
@@ -74,6 +77,8 @@ function Game:update(dt)
 	self.decks:update(dt)
 	self.hints:update(dt)
 	
+	self.tracker:update(dt)
+	
 	if Suit.Button('toggle debug', 250, 400, 200, 80).hit then
 		Settings.isDebug = not Settings.isDebug
 	elseif Suit.Button('toggle card automatically fade', 250, 520, 200, 80).hit then
@@ -90,6 +95,8 @@ function Game:draw()
 	self.hints:draw()
 	
 	self.scoreManager:draw()
+	
+	self.tracker:draw()
 	
 	love.graphics.setColor(1, 1, 1)
 	Suit.draw()

@@ -111,6 +111,12 @@ function Deck:executeNextAction()
 						Gamestate.current().scoreManager:modifyScore(self.currentFlippedCard.score)
 						Gamestate.current().scoreManager:modifyTriPrimaObtained(self.currentFlippedCard.triValue)
 						
+						if self.currentFlippedCard.name == 'Gold Event 0' then
+							Gamestate.current().tracker:onGoldEventFlip()
+						elseif self.currentFlippedCard.group == 'element' then
+							Gamestate.current().tracker:onElementFlip(self.currentFlippedCard.type)
+						end
+						
 						if self.currentFlippedCard.event ~= nil then
 							self.currentFlippedCard:event(self)
 						end

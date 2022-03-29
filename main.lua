@@ -14,7 +14,7 @@ function love.load()
 	math.randomseed(os.time())
 
 	Gamestate.registerEvents()
-	Gamestate.switch(Menu)
+	Gamestate.switch(Game)
 end
 
 function love.update()
