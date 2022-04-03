@@ -32,6 +32,31 @@ function Deck:initialize(x, y, scoreOx, scoreOy)
 			{0, self.h, 1, 1, 1, 1, 1}, {self.w, self.h, 0, 1, 1, 1, 1}}
 	self.mesh = love.graphics.newMesh(self.vertices, 'fan')
 	self.canvas = love.graphics.newCanvas(self.w, self.h)
+	self.halfs = {
+		deck = self,
+		isTearing = false,
+		left = {ox = 0, stencilFunction = function() love.graphics.polygon('fill', self.x + self.halfs.left.ox, self.y, self.x + self.halfs.left.ox + 80, self.y, self.x + self.halfs.left.ox + 152, self.y + 315, self.x + self.halfs.left.ox, self.y + 315) end},
+		right = {ox = 0, stencilFunction = function() love.graphics.polygon('fill', self.x + self.halfs.right.ox + 80, self.y, self.x + self.halfs.right.ox + 232, self.y, self.x + self.halfs.right.ox + 232, self.y + 315, self.x + self.halfs.right.ox + 152, self.y + 315) end},
+		opacity = 1,
+		maxOx = 45,
+		draw = function(self, cardMesh)
+			if self.isTearing then
+				love.graphics.stencil(self.left.stencilFunction, 'replace', 1)
+				love.graphics.setStencilTest('greater', 0)
+					love.graphics.setColor(1, 1, 1, self.opacity)
+					love.graphics.draw(cardMesh, self.deck.x + self.left.ox, self.deck.y)
+				love.graphics.setStencilTest()
+				love.graphics.stencil(self.left.stencilFunction, 'replace', 0)
+				
+				love.graphics.stencil(self.right.stencilFunction, 'replace', 1)
+				love.graphics.setStencilTest('greater', 0)
+					love.graphics.setColor(1, 1, 1, self.opacity)
+					love.graphics.draw(cardMesh, self.deck.x + self.right.ox, self.deck.y)
+				love.graphics.setStencilTest()
+				love.graphics.stencil(self.right.stencilFunction, 'replace', 0)
+			end
+		end
+	}
 	self.currentFlippedCard = nil
 	self.currentFlippedCardOpacity = 1
 	self.currentFlippedCardOy = 0
@@ -137,7 +162,7 @@ function Deck:executeNextAction()
 					end
 				
 					self.timer:tween(flipAnimationInfo.fadeTime, self,
-							{currentFlippedCardOpacity = 0, currentFlippedCardOy = flipAnimationInfo.maxOy}, 'linear',
+							{currentFlippedCardOpacity = 0, currentFlippedCardOy = flipAnimationInfo.maxOy}, 'quad',
 							function()
 								self.timer:after(0.05,
 										function()
@@ -155,6 +180,41 @@ function Deck:executeNextAction()
 											self:onActionEnded()
 											self:emitOnCardChangedEvent()
 										end)
+							end)
+				end)
+				
+	elseif action == 'tear flipped card' then
+		local delay
+		if Settings.cardAutomaticallyFadeAway then delay = flipAnimationInfo.delayToFade
+		else delay = 0.05
+		end
+		self.timer:after(delay, 
+				function()
+					AudioManager:play('tearInHalf')
+				
+					self.currentFlippedCardOpacity = 0
+					
+					self.halfs.isTearing = true
+					self.timer:tween(flipAnimationInfo.fadeTime, self.halfs, {opacity = 0}, 'quad')
+					self.timer:tween(flipAnimationInfo.fadeTime, self.halfs.left, {ox = -self.halfs.maxOx}, 'quad')
+					self.timer:tween(flipAnimationInfo.fadeTime, self.halfs.right, {ox = self.halfs.maxOx}, 'quad',
+							function()
+								self.timer:after(0.05,
+										function()
+											self.halfs.isTearing = false
+											self.halfs.opacity = 1
+											self.halfs.left.ox = 0
+											self.halfs.right.ox = 0
+											
+											self.currentFlippedCard = nil
+											self.currentFlippedCardOpacity = 1
+											self.currentFlippedCardOy = 0
+											self.currentFlippedSprite = nil
+											self.isFlipping = false
+											
+											self:onActionEnded()
+											self:emitOnCardChangedEvent()
+										end)		
 							end)
 				end)
 	end
@@ -219,6 +279,8 @@ function Deck:draw()
 		end
 		love.graphics.setColor(1, 1, 1, self.currentFlippedCardOpacity)
 		love.graphics.draw(self.mesh, self.x, self.y - self.currentFlippedCardOy)
+		
+		self.halfs:draw(self.mesh)
 	end
 	
 	
@@ -249,20 +311,24 @@ function Deck:mousepressed(x, y, button)
 		end
 	end
 	
-	local mainAction
-	if button == 1 then mainAction = 'flip'
-	elseif button == 2 then mainAction = 'remove'
+	local actions = {}
+	if button == 1 then
+		actions[1] = 'flip'
+		actions[2] = 'fade flipped card'
+	elseif button == 2 then
+		actions[1] = 'remove'
+		actions[2] = 'tear flipped card'
 	end
 	
 	if not isAnyDeckFlipping and Settings.cardAutomaticallyFadeAway then
-		self:addActionToBottom(mainAction)
-		self:addActionToBottom('fade flipped card')
+		self:addActionToBottom(actions[1])
+		self:addActionToBottom(actions[2])
 		
 	elseif not isAnyDeckFlipping and not Settings.cardAutomaticallyFadeAway then
-		self:addActionToBottom(mainAction)
+		self:addActionToBottom(actions[1])
 		
 	elseif isAnyDeckFlipping and self.currentFlippedCard ~= nil then
-		self:addActionToBottom('fade flipped card')
+		self:addActionToBottom(actions[2])
 		if self.autoAddRemoveLeft >= 1 then
 			self.autoAddRemoveLeft = self.autoAddRemoveLeft - 1
 			self:addActionToBottom('remove')

@@ -116,6 +116,7 @@ Audios = {
 	remove = love.audio.newSource('assets/audio/remove.wav', 'static'),
 	positive = love.audio.newSource('assets/audio/positive.wav', 'static'),
 	negative = love.audio.newSource('assets/audio/negative.wav', 'static'),
+	tearInHalf = love.audio.newSource('assets/audio/tearInHalf.mp3', 'static'),
 }
 
 Fonts = {
