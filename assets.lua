@@ -95,7 +95,8 @@ Animators = {
 	explosions = {
 		goldEvent = newAnimator('assets/animations/explosion_GE.png', 96, 96, 28, nil, 0.02, 'pauseAtStart'),
 		element = newAnimator('assets/animations/explosion_element.png', 64, 64, 33, nil, 0.02, 'pauseAtStart'),
-		done = newAnimator('assets/animations/done_element.png', 133, 133, 60, nil, 0.02, 'pauseAtStart')
+		done = newAnimator('assets/animations/done_element.png', 133, 133, 60, nil, 0.02, 'pauseAtStart'),
+		cardClick = newAnimator('assets/animations/card_click.png', 64, 32, 5, {1, '1-5'}, 0.03, 'pauseAtStart')
 	},
 	flames = {
 		goldEvent = newAnimator('assets/animations/flame_GE.png', 96, 96, 60, nil, 0.02),
@@ -107,7 +108,7 @@ Animators = {
 				{'1-10',1, '1-10',2 ,'1-10',3 ,'1-10',4, '1-10',5 ,'1-10',6}, 0.02),
 		earth = newAnimator('assets/animations/element_earth.png', 65, 9, 60,
 				{'1-10',1, '1-10',2 ,'1-10',3 ,'1-10',4, '1-10',5 ,'1-10',6}, 0.02),
-	}
+	},
 }
 
 Audios = {

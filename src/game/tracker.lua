@@ -23,7 +23,15 @@ function Tracker:initialize()
 	
 	Animators.explosions.done.animation:pause()
 	
+	self.mouseX, self.mouseY = -1000, -1000
+	Animators.explosions.cardClick.animation:pause()
+	
 	self.timer = Timer.new()
+end
+
+function Tracker:onDeckClicked(mouseX, mouseY)
+	self.mouseX, self.mouseY = mouseX, mouseY
+	Animators.explosions.cardClick.animation:resume()
 end
 
 function Tracker:onGoldEventFlip()
@@ -75,6 +83,8 @@ function Tracker:update(dt)
 	Animators.explosions.element:update(dt)
 	
 	Animators.explosions.done:update(dt)
+	
+	Animators.explosions.cardClick:update(dt)
 end
 
 function Tracker:draw()
@@ -107,6 +117,10 @@ function Tracker:draw()
 		for element, pos in pairs(pos.elements) do
 			Animators.explosions.done:draw(pos.x, pos.y - 28, 0, 1, 1)
 		end
+	end
+	
+	if Animators.explosions.cardClick.animation.status ~= 'paused' then
+		Animators.explosions.cardClick:draw(self.mouseX, self.mouseY, 0, 1.2, 1.2)
 	end
 end
 

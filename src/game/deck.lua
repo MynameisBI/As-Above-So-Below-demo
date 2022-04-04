@@ -24,6 +24,7 @@ function Deck:initialize(x, y, scoreOx, scoreOy)
 	
 	-- Action queue
 	self.actionQueue = {}
+	self.toBeAddedActions = {}
 	self.timer = Timer.new()
 	self.isInAction = false
 	
@@ -105,12 +106,20 @@ end
 function Deck:executeNextAction()
 	local action = self.actionQueue[1]
 	
-	if action == 'flip' or action == 'remove' then
-		self.currentFlippedCard = table.remove(self.cards, 1)
-		
-		if self.currentFlippedCard == nil then return end
+	if action == 'select' or action == 'remove' then
+		AudioManager:play(action)
 		
 		self.isFlipping = true
+		
+		self.timer:after(0.05,
+				function()
+					self:onActionEnded()
+				end)	
+		
+	
+	elseif action == 'flip and count' or action == 'flip and ignore' then
+		self.currentFlippedCard = table.remove(self.cards, 1)
+		if self.currentFlippedCard == nil then return end
 		
 		self.currentFlippedSprite = nil
 		
@@ -121,9 +130,7 @@ function Deck:executeNextAction()
 		
 		self.timer:after(flipAnimationInfo.flipTime/2 + 0.01,
 				function()
-					if action == 'flip' then AudioManager:play('flip')
-					elseif action == 'remove' then AudioManager:play('remove')
-					end
+					AudioManager:play('flip')
 				
 					self.currentFlippedSprite = self.currentFlippedCard.sprite
 				
@@ -132,7 +139,7 @@ function Deck:executeNextAction()
 					self.timer:tween(flipAnimationInfo.flipTime/2, self.vertices[3], {self.w, self.h}, 'linear')
 					self.timer:tween(flipAnimationInfo.flipTime/2, self.vertices[4], {0, self.h}, 'linear')
 					
-					if action == 'flip' then
+					if action == 'flip and count' then
 						Gamestate.current().scoreManager:modifyScore(self.currentFlippedCard.score)
 						Gamestate.current().scoreManager:modifyTriPrimaObtained(self.currentFlippedCard.triValue)
 						
@@ -301,6 +308,8 @@ function Deck:mousepressed(x, y, button)
 		return
 	end
 	
+	Gamestate.current().tracker:onDeckClicked(x, y)
+	
 	if self.isInAction then return end
 	
 	local isAnyDeckFlipping = false
@@ -313,25 +322,39 @@ function Deck:mousepressed(x, y, button)
 	
 	local actions = {}
 	if button == 1 then
-		actions[1] = 'flip'
-		actions[2] = 'fade flipped card'
+		actions[1] = 'select'
+		actions[2] = 'flip and count'
+		actions[3] = 'fade flipped card'
 	elseif button == 2 then
 		actions[1] = 'remove'
-		actions[2] = 'tear flipped card'
+		actions[2] = 'flip and ignore'
+		actions[3] = 'tear flipped card'
 	end
 	
 	if not isAnyDeckFlipping and Settings.cardAutomaticallyFadeAway then
 		self:addActionToBottom(actions[1])
 		self:addActionToBottom(actions[2])
+		self:addActionToBottom(actions[3])
 		
 	elseif not isAnyDeckFlipping and not Settings.cardAutomaticallyFadeAway then
 		self:addActionToBottom(actions[1])
+		table.insert(self.toBeAddedActions, actions[2])
+		table.insert(self.toBeAddedActions, actions[3])
 		
-	elseif isAnyDeckFlipping and self.currentFlippedCard ~= nil then
-		self:addActionToBottom(actions[2])
-		if self.autoAddRemoveLeft >= 1 then
-			self.autoAddRemoveLeft = self.autoAddRemoveLeft - 1
-			self:addActionToBottom('remove')
+	elseif self.isFlipping ~= nil and button == 1 then
+		if #self.toBeAddedActions > 0 then
+			self:addActionToBottom(self.toBeAddedActions[1])
+			table.remove(self.toBeAddedActions, 1)
+			
+			if #self.toBeAddedActions == 0 then
+				if self.autoAddRemoveLeft >= 1 and #self.cards >= 1 then
+					self.autoAddRemoveLeft = self.autoAddRemoveLeft - 1
+					
+					self:addActionToBottom('remove')
+					self:addActionToBottom('flip and ignore')
+					table.insert(self.toBeAddedActions, 'tear flipped card')
+				end
+			end
 		end
 	end
 end
