@@ -7,6 +7,7 @@ end
 
 function ScoreManager:modifyScore(modifier)
 	self.score = self.score + modifier
+	return self.score
 end
 
 function ScoreManager:modifyTriPrimaObtained(modifier)

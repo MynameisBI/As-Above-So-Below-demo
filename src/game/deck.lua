@@ -84,6 +84,15 @@ function Deck:shuffle()
   end
 end
 
+function Deck:addActionToTop(action)
+	table.insert(self.actionQueue, 1, action)
+	
+	if not self.isInAction then
+		self.isInAction = true
+		self:executeNextAction()
+	end
+end
+
 function Deck:addActionToBottom(action)
 	table.insert(self.actionQueue, action)
 	
@@ -140,7 +149,7 @@ function Deck:executeNextAction()
 					self.timer:tween(flipAnimationInfo.flipTime/2, self.vertices[4], {0, self.h}, 'linear')
 					
 					if action == 'flip and count' then
-						Gamestate.current().scoreManager:modifyScore(self.currentFlippedCard.score)
+						local score = Gamestate.current().scoreManager:modifyScore(self.currentFlippedCard.score)
 						Gamestate.current().scoreManager:modifyTriPrimaObtained(self.currentFlippedCard.triValue)
 						
 						if self.currentFlippedCard.name == 'Gold Event 0' then
@@ -151,6 +160,10 @@ function Deck:executeNextAction()
 						
 						if self.currentFlippedCard.event ~= nil then
 							self.currentFlippedCard:event(self)
+						end
+						
+						if score < 0 then
+							self:addActionToTop('end and lose')
 						end
 					end
 					
@@ -164,10 +177,6 @@ function Deck:executeNextAction()
 		end
 		self.timer:after(delay, 
 				function()
-					if self.currentFlippedCard:isPositive() then AudioManager:play('positive')
-					else AudioManager:play('negative')
-					end
-				
 					self.timer:tween(flipAnimationInfo.fadeTime, self,
 							{currentFlippedCardOpacity = 0, currentFlippedCardOy = flipAnimationInfo.maxOy}, 'quad',
 							function()
@@ -182,7 +191,13 @@ function Deck:executeNextAction()
 											self.currentFlippedCardOpacity = 1
 											self.currentFlippedCardOy = 0
 											self.currentFlippedSprite = nil
-											self.isFlipping = false
+											
+											local isAllDeckEmpty = self:isAllDeckEmpty()
+											if isAllDeckEmpty then
+												self:addActionToBottom('end and win')
+											else
+												self.isFlipping = false
+											end
 											
 											self:onActionEnded()
 											self:emitOnCardChangedEvent()
@@ -217,13 +232,30 @@ function Deck:executeNextAction()
 											self.currentFlippedCardOpacity = 1
 											self.currentFlippedCardOy = 0
 											self.currentFlippedSprite = nil
-											self.isFlipping = false
+											
+											local isAllDeckEmpty = self:isAllDeckEmpty()
+											if isAllDeckEmpty then
+												self:addActionToBottom('end and win')
+											else
+												self.isFlipping = false
+											end
 											
 											self:onActionEnded()
 											self:emitOnCardChangedEvent()
 										end)		
 							end)
 				end)
+				
+	elseif action == 'end and win' or action == 'end and lose' then
+		self.timer:after(1.8, function()
+					self.isFlipping = false
+					if action == 'end and win' then
+						Gamestate.current():endGame('win')
+					elseif action == 'end and lose' then
+						Gamestate.current():endGame('lose')
+					end
+				end)
+		
 	end
 end
 
@@ -237,6 +269,17 @@ function Deck:emitOnCardChangedEvent()
 	for i = 1, #self.registeredHints do
 		self.registeredHints[i]:onCardChanged()
 	end
+end
+
+function Deck:isAllDeckEmpty()
+	local isAllDeckEmpty = true
+	local decks = Gamestate.current().decks.entities
+	for i = 1, 4 do
+		if #decks[i].cards > 0 then
+			isAllDeckEmpty = false
+		end
+	end
+	return isAllDeckEmpty
 end
 
 function Deck:update(dt)
@@ -303,10 +346,14 @@ function Deck:mousemoved(x, y)
 end
 
 function Deck:mousepressed(x, y, button)
+	if Gamestate.current().resultFrame.isActive then return end
+
 	if self.x >= x or x >= self.x + self.w or
 			self.y >= y or y >= self.y + self.h then	
 		return
 	end
+	
+	if #self.cards == 0 and self.currentFlippedCard == nil then return end
 	
 	Gamestate.current().tracker:onDeckClicked(x, y)
 	

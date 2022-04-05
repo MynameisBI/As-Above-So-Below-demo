@@ -3,6 +3,7 @@ local ValueHint = require 'src.game.valueHint'
 local TypeHint = require 'src.game.typeHint'
 local ScoreManager = require 'src.game.scoreManager'
 local Tracker = require 'src.game.tracker'
+local ResultFrame = require 'src.game.resultFrame'
 
 local Manager = require 'src.game.manager'
 
@@ -15,6 +16,8 @@ function Game:enter()
 	self.scoreManager = ScoreManager()
 	
 	self.tracker = Tracker()
+	
+	self.resultFrame = ResultFrame()
 	
 	self:setupGame()
 end
@@ -73,6 +76,15 @@ function Game:setupGame()
 	deck4:registerOnCardChangedEvent(valueHint3, valueHint4, typeHint3, typeHint4, scoreManager)
 end
 
+function Game:endGame(result)
+	if result == 'win' then
+		
+	elseif result == 'lose' then
+	
+	end
+	self.resultFrame:setActive(true)
+end
+
 function Game:update(dt)
 	self.decks:update(dt)
 	self.hints:update(dt)
@@ -84,6 +96,8 @@ function Game:update(dt)
 	elseif Suit.Button('toggle card automatically fade', 250, 520, 200, 80).hit then
 		Settings.cardAutomaticallyFadeAway = not Settings.cardAutomaticallyFadeAway
 	end
+	
+	self.resultFrame:update(dt)
 end
 
 function Game:draw()
@@ -100,6 +114,8 @@ function Game:draw()
 	
 	love.graphics.setColor(1, 1, 1)
 	Suit.draw()
+	
+	self.resultFrame:draw()
 end
 
 function Game:mousemoved(x, y)

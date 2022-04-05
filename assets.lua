@@ -65,6 +65,18 @@ Sprites = {
 		normalLevelChurch = love.graphics.newImage('assets/level/normal_level_church.png'),
 		normalLevelTavern = love.graphics.newImage('assets/level/normal_level_tavern.png'),
 		castleLevel = love.graphics.newImage('assets/level/castle_level.png'),
+	},
+	
+	result = {
+		background = love.graphics.newImage('assets/result/result UI bg.png'),
+		openLevelMap = love.graphics.newImage('assets/result/open level map shortcut.png'),
+		openTradingPlace = love.graphics.newImage('assets/result/open trading place shortcut.png'),
+		replay = love.graphics.newImage('assets/result/replay.png'),
+		scrollBar = love.graphics.newImage('assets/result/scroll bar.png'),
+		scrollBox = love.graphics.newImage('assets/result/scroll box.png'),
+		shareButton = love.graphics.newImage('assets/result/share button.png'),
+		worldHighscoreButton = love.graphics.newImage('assets/result/world highscore button.png'),
+		XButton = love.graphics.newImage('assets/result/X button.png'),
 	}
 }
 

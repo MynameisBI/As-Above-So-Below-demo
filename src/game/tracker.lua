@@ -17,7 +17,7 @@ function Tracker:initialize()
 	self.goldEventExplosionX, self.goldEventExplosionY = -1000, -1000
 	
 	self.elementFlipped = {
-		fire = false, air = false, water = false, earth = false
+		fire = 0, air = 0, water = 0, earth = 0
 	}
 	self.elementExplosionX, self.elementExplosionY = -1000, -1000
 	
@@ -43,9 +43,7 @@ function Tracker:onGoldEventFlip()
 end
 
 function Tracker:onElementFlip(element)
-	if self.elementFlipped[element] == false then
-		self.elementFlipped[element] = true
-	end
+	self.elementFlipped[element] = self.elementFlipped[element] + 1
 	
 	self.elementExplosionX = pos.elements[element].x
 	self.elementExplosionY = pos.elements[element].y
@@ -54,18 +52,21 @@ function Tracker:onElementFlip(element)
 	if self:hasAllElements() then
 		self.timer:after(0.4, function()
 					Animators.explosions.done.animation:resume()
-					self.elementFlipped = {
-						fire = false, air = false, water = false, earth = false
-					}
+					for element, count in pairs(self.elementFlipped) do
+						self.elementFlipped[element] = self.elementFlipped[element] - 1
+					end
 				end)
 	end
 end
 
 function Tracker:hasAllElements()
-	local self = self.elementFlipped
+	local elementFlipped = self.elementFlipped
 
-	if self.fire and self.air and self.water and self.earth then return true
-	else return false
+	if elementFlipped.fire >= 1 and elementFlipped.air >= 1 and
+			elementFlipped.water >= 1 and elementFlipped.earth >= 1 then
+		return true
+	else
+		return false
 	end
 end
 
