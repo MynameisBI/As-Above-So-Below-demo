@@ -136,6 +136,10 @@ Fonts = {
 	cardValue = love.graphics.newFont('assets/fonts/Olondon_.otf', 40),
 	score = love.graphics.newFont('assets/fonts/Olondon_.otf', 70),
 	cardsLeft = love.graphics.newFont('assets/fonts/Olondon_.otf', 52),
+	
+	result_small = love.graphics.newFont('assets/fonts/JMH Beda.ttf', 52),
+	result_big = love.graphics.newFont('assets/fonts/JMH Beda.ttf', 180),
+	result_number = love.graphics.newFont('assets/fonts/Olondon_.otf', 254),
 }
 
 lAYOUT = love.graphics.newImage('assets/layout-01.png')

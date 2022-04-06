@@ -98,16 +98,16 @@ function Tracker:draw()
 		Animators.explosions.goldEvent:draw(self.goldEventExplosionX, self.goldEventExplosionY, 0, 1, 1)
 	end
 	
-	if self.elementFlipped.fire then
+	if self.elementFlipped.fire >= 1 then
 		Animators.flames.fire:draw(pos.elements.fire.x, pos.elements.fire.y - 56, -math.pi/2, 2, 2.2)
 	end
-	if self.elementFlipped.air then
+	if self.elementFlipped.air >= 1 then
 		Animators.flames.air:draw(pos.elements.air.x, pos.elements.air.y - 72, -math.pi/2, 2, 2.2)
 	end
-	if self.elementFlipped.water then
+	if self.elementFlipped.water >= 1 then
 		Animators.flames.water:draw(pos.elements.water.x, pos.elements.water.y - 72, -math.pi/2, 2, 2.2)
 	end
-	if self.elementFlipped.earth then
+	if self.elementFlipped.earth >= 1 then
 		Animators.flames.earth:draw(pos.elements.earth.x, pos.elements.earth.y - 56, -math.pi/2, 2, 2.2)
 	end
 	if Animators.explosions.element.animation.status ~= 'paused' then

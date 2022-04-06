@@ -77,11 +77,14 @@ function Game:setupGame()
 end
 
 function Game:endGame(result)
-	if result == 'win' then
-		
-	elseif result == 'lose' then
+	--if result == 'win' then
+		--self.resultFrame:setResultInfo('win', self.scoreManager.score, {})
+	--elseif result == 'lose' then
+		--self.resultFrame:setResultInfo('lose', )
+	--end
 	
-	end
+	self.resultFrame:setResultInfo(result, self.scoreManager.score, {})
+	
 	self.resultFrame:setActive(true)
 end
 
@@ -121,11 +124,19 @@ end
 function Game:mousemoved(x, y)
 	self.decks:mousemoved(x, y)
 	self.hints:mousemoved(x, y)
+	
+	self.resultFrame:mousemoved(x, y)
 end
 
 function Game:mousepressed(x, y, button)
 	self.decks:mousepressed(x, y, button)
 	self.hints:mousepressed(x, y, button)
+	
+	self.resultFrame:mousepressed(x, y, button)
+end
+
+function Game:mousereleased(x, y, button)
+	self.resultFrame:mousereleased(x, y, button)
 end
 
 return Game

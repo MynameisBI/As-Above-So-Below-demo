@@ -1,6 +1,8 @@
 local Button = Class('Button')
 
 local inGameSpriteSize = 1
+local minSize = 0.925
+local maxSize = 1.075
 
 function Button:initialize(sprite, x, y, w, h, executeFunc)
 	assert(sprite, 'sprite is nil')
@@ -11,7 +13,7 @@ function Button:initialize(sprite, x, y, w, h, executeFunc)
 	
 	self.size = 1
 	self.targetSize = 1
-	self.sizeTweenSpeed = 12
+	self.sizeTweenSpeed = 22
 	self.isHovered = false
 	self.isActive = false
 	
@@ -20,9 +22,9 @@ end
 
 function Button:update(dt)
 	if self.isHovered and self.isActive then
-		self.targetSize = 0.9
+		self.targetSize = minSize
 	elseif self.isHovered and not self.isActive then
-		self.targetSize = 1.1
+		self.targetSize = maxSize
 	elseif not self.isHovered and self.isActive then
 		self.targetSize = 1
 	else
