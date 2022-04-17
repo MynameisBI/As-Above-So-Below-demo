@@ -1,34 +1,22 @@
 local Button = require 'src.game.button'
 
-local ResultFrame = Class('ResultFrame')
+local Frame = require 'src.game.frame'
+
+local ResultFrame = Class('ResultFrame', Frame)
 
 function ResultFrame:initialize()
-	self.isActive = false
-	
-	self.buttons = {
-		replayButton = Button(Sprites.result.replay, 960, 1025, 540, 130, function() Gamestate.switch(Game) end),
-		openLevelMap = Button(Sprites.result.openLevelMap, 183, 864, 274, 442, function() Gamestate.switch(Level) end),
-		X = Button(Sprites.result.XButton, 1815, 94, 120, 120, function() Gamestate.switch(Menu) end),
-		openTrading = Button(Sprites.result.openTradingPlace, 1685, 895, 470, 370, function() print('Get stickbugged lol') end)
-	}
-end
+	Frame.initialize(self)
 
-function ResultFrame:setActive(isActive)
-	self.isActive = isActive 
+	self:addButton('replayButton', Button(Sprites.result.replay, 960, 1025, 540, 130, function() Gamestate.switch(Game) end))
+	self:addButton('openLevelMap', Button(Sprites.result.openLevelMap, 183, 864, 274, 442, function() Gamestate.switch(Level) end))
+	self:addButton('X', Button(Sprites.result.XButton, 1815, 94, 120, 120, function() Gamestate.switch(Menu) end))
+	self:addButton('openTrading', Button(Sprites.result.openTradingPlace, 1725, 895, 470, 370, function() print('Get stickbugged lol') end))
 end
 
 function ResultFrame:setResultInfo(result, score, reward)
 	self.result = result
 	self.score = score
 	self.reward = reward
-end
-
-function ResultFrame:update(dt)
-	if not self.isActive then return end
-
-	for _, button in pairs(self.buttons) do
-		button:update(dt)
-	end
 end
 
 function ResultFrame:draw()
@@ -57,30 +45,6 @@ function ResultFrame:print(text, font, color, x, y)
 	love.graphics.setColor(color or {1, 1, 1})
 		love.graphics.setFont(font)
 		love.graphics.print(text, x, y, 0, 1, 1, font:getWidth(text) / 2)
-end
-
-function ResultFrame:mousemoved(x, y)
-	if not self.isActive then return end
-
-	for _, button in pairs(self.buttons) do
-		button:mousemoved(x, y)
-	end
-end
-
-function ResultFrame:mousepressed(x, y, button)
-	if not self.isActive then return end
-	
-	for _, button in pairs(self.buttons) do
-		button:mousepressed(x, y, button)
-	end
-end
-
-function ResultFrame:mousereleased(x, y, button)
-	if not self.isActive then return end
-
-	for _, button in pairs(self.buttons) do
-		button:mousereleased(x, y, button)
-	end
 end
 
 return ResultFrame

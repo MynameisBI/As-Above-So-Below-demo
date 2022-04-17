@@ -41,18 +41,105 @@ Sprites = {
 		},
 	},
 	background = love.graphics.newImage('assets/game_background.png'),
+	backgrounds = {
+		bridgeTown = love.graphics.newImage('assets/gameBackgrounds/bridgeTown.png'),
+		mainGate = love.graphics.newImage('assets/gameBackgrounds/mainGate.png'),
+		monastery = love.graphics.newImage('assets/gameBackgrounds/monastery.png'),
+		nightTavern = love.graphics.newImage('assets/gameBackgrounds/nightTavern.png'),
+		theBeginning = love.graphics.newImage('assets/gameBackgrounds/theBeginning.png'),
+		theRoyalFortress = love.graphics.newImage('assets/gameBackgrounds/theRoyalFortress.png'),
+	},
+	result = {
+		background = love.graphics.newImage('assets/result/result UI bg.png'),
+		openLevelMap = love.graphics.newImage('assets/result/open level map shortcut.png'),
+		openTradingPlace = love.graphics.newImage('assets/result/open trading place shortcut.png'),
+		replay = love.graphics.newImage('assets/result/replay.png'),
+		scrollBar = love.graphics.newImage('assets/result/scroll bar.png'),
+		scrollBox = love.graphics.newImage('assets/result/scroll box.png'),
+		shareButton = love.graphics.newImage('assets/result/share button.png'),
+		worldHighscoreButton = love.graphics.newImage('assets/result/world highscore button.png'),
+		XButton = love.graphics.newImage('assets/result/X button.png'),
+	},
+	pauseButton = love.graphics.newImage('assets/options button.png'),
+	pause = {
+		background = love.graphics.newImage('assets/pause/background.png'),
+		bgm = love.graphics.newImage('assets/pause/bgm button.png'),
+		toggleAutoFade = love.graphics.newImage('assets/pause/card automatically fade button.png'),
+		continue = love.graphics.newImage('assets/pause/continue playing button.png'),
+		exitLevel = love.graphics.newImage('assets/pause/exit level button.png'),
+		options = love.graphics.newImage('assets/pause/options button.png'),
+		replay = love.graphics.newImage('assets/pause/replay button.png'),
+		sound = love.graphics.newImage('assets/pause/sound button.png'),
+		toggleDebug = love.graphics.newImage('assets/pause/toggle debug button.png'),
+		X = love.graphics.newImage('assets/pause/X button.png'),
+	},
+	instruction = {
+		button = love.graphics.newImage('assets/instruction/emerald tablet.png'),
+		XButton = love.graphics.newImage('assets/instruction/X button.png'),
+		background = love.graphics.newImage('assets/instruction/instruction bg.png'),
+	},
+	loadingScreen = love.graphics.newVideo('assets/loadingScreen.ogg'),
 	
-	menu = love.graphics.newImage('assets/menu.png'),
+	menu = {
+		background = love.graphics.newImage('assets/menu/background.png'),
+		achievements = {
+			normal = love.graphics.newImage('assets/menu/achievements.png'),
+			hovered = love.graphics.newImage('assets/menu/achievements (after).png'),
+		},
+		authorsInformation = {
+			normal = love.graphics.newImage('assets/menu/authors information.png'),
+			hovered = love.graphics.newImage('assets/menu/authors information (after).png'),
+		},
+		cardsCollection = {
+			normal = love.graphics.newImage('assets/menu/cards collection.png'),
+			hovered = love.graphics.newImage('assets/menu/cards collection (after).png'),
+		},
+		dailyChallenges = {
+			normal = love.graphics.newImage('assets/menu/daily challenges.png'),
+			hovered = love.graphics.newImage('assets/menu/daily challenges (after).png'),
+		},
+		inventory = {
+			normal = love.graphics.newImage('assets/menu/inventory.png'),
+			hovered = love.graphics.newImage('assets/menu/inventory (after).png'),
+		},
+		settings = {
+			normal = love.graphics.newImage('assets/menu/settings.png'),
+			hovered = love.graphics.newImage('assets/menu/settings (after).png'),
+		},
+		tradings = {
+			normal = love.graphics.newImage('assets/menu/tradings.png'),
+			hovered = love.graphics.newImage('assets/menu/tradings (after).png'),
+		},
+		worldMap = {
+			normal = love.graphics.newImage('assets/menu/world map.png'),
+			hovered = love.graphics.newImage('assets/menu/world map (after).png'),
+		},
+		
+		XButton = love.graphics.newImage('assets/menu/X button.png'),
+		creditsFrame = {
+			credits = love.graphics.newImage('assets/menu/credits/authors information UI.png')
+		},
+		settingsFrame = {
+			background = love.graphics.newImage('assets/menu/settings/settings menu UI.png'),
+			bgm = love.graphics.newImage('assets/menu/settings/bgm button.png'),
+			exitLevel = love.graphics.newImage('assets/menu/settings/exit level button.png'),
+			sound = love.graphics.newImage('assets/menu/settings/sound button.png'),
+		}
+	},
 	
 	world = {
+		startingPoint = love.graphics.newImage('assets/world/starting point.png'),
+	
 		arab = love.graphics.newImage('assets/world/arab.png'),
-		eastAsia = love.graphics.newImage('assets/world/east_asia.png'),
+		eastAsia = love.graphics.newImage('assets/world/east asia.png'),
 		egypt = love.graphics.newImage('assets/world/egypt.png'),
 		europe = love.graphics.newImage('assets/world/europe.png'),
 		greece = love.graphics.newImage('assets/world/greece.png'),
 		india = love.graphics.newImage('assets/world/india.png'),
 		
-		worldMap = love.graphics.newImage('assets/world/world_map.png')
+		returnButton = love.graphics.newImage('assets/world/return.png'),
+		
+		worldMap = love.graphics.newImage('assets/world/world map.png')
 	},
 	
 	level = {
@@ -65,19 +152,20 @@ Sprites = {
 		normalLevelChurch = love.graphics.newImage('assets/level/normal_level_church.png'),
 		normalLevelTavern = love.graphics.newImage('assets/level/normal_level_tavern.png'),
 		castleLevel = love.graphics.newImage('assets/level/castle_level.png'),
+		
+		levelsUI = {
+			bridge = love.graphics.newImage('assets/level/UIs/bridge town level UI.png'),
+			mainGate = love.graphics.newImage('assets/level/UIs/main gate level UI.png'),
+			monastery = love.graphics.newImage('assets/level/UIs/monastery level UI.png'),
+			tavern = love.graphics.newImage('assets/level/UIs/night tavern level UI.png'),
+			beginning = love.graphics.newImage('assets/level/UIs/the beginning level UI.png'),
+			fortress = love.graphics.newImage('assets/level/UIs/the royal fortress level (final level) UI.png'),
+			
+			equipmentCards = love.graphics.newImage('assets/level/UIs/equipment cards.png'),
+			start = love.graphics.newImage('assets/level/UIs/start.png'),
+			XButton = love.graphics.newImage('assets/level/UIs/X button.png'),
+		}
 	},
-	
-	result = {
-		background = love.graphics.newImage('assets/result/result UI bg.png'),
-		openLevelMap = love.graphics.newImage('assets/result/open level map shortcut.png'),
-		openTradingPlace = love.graphics.newImage('assets/result/open trading place shortcut.png'),
-		replay = love.graphics.newImage('assets/result/replay.png'),
-		scrollBar = love.graphics.newImage('assets/result/scroll bar.png'),
-		scrollBox = love.graphics.newImage('assets/result/scroll box.png'),
-		shareButton = love.graphics.newImage('assets/result/share button.png'),
-		worldHighscoreButton = love.graphics.newImage('assets/result/world highscore button.png'),
-		XButton = love.graphics.newImage('assets/result/X button.png'),
-	}
 }
 
 function newAnimator(imagePath, frameWidth, frameHeight, frameAmmount, frameIndexes, durations, onLoop)

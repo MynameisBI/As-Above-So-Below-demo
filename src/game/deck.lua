@@ -194,7 +194,10 @@ function Deck:executeNextAction()
 											
 											local isAllDeckEmpty = self:isAllDeckEmpty()
 											if isAllDeckEmpty then
-												self:addActionToBottom('end and win')
+												local score = Gamestate.current().scoreManager.score
+												if score >= 0 then self:addActionToBottom('end and win')
+												elseif score < 0 then self:addActionToBottom('end and lose')
+												end
 											else
 												self.isFlipping = false
 											end
@@ -247,7 +250,7 @@ function Deck:executeNextAction()
 				end)
 				
 	elseif action == 'end and win' or action == 'end and lose' then
-		self.timer:after(1.8, function()
+		self.timer:after(1.65, function()
 					self.isFlipping = false
 					if action == 'end and win' then
 						Gamestate.current():endGame('win')
@@ -274,7 +277,7 @@ end
 function Deck:isAllDeckEmpty()
 	local isAllDeckEmpty = true
 	local decks = Gamestate.current().decks.entities
-	for i = 1, 4 do
+	for i = 1, #decks do
 		if #decks[i].cards > 0 then
 			isAllDeckEmpty = false
 		end

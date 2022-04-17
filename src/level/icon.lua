@@ -2,18 +2,20 @@ local Icon = Class('Icon')
 
 local inGameSpriteSize = 1
 
-function Icon:initialize(sprite, x, y, w, h)
+function Icon:initialize(sprite, x, y, levelUI)
 	assert(sprite, 'sprite is nil')
 	
 	self.sprite = sprite
 	self.x, self.y = x or 0, y or 0
-	self.w, self.h = w or sprite:getWidth() * inGameSpriteSize, h or sprite:getHeight() * inGameSpriteSize
+	self.w, self.h = sprite:getWidth() * inGameSpriteSize, sprite:getHeight() * inGameSpriteSize
 	
 	self.size = 1
 	self.targetSize = 1
 	self.sizeTweenSpeed = 12
 	self.isHovered = false
 	self.isActive = false
+	
+	self.levelUI = levelUI
 end
 
 function Icon:update(dt)
@@ -66,7 +68,13 @@ function Icon:mousereleased(x, y, button)
 end
 
 function Icon:hit(x, y, button)
-	Gamestate.switch(Game)
+	--Gamestate.switch(Game)
+	
+	print(self.levelUI)
+	
+	if self.levelUI ~= nil then
+		self.levelUI:setActive(true)
+	end
 end
 
 return Icon
