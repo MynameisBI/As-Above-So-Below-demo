@@ -2,7 +2,7 @@ local Icon = Class('Icon')
 
 local inGameSpriteSize = 1
 
-function Icon:initialize(sprite, x, y, levelUI)
+function Icon:initialize(sprite, x, y, levelUI, func)
 	assert(sprite, 'sprite is nil')
 	
 	self.sprite = sprite
@@ -16,6 +16,7 @@ function Icon:initialize(sprite, x, y, levelUI)
 	self.isActive = false
 	
 	self.levelUI = levelUI
+	self.func = func
 end
 
 function Icon:update(dt)
@@ -68,12 +69,10 @@ function Icon:mousereleased(x, y, button)
 end
 
 function Icon:hit(x, y, button)
-	--Gamestate.switch(Game)
-	
-	print(self.levelUI)
-	
 	if self.levelUI ~= nil then
 		self.levelUI:setActive(true)
+	elseif self.func ~= nil then
+		self.func()
 	end
 end
 

@@ -10,9 +10,18 @@ local Button = require 'src.game.button'
 
 local Manager = require 'src.game.manager'
 
-local Game = {}
+local Game = Class('Game', State)
 
 function Game:enter(from, background, cardsNum, baseDeck, wildCards)
+	State.initialize(self)
+
+	self.args = {
+		background = background,
+		cardsNum = cardsNum,
+		baseDeck = baseDeck,
+		wildCards = wildCards
+	}
+
 	self.background = Sprites.backgrounds[background]
 
 	self.decks = Manager()
@@ -23,10 +32,10 @@ function Game:enter(from, background, cardsNum, baseDeck, wildCards)
 	
 	self.tracker = Tracker()
 	
-	self.resultFrame = ResultFrame()
+	self.resultFrame = ResultFrame(self.args)
 	
 	self.paused = false
-	self.pauseFrame = PauseFrame()
+	self.pauseFrame = PauseFrame(self.args)
 	self.pauseButton = Button(Sprites.pauseButton, 1853, 57, 114, 114,
 			function()
 				if self.paused then self:resume()
@@ -151,7 +160,7 @@ function Game:isAnyFrameActive()
 	end
 end
 
-function Game:update(dt)
+function Game:_update(dt)
 	self.pauseFrame:update(dt)
 	self.instructionFrame:update(dt)
 	self.resultFrame:update(dt)
@@ -166,7 +175,7 @@ function Game:update(dt)
 	self.instructionButton:update(dt)
 end
 
-function Game:draw()
+function Game:_draw()
 	-- Background
 	love.graphics.setColor(1, 1, 1)
 	love.graphics.draw(self.background, 0, 0)

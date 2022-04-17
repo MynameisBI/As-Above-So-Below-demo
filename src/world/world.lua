@@ -2,7 +2,7 @@ local Wonder = require 'src.world.wonder'
 local Manager = require 'src.world.manager'
 local Button = require 'src.game.button'
 
-local World = {}
+local World = Class('World', State)
 
 local scrollSpeed = 2240
 local zoom = 0.5
@@ -10,6 +10,10 @@ local minZoom, maxZoom = 0.5, 1.125
 local zoomSpeed = 0.125
 
 function World:enter()
+	State.initialize(self)
+
+	self:fadeToBright()
+
 	self.wonders = Manager(Wonder(Sprites.world.startingPoint, 968, 992),
 			Wonder(Sprites.world.europe, 1340, 700), Wonder(Sprites.world.greece, 1750, 900),
 			Wonder(Sprites.world.egypt, 1806, 1346), Wonder(Sprites.world.arab, 2338, 1204),
@@ -22,7 +26,8 @@ function World:enter()
 	self.targetX, self.targetY = self.camera.x, self.camera.y
 	self.smoother = Camera.smooth.linear(9600)
 	
-	self.returnButton = Button(Sprites.world.returnButton, 1820, 100, 500, 500, function() Gamestate.switch(Menu) end)
+	self.returnButton = Button(Sprites.world.returnButton, 1820, 100, 500, 500,
+			function() self:fadeToDark(function() Gamestate.switch(Menu) end) end)
 end
 
 function World:getMinX()
@@ -42,7 +47,7 @@ function World:getMaxY()
 end
 
 
-function World:update(dt)
+function World:_update(dt)
 	self.wonders:update(dt)
 	
 	local mouseX, mouseY = love.mouse.getPosition()
@@ -61,7 +66,7 @@ function World:update(dt)
 	self.returnButton:update(dt)
 end
 
-function World:draw()
+function World:_draw()
 	self.camera:attach()
 
 	love.graphics.setColor(1, 1, 1)

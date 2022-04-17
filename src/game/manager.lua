@@ -35,4 +35,11 @@ function Manager:mousepressed(x, y, button)
 	end
 end
 
+function Manager:mousereleased(x, y, button)
+	for i, entity in ipairs(self.entities) do
+		-- slowness eww
+		if entity.mousereleased then entity:mousereleased(x, y, button) end
+	end
+end
+
 return Manager

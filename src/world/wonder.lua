@@ -66,7 +66,7 @@ function Wonder:mousereleased(x, y, button)
 end
 
 function Wonder:hit(x, y, button)
-	Gamestate.switch(Level)
+	Gamestate.current():fadeToDark(function() Gamestate.switch(Level) end)
 end
 
 return Wonder

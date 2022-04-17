@@ -3,11 +3,15 @@ local Manager = require 'src.level.manager'
 local Button = require 'src.game.button'
 local LevelUI = require 'src.level.levelUI'
 
-local Level = {}
+local Level = Class('Level', State)
 
 local scrollSpeed = 1200
 
 function Level:enter()
+	State.initialize(self)
+
+	self:fadeToBright()
+
 	local UIs = {
 		fortress = LevelUI(Sprites.level.levelsUI.fortress, 'theRoyalFortress', 4),
 		monastery = LevelUI(Sprites.level.levelsUI.monastery, 'monastery', 3),
@@ -26,7 +30,7 @@ function Level:enter()
 			Icon(Sprites.level.normalLevelBridge, 960, 810, UIs.bridge),
 			Icon(Sprites.level.normalLevelGate, 960, 1130, UIs.mainGate),
 			Icon(Sprites.level.tutorialLevel, 780, 1400, UIs.beginning),
-			Icon(Sprites.level.tradingPlace, 1150, 1320))
+			Icon(Sprites.level.tradingPlace, 1150, 1320, nil, function() self:fadeToDark(function() Gamestate.switch(Trading) end) end))
 	
 	self.camera = Camera.new()
 	self.targetY = self.camera.y
@@ -34,7 +38,8 @@ function Level:enter()
 	self.screenHeight = self.halfScreenHeight * 2
 	self.smoother = Camera.smooth.linear(7360)
 	
-	self.returnButton = Button(Sprites.world.returnButton, 1350, 100, 500, 500, function() Gamestate.switch(World) end)
+	self.returnButton = Button(Sprites.world.returnButton, 1350, 100, 500, 500,
+			function() self:fadeToDark(function() Gamestate.switch(World) end) end)
 end
 
 function Level:isAnyFrameActive()
@@ -44,7 +49,7 @@ function Level:isAnyFrameActive()
 	return false
 end
 
-function Level:update(dt)
+function Level:_update(dt)
 	self.frames:update(dt)
 	
 	if self:isAnyFrameActive() then return end
@@ -64,7 +69,7 @@ function Level:update(dt)
 	self.returnButton:update(dt)
 end
 
-function Level:draw()
+function Level:_draw()
 	self.camera:attach()
 
 	love.graphics.setColor(1, 1, 1)

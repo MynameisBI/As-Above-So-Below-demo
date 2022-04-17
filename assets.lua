@@ -78,7 +78,6 @@ Sprites = {
 		XButton = love.graphics.newImage('assets/instruction/X button.png'),
 		background = love.graphics.newImage('assets/instruction/instruction bg.png'),
 	},
-	loadingScreen = love.graphics.newVideo('assets/loadingScreen.ogg'),
 	
 	menu = {
 		background = love.graphics.newImage('assets/menu/background.png'),
@@ -166,6 +165,22 @@ Sprites = {
 			XButton = love.graphics.newImage('assets/level/UIs/X button.png'),
 		}
 	},
+	
+	trading = {
+		background = love.graphics.newImage('assets/trading/tradings bg.png'),
+		equipmentCards = {
+			normal = love.graphics.newImage('assets/trading/equipmentCards.png'),
+			hovered = love.graphics.newImage('assets/trading/equipmentCards (after).png')
+		},
+		metalsIngredients = {
+			normal = love.graphics.newImage('assets/trading/metalsIngredients.png'),
+			hovered = love.graphics.newImage('assets/trading/metalsIngredients (after).png')
+		},
+		trading = {
+			normal = love.graphics.newImage('assets/trading/trading.png'),
+			hovered = love.graphics.newImage('assets/trading/trading (after).png')
+		},
+	},
 }
 
 function newAnimator(imagePath, frameWidth, frameHeight, frameAmmount, frameIndexes, durations, onLoop)
@@ -230,4 +245,6 @@ Fonts = {
 	result_number = love.graphics.newFont('assets/fonts/Olondon_.otf', 254),
 }
 
-lAYOUT = love.graphics.newImage('assets/layout-01.png')
+Videos = {
+	loadingScreen = love.graphics.newVideo('assets/videos/loadingScreen.ogv'),
+}

@@ -4,13 +4,17 @@ local Frame = require 'src.game.frame'
 
 local ResultFrame = Class('ResultFrame', Frame)
 
-function ResultFrame:initialize()
+function ResultFrame:initialize(args)
 	Frame.initialize(self)
 
-	self:addButton('replayButton', Button(Sprites.result.replay, 960, 1025, 540, 130, function() Gamestate.switch(Game) end))
-	self:addButton('openLevelMap', Button(Sprites.result.openLevelMap, 183, 864, 274, 442, function() Gamestate.switch(Level) end))
-	self:addButton('X', Button(Sprites.result.XButton, 1815, 94, 120, 120, function() Gamestate.switch(Menu) end))
-	self:addButton('openTrading', Button(Sprites.result.openTradingPlace, 1725, 895, 470, 370, function() print('Get stickbugged lol') end))
+	self:addButton('replayButton', Button(Sprites.result.replay, 960, 1025, 540, 130,
+			function() Gamestate.current():fadeToDark(function() Gamestate.switch(Game, args.background, args.cardsNum, args.baseDeck, args.wildCards) end) end))
+	self:addButton('openLevelMap', Button(Sprites.result.openLevelMap, 183, 864, 274, 442,
+			function() Gamestate.current():fadeToDark(function() Gamestate.switch(Level) end) end))
+	self:addButton('X', Button(Sprites.result.XButton, 1815, 94, 120, 120,
+			function() Gamestate.current():fadeToDark(function() Gamestate.switch(Menu) end) end))
+	self:addButton('openTrading', Button(Sprites.result.openTradingPlace, 1725, 895, 470, 370,
+			function() self:fadeToDark(function() Gamestate.switch(Trading) end) end))
 end
 
 function ResultFrame:setResultInfo(result, score, reward)

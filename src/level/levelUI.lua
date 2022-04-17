@@ -9,8 +9,11 @@ function LevelUI:initialize(sprite, background, cardsNum, baseDeck, wildCards)
 	self.UISprite = sprite
 	
 	self:addButton('X', Button(Sprites.result.XButton, 1815, 94, 120, 120, function() self:setActive(false) end))
-	self:addButton('start',Button(Sprites.level.levelsUI.start, 960, 910, 494, 260,
-			function() Gamestate.switch(Game, background, cardsNum, baseDeck, wildCards) end))
+	self:addButton('start',Button(Sprites.level.levelsUI.start, 960, 910, 494, 260, function()
+				Gamestate.current():fadeToDark(function()
+							Gamestate.switch(Load, background, cardsNum, baseDeck, wildCards)
+						end)
+			end))
 	self:addButton('equipment', Button(Sprites.level.levelsUI.equipmentCards, 1374, 902, 262, 262, function() print('get stick bugged lol') end))
 end
 

@@ -2,9 +2,13 @@ local MenuButton = require 'src.menu.menuButton'
 local SettingsFrame = require 'src.menu.settingsFrame'
 local CreditsFrame = require 'src.menu.creditsFrame'
 
-local Menu = {}
+local Menu = Class('Menu', State)
 
 function Menu:enter()
+	State.initialize(self)
+
+	self:fadeToBright()
+
 	self.settingsFrame = SettingsFrame()
 	self.creditsFrame = CreditsFrame()
 
@@ -22,9 +26,9 @@ function Menu:enter()
 		settings = MenuButton(Sprites.menu.settings.normal, Sprites.menu.settings.hovered,
 				1703, 57, 114, 114, 0, -20, function() self.settingsFrame:setActive(true); self.settingsFrame.isHovered = false end),
 		tradings = MenuButton(Sprites.menu.tradings.normal, Sprites.menu.tradings.hovered,
-				642, 273, 652, 366, -44, -61, function() print('never gonna say goodbye')  end),
+				642, 273, 652, 366, -44, -61, function() self:fadeToDark(function() Gamestate.switch(Trading) end) end),
 		worldMap = MenuButton(Sprites.menu.worldMap.normal, Sprites.menu.worldMap.hovered,
-				769, 685, 778, 422, -4, -32, function() Gamestate.switch(World) end),
+				769, 685, 778, 422, -4, -32, function() self:fadeToDark(function() Gamestate.switch(World) end) end),
 	}
 end
 
@@ -35,7 +39,7 @@ function Menu:isAnyFrameActive()
 	end
 end
 
-function Menu:update(dt)
+function Menu:_update(dt)
 	if not self.settingsFrame.isActive and not self.creditsFrame.isActive then
 		for _, button in pairs(self.buttons) do
 			button:update(dt)
@@ -46,7 +50,7 @@ function Menu:update(dt)
 	self.creditsFrame:update(dt)
 end
 
-function Menu:draw()
+function Menu:_draw()
 	local sw, sh = love.graphics.getDimensions()
 
 	love.graphics.setColor(1, 1, 1)

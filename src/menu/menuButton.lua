@@ -5,8 +5,8 @@ local MenuButton = Class('MenuButton', Button)
 function MenuButton:initialize(sprite, hoveredSprite, x, y, w, h, spriteOx, spriteOy, executeFunc)
 	Button.initialize(self, sprite, x, y, w, h, executeFunc)
 	self.hoveredSprite = hoveredSprite
-	self.spriteOx = spriteOx
-	self.spriteOy = spriteOy
+	self.spriteOx = spriteOx or 0
+	self.spriteOy = spriteOy or 0
 end
 
 function MenuButton:draw()
