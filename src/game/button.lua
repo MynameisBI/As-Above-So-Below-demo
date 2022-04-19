@@ -1,7 +1,7 @@
 local Button = Class('Button')
 
 local inGameSpriteSize = 1
-local minSize = 0.9
+local minSize = 0.92
 local maxSize = 1.1
 
 function Button:initialize(sprite, x, y, w, h, executeFunc)
@@ -70,9 +70,8 @@ function Button:mousereleased(x, y, button)
 			self.x - self.w / 2 <= x and x <= self.x + self.w / 2 and
 			self.y - self.h / 2 <= y and y <= self.y + self.h / 2 then
 		self:hit(x, y, button)
-	else
-		self.isActive  = false
 	end
+	self.isActive = false
 end
 
 function Button:hit(x, y, button)

@@ -1,13 +1,13 @@
 local Icon = Class('Icon')
 
-local inGameSpriteSize = 1
+local inGameSpriteSize = 0.35
 
 function Icon:initialize(sprite, x, y, levelUI, func)
 	assert(sprite, 'sprite is nil')
 	
 	self.sprite = sprite
-	self.x, self.y = x or 0, y or 0
-	self.w, self.h = sprite:getWidth() * inGameSpriteSize, sprite:getHeight() * inGameSpriteSize
+	self.x, self.y = x or 0, y + 14 or 0
+	self.w, self.h = sprite:getWidth() * inGameSpriteSize * 0.3, sprite:getHeight() * inGameSpriteSize * 0.3
 	
 	self.size = 1
 	self.targetSize = 1
@@ -21,9 +21,9 @@ end
 
 function Icon:update(dt)
 	if self.isHovered and self.isActive then
-		self.targetSize = 0.9
+		self.targetSize = 0.85
 	elseif self.isHovered and not self.isActive then
-		self.targetSize = 1.1
+		self.targetSize = 1.15
 	elseif not self.isHovered and self.isActive then
 		self.targetSize = 1
 	else

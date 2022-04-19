@@ -1,6 +1,7 @@
 local Trading = Class('Trading', State)
 local Manager = require 'src.game.manager'
 local MenuButton = require 'src.menu.menuButton'
+local Button = require 'src.game.button'
 
 function Trading:enter()
 	State.initialize(self)

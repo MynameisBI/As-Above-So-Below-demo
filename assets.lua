@@ -144,13 +144,13 @@ Sprites = {
 	level = {
 		levelMap = love.graphics.newImage('assets/level/level_map.png'),
 		
-		tutorialLevel = love.graphics.newImage('assets/level/tutorial_level.png'),
-		tradingPlace = love.graphics.newImage('assets/level/trading_place.png'),
-		normalLevelGate = love.graphics.newImage('assets/level/normal_level_gate.png'),
-		normalLevelBridge = love.graphics.newImage('assets/level/normal_level_bridge.png'),
-		normalLevelChurch = love.graphics.newImage('assets/level/normal_level_church.png'),
-		normalLevelTavern = love.graphics.newImage('assets/level/normal_level_tavern.png'),
-		castleLevel = love.graphics.newImage('assets/level/castle_level.png'),
+		tutorialLevel = love.graphics.newImage('assets/level/theBeginningLevel.png'),
+		tradingPlace = love.graphics.newImage('assets/level/tradingPlace.png'),
+		normalLevelGate = love.graphics.newImage('assets/level/mainGateLevel.png'),
+		normalLevelBridge = love.graphics.newImage('assets/level/bridgeTownLevel.png'),
+		normalLevelChurch = love.graphics.newImage('assets/level/monasteryLevel.png'),
+		normalLevelTavern = love.graphics.newImage('assets/level/nightTavernLevel.png'),
+		castleLevel = love.graphics.newImage('assets/level/theRoyalFortressLevel.png'),
 		
 		levelsUI = {
 			bridge = love.graphics.newImage('assets/level/UIs/bridge town level UI.png'),
