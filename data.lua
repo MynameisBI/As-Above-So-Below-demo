@@ -11,8 +11,8 @@ return {
 			--'e1', 'e2', 'e3', 'e4',
 			--'a1', 'a2', 'a3', 'a4',
 			
-			'f1', 'w1', 'e1', 'a1',
-			--'be', 'be', 'be', 'be'
+			--'f1', 'w1', 'e1', 'a1',
+			'g', 'geBo', 'geSo', 'geSp'
 		}
 	},
 	
@@ -140,13 +140,32 @@ return {
 			type = 'gold',
 			sprite = 'gold',
 		},
-		ge = {
-			name = 'Gold Event 0',
+		geBo = {
+			name = 'Gold Event Body',
 			value = 0,
 			group = 'gold',
 			type = 'gold event',
 			triValue = 1,
-			sprite = 'gold',
+			triType = 'body',
+			sprite = 'gold event body',
+		},
+		geSo = {
+			name = 'Gold Event Soul',
+			value = 0,
+			group = 'gold',
+			type = 'gold event',
+			triValue = 1,
+			triType = 'soul',
+			sprite = 'gold event soul',
+		},
+		geSp = {
+			name = 'Gold Event Spirit',
+			value = 0,
+			group = 'gold',
+			type = 'gold event',
+			triValue = 1,
+			triType = 'spirit',
+			sprite = 'gold event spirit',
 		},
 		b = {
 			name = 'Black 4',

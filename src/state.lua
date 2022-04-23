@@ -38,11 +38,11 @@ end
 function State:_draw()
 end
 
-function State:fadeToDark(after, delay, image)
+function State:fadeToDark(after, delay, image, method)
 	self._image = image
 	self._opacity = 0
 	self._timer:after(delay or 0, function()
-				self._timer:tween(fadeTime, self, {_opacity = 1}, 'quad', after)
+				self._timer:tween(fadeTime, self, {_opacity = 1}, method or 'quad', after)
 			end)
 end
 
@@ -50,7 +50,7 @@ function State:fadeToBright(after, delay, image)
 	self._image = image
 	self._opacity = 1
 	self._timer:after(delay or 0, function()
-				self._timer:tween(fadeTime, self, {_opacity = 0}, 'out-quad', after)
+				self._timer:tween(fadeTime, self, {_opacity = 0}, method or 'out-quad', after)
 			end)
 end
 

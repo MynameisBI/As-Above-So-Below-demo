@@ -7,6 +7,8 @@ function Intro:enter()
 	
 	self.currentDrawable = nil
 	self:next()
+	
+	self.isFadingToDark = false
 end
 
 function Intro:next()
@@ -16,30 +18,62 @@ function Intro:next()
 		self.currentDrawable:play()
 		
 	elseif self.currentDrawable == Videos.intro then
-		self.currentDrawable:pause()
-	
-		self.currentDrawable = Sprites.intro.title
+		if not self.isFadingToDark then
+			self.isFadingToDark = true
+			self:fadeToDark(function()
+						self:fadeToBright(nil, 0.6)
+						
+						self.currentDrawable:pause()
 		
-		Audios.intro:seek(2)
-		Audios.intro:setLooping(true)
-		Audios.intro:play()
+						self.currentDrawable = Sprites.intro.title
+						
+						Audios.intro:seek(2)
+						Audios.intro:setLooping(true)
+						Audios.intro:play()
+						
+						self.isFadingToDark = false
+					end, 0.3, nil, 'out-cubic')
+		end
 		
 	elseif self.currentDrawable == Sprites.intro.title then
-		Audios.intro:stop()
-		
-		self.currentDrawable = Videos.pIntro
-		self.currentDrawable:rewind()
-		self.currentDrawable:play()
+		if not self.isFadingToDark then
+			self.isFadingToDark = true
+			self:fadeToDark(function()
+						self:fadeToBright(nil, 0.6)
+						
+						Audios.intro:stop()
+			
+						self.currentDrawable = Videos.pIntro
+						self.currentDrawable:rewind()
+						self.currentDrawable:play()
+						
+						self.isFadingToDark = false
+					end, 0.3, nil, 'out-cubic')
+		end
 		
 	elseif self.currentDrawable == Videos.pIntro then
-		self.currentDrawable:pause()
-		
-		Gamestate.switch(Load, nil, nil, nil, nil, Menu)
+		if not self.isFadingToDark then
+			self.isFadingToDark = true
+			self:fadeToDark(function()
+						self:fadeToBright(nil, 0.6)
+						
+						self.currentDrawable:pause()
+						
+						self.isFadingToDark = false
+						
+						Gamestate.switch(Load, nil, nil, nil, nil, Menu)
+					end, 0.3, nil, 'out-cubic')
+		end
 		
 	end
 end
 
 function Intro:_update(dt)
+	if self.currentDrawable == Videos.intro or self.currentDrawable == Videos.pIntro then
+		if self.currentDrawable:isPlaying() == false then
+			self:next()
+		end
+	end
 end
 
 function Intro:_draw()

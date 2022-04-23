@@ -2,7 +2,9 @@ local Tracker = Class('Tracker')
 
 local pos = {
 	goldEvents = {
-		{x = 881, y = 60}, {x = 960, y = 51}, {x = 1037, y = 56},
+		soul = {x = 881, y = 60},
+		spirit = {x = 960, y = 51},
+		body = {x = 1037, y = 56},
 	},
 	elements = {
 		fire = {x = 846, y = 123},
@@ -13,7 +15,9 @@ local pos = {
 }
 
 function Tracker:initialize()
-	self.goldEventFlipped = 0
+	self.goldEventFlipped = {
+		body = 0, soul = 0, spirit = 0,
+	}
 	self.goldEventExplosionX, self.goldEventExplosionY = -1000, -1000
 	
 	self.elementFlipped = {
@@ -47,11 +51,12 @@ function Tracker:onDeckStabCard(deckX, deckY)
 	Animators.cardClick.stab.animation:resume()
 end
 
-function Tracker:onGoldEventFlip()
-	self.goldEventFlipped = self.goldEventFlipped + 1
+function Tracker:onGoldEventFlip(eventType)
+	print(eventType)
+	self.goldEventFlipped[eventType] = self.goldEventFlipped[eventType] + 1
 	
-	self.goldEventExplosionX = pos.goldEvents[self.goldEventFlipped].x
-	self.goldEventExplosionY = pos.goldEvents[self.goldEventFlipped].y
+	self.goldEventExplosionX = pos.goldEvents[eventType].x
+	self.goldEventExplosionY = pos.goldEvents[eventType].y
 	Animators.explosions.goldEvent.animation:resume()
 end
 
@@ -107,8 +112,13 @@ end
 function Tracker:draw()
 	love.graphics.setColor(1, 1, 1)
 	
-	for i = 1, self.goldEventFlipped do
-		Animators.flames.goldEvent:draw(pos.goldEvents[i].x, pos.goldEvents[i].y - 42, 0, 1.6, 1.6)
+	--for i = 1, self.goldEventFlipped do
+		--Animators.flames.goldEvent:draw(pos.goldEvents[i].x, pos.goldEvents[i].y - 42, 0, 1.6, 1.6)
+	--end
+	for eventType, flamePos in pairs(pos.goldEvents) do
+		if self.goldEventFlipped[eventType] >= 1 then
+			Animators.flames.goldEvent:draw(flamePos.x, flamePos.y - 42, 0, 1.6, 1.6)
+		end
 	end
 	if Animators.explosions.goldEvent.animation.status ~= 'paused' then
 		Animators.explosions.goldEvent:draw(self.goldEventExplosionX, self.goldEventExplosionY, 0, 1, 1)

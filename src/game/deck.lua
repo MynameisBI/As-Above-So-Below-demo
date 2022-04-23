@@ -71,7 +71,7 @@ function Deck:addCard(id)
 	local cardInfo = DATA.cardInfos[id]
 	table.insert(self.cards,
 			Card(cardInfo.name, cardInfo.value, cardInfo.score, cardInfo.triValue,
-					cardInfo.group, cardInfo.type,
+					cardInfo.group, cardInfo.type, cardInfo.triType,
 					cardInfo.event,
 					cardInfo.sprite, cardInfo.valueTextColor)
 			)
@@ -159,8 +159,8 @@ function Deck:executeNextAction()
 						local score = Gamestate.current().scoreManager:modifyScore(self.currentFlippedCard.score)
 						Gamestate.current().scoreManager:modifyTriPrimaObtained(self.currentFlippedCard.triValue)
 						
-						if self.currentFlippedCard.name == 'Gold Event 0' then
-							Gamestate.current().tracker:onGoldEventFlip()
+						if self.currentFlippedCard.triValue ~= 0 then
+							Gamestate.current().tracker:onGoldEventFlip(self.currentFlippedCard.triType)
 						elseif self.currentFlippedCard.group == 'element' then
 							Gamestate.current().tracker:onElementFlip(self.currentFlippedCard.type)
 						end
