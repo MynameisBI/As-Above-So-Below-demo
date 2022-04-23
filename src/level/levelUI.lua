@@ -14,7 +14,8 @@ function LevelUI:initialize(sprite, background, cardsNum, baseDeck, wildCards)
 							Gamestate.switch(Load, background, cardsNum, baseDeck, wildCards)
 						end)
 			end))
-	self:addButton('equipment', Button(Sprites.level.levelsUI.equipmentCards, 1374, 902, 262, 262, function() print('get stick bugged lol') end))
+	self:addButton('equipment', Button(Sprites.level.levelsUI.equipmentCards, 1374, 902, 262, 262,
+			function() Gamestate.current().inDevFrame:setActive(true) end))
 end
 
 function LevelUI:draw()

@@ -18,7 +18,8 @@ function love.load()
 	math.randomseed(os.time())
 
 	Gamestate.registerEvents()
-	Gamestate.switch(Menu)
+	--Gamestate.switch(Game, 'theBeginning', 2)
+	Gamestate.switch(Level)
 end
 
 function love.update()
@@ -27,4 +28,35 @@ end
 
 function love.draw()
 
+end
+
+-- Lazy code
+function love.mousemoved(x, y)
+	local state = Gamestate.current()
+	if state ~= nil then
+		local inDevFrame = state.inDevFrame
+		if inDevFrame ~= nil then
+			inDevFrame:mousemoved(x, y)
+		end
+	end
+end
+
+function love.mousepressed(x, y, button)
+	local state = Gamestate.current()
+	if state ~= nil then
+		local inDevFrame = state.inDevFrame
+		if inDevFrame ~= nil then
+			inDevFrame:mousepressed(x, y, button)
+		end
+	end
+end
+
+function love.mousereleased(x, y, button)
+	local state = Gamestate.current()
+	if state ~= nil then
+		local inDevFrame = state.inDevFrame
+		if inDevFrame ~= nil then
+			inDevFrame:mousereleased(x, y, button)
+		end
+	end
 end

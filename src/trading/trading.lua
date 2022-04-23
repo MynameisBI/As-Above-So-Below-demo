@@ -11,12 +11,13 @@ function Trading:enter()
 	self.buttons = Manager()
 	
 	self.buttons:add(MenuButton(Sprites.trading.trading.normal, Sprites.trading.trading.hovered,
-			990, 460, 368, 207, -30, -40, nil))
+			990, 460, 368, 207, -30, -40, function() Gamestate.current().inDevFrame:setActive(true) end))
 	self.buttons:add(MenuButton(Sprites.trading.equipmentCards.normal, Sprites.trading.equipmentCards.hovered,
-			990, 663, 424, 153, -30, 0, nil))
+			990, 663, 424, 153, -30, 0, function() Gamestate.current().inDevFrame:setActive(true) end))
 	self.buttons:add(MenuButton(Sprites.trading.metalsIngredients.normal, Sprites.trading.metalsIngredients.hovered,
-			990, 840, 428, 192, -30, 22, nil))
-	self.buttons:add(Button(Sprites.result.XButton, 1815, 94, 120, 120, function() self:setActive(false) end))
+			990, 840, 428, 192, -30, 22, function() Gamestate.current().inDevFrame:setActive(true) end))
+	self.buttons:add(Button(Sprites.result.XButton,
+			1815, 94, 120, 120, function() self:setActive(false) end))
 end
 
 function Trading:update(dt)

@@ -78,6 +78,14 @@ Sprites = {
 		XButton = love.graphics.newImage('assets/instruction/X button.png'),
 		background = love.graphics.newImage('assets/instruction/instruction bg.png'),
 	},
+	gameIntros = {
+		bridgeTown = love.graphics.newImage('assets/gameIntro/bridgeTownTitle.png'),
+		mainGate = love.graphics.newImage('assets/gameIntro/mainGateTitle.png'),
+		monastery = love.graphics.newImage('assets/gameIntro/monasteryTitle.png'),
+		nightTavern = love.graphics.newImage('assets/gameIntro/nightTavernTitle.png'),
+		theBeginning = love.graphics.newImage('assets/gameIntro/theBeginningTitle.png'),
+		theRoyalFortress = love.graphics.newImage('assets/gameIntro/theRoyalFortressTitle.png'),
+	},
 	
 	menu = {
 		background = love.graphics.newImage('assets/menu/background.png'),
@@ -180,7 +188,17 @@ Sprites = {
 			normal = love.graphics.newImage('assets/trading/trading.png'),
 			hovered = love.graphics.newImage('assets/trading/trading (after).png')
 		},
+		
 	},
+	
+	inDevelopment = love.graphics.newImage('assets/inDevelopment.png'),
+	
+	loadingScreens = {
+		love.graphics.newImage('assets/loadingScreen/loading1.png'),
+		love.graphics.newImage('assets/loadingScreen/loading2.png'),
+		love.graphics.newImage('assets/loadingScreen/loading3.png'),
+		love.graphics.newImage('assets/loadingScreen/loading4.png'),
+	}
 }
 
 function newAnimator(imagePath, frameWidth, frameHeight, frameAmmount, frameIndexes, durations, onLoop)
@@ -224,6 +242,11 @@ Animators = {
 		earth = newAnimator('assets/animations/element_earth.png', 65, 9, 60,
 				{'1-10',1, '1-10',2 ,'1-10',3 ,'1-10',4, '1-10',5 ,'1-10',6}, 0.02),
 	},
+	cardClick = {
+		draw = newAnimator('assets/animations/drawCard.png', 256, 256, 4, {1, '1-4'}, 0.133, 'pauseAtStart'),
+		stab = newAnimator('assets/animations/stabCard.png', 256, 250, 4, nil, 0.133, 'pauseAtStart'),
+	},
+	loadingSymbol = newAnimator('assets/animations/loadingSymbol.png', 287, 550, 26, nil, 0.15,'pauseAtEnd'),
 }
 
 Audios = {
@@ -243,8 +266,4 @@ Fonts = {
 	result_small = love.graphics.newFont('assets/fonts/JMH Beda.ttf', 52),
 	result_big = love.graphics.newFont('assets/fonts/JMH Beda.ttf', 180),
 	result_number = love.graphics.newFont('assets/fonts/Olondon_.otf', 254),
-}
-
-Videos = {
-	loadingScreen = love.graphics.newVideo('assets/videos/loadingScreen.ogv'),
 }

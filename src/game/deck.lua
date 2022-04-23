@@ -124,6 +124,13 @@ function Deck:executeNextAction()
 				function()
 					self:onActionEnded()
 				end)	
+				
+		local center = {x = self.x + self.w/2, y = self.y + self.h/2}
+		if action == 'select' then
+			Gamestate.current().tracker:onDeckDrawCard(center.x, center.y)
+		elseif action == 'remove' then
+			Gamestate.current().tracker:onDeckStabCard(center.x, center.y)
+		end
 		
 	
 	elseif action == 'flip and count' or action == 'flip and ignore' then
@@ -358,7 +365,7 @@ function Deck:mousepressed(x, y, button)
 	
 	if #self.cards == 0 and self.currentFlippedCard == nil then return end
 	
-	Gamestate.current().tracker:onDeckClicked(x, y)
+	Gamestate.current().tracker:onDeckClicked(x, y, button)
 	
 	if self.isInAction then return end
 	

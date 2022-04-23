@@ -15,6 +15,8 @@ local Game = Class('Game', State)
 function Game:enter(from, background, cardsNum, baseDeck, wildCards)
 	State.initialize(self)
 
+	self:fadeToBright(nil, 1.2, Sprites.gameIntros[background])
+
 	self.args = {
 		background = background,
 		cardsNum = cardsNum,
@@ -60,7 +62,7 @@ function Game:setupGame(cardsNum)
 	-- Initialize all the decks
 	if cardsNum == 2 then
 		decks[1] = self.decks:add(Deck(628, 396, -104, 158))
-		decks[2] = self.decks:add(Deck(1060, 396, 104, 158))
+		decks[2] = self.decks:add(Deck(1060, 396, 336, 158))
 	elseif cardsNum == 3 then
 		decks[1] = self.decks:add(Deck(844, 152, -60, 80))
 		decks[2] = self.decks:add(Deck(554, 564, -58, 200))

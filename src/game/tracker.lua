@@ -24,14 +24,27 @@ function Tracker:initialize()
 	Animators.explosions.done.animation:pause()
 	
 	self.mouseX, self.mouseY = -1000, -1000
+	self.deckX, self.deckY = -1000, -1000
 	Animators.explosions.cardClick.animation:pause()
+	Animators.cardClick.draw.animation:pause()
+	Animators.cardClick.stab.animation:pause()
 	
 	self.timer = Timer.new()
 end
 
-function Tracker:onDeckClicked(mouseX, mouseY)
+function Tracker:onDeckClicked(mouseX, mouseY, button)
 	self.mouseX, self.mouseY = mouseX, mouseY
 	Animators.explosions.cardClick.animation:resume()
+end
+
+function Tracker:onDeckDrawCard(deckX, deckY)
+	self.deckX, self.deckY = deckX, deckY
+	Animators.cardClick.draw.animation:resume()
+end
+
+function Tracker:onDeckStabCard(deckX, deckY)
+	self.deckX, self.deckY = deckX, deckY
+	Animators.cardClick.stab.animation:resume()
 end
 
 function Tracker:onGoldEventFlip()
@@ -86,6 +99,9 @@ function Tracker:update(dt)
 	Animators.explosions.done:update(dt)
 	
 	Animators.explosions.cardClick:update(dt)
+	
+	Animators.cardClick.draw:update(dt)
+	Animators.cardClick.stab:update(dt)
 end
 
 function Tracker:draw()
@@ -122,6 +138,12 @@ function Tracker:draw()
 	
 	if Animators.explosions.cardClick.animation.status ~= 'paused' then
 		Animators.explosions.cardClick:draw(self.mouseX, self.mouseY, 0, 1.2, 1.2)
+	end
+	if Animators.cardClick.draw.animation.status ~= 'paused' then
+		Animators.cardClick.draw:draw(self.deckX, self.deckY, 0, 1, 1)
+	end
+	if Animators.cardClick.stab.animation.status ~= 'paused' then
+		Animators.cardClick.stab:draw(self.deckX, self.deckY - 24, 0, 1, 1)
 	end
 end
 

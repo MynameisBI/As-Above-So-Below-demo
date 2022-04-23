@@ -2,18 +2,20 @@ local Wonder = Class('Wonder')
 
 local inGameSpriteSize = 1
 
-function Wonder:initialize(sprite, x, y, w, h)
+function Wonder:initialize(sprite, x, y, isTrueLevel)
 	assert(sprite)
 	
 	self.sprite = sprite
 	self.x, self.y = x or 0, y or 0
-	self.w, self.h = w or sprite:getWidth() * inGameSpriteSize, h or sprite:getHeight() * inGameSpriteSize
+	self.w, self.h = sprite:getWidth() * inGameSpriteSize, sprite:getHeight() * inGameSpriteSize
 	
 	self.size = 1
 	self.targetSize = 1
 	self.sizeTweenSpeed = 12
 	self.isHovered = false
 	self.isActive = false
+	
+	self.isTrueLevel = isTrueLevel
 end
 
 function Wonder:update(dt)
@@ -66,7 +68,11 @@ function Wonder:mousereleased(x, y, button)
 end
 
 function Wonder:hit(x, y, button)
-	Gamestate.current():fadeToDark(function() Gamestate.switch(Level) end)
+	if self.isTrueLevel then
+		Gamestate.current():fadeToDark(function() Gamestate.switch(Level) end)
+	else
+		Gamestate.current().inDevFrame:setActive(true)
+	end
 end
 
 return Wonder
