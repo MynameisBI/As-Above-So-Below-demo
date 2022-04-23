@@ -6,6 +6,7 @@ DATA = require 'data'
 AudioManager = require 'src.audioManager'
 
 State = require 'src.state'
+Intro = require 'src.intro.intro'
 Menu = require 'src.menu.menu'
 World = require 'src.world.world'
 Level = require 'src.level.level'
@@ -19,7 +20,7 @@ function love.load()
 
 	Gamestate.registerEvents()
 	--Gamestate.switch(Game, 'theBeginning', 2)
-	Gamestate.switch(Level)
+	Gamestate.switch(Intro)
 end
 
 function love.update()

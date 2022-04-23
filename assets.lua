@@ -198,7 +198,12 @@ Sprites = {
 		love.graphics.newImage('assets/loadingScreen/loading2.png'),
 		love.graphics.newImage('assets/loadingScreen/loading3.png'),
 		love.graphics.newImage('assets/loadingScreen/loading4.png'),
-	}
+	},
+	
+	intro = {
+		title = love.graphics.newImage('assets/intro/titleIntro.png'),
+		loadingScreen = love.graphics.newImage('assets/intro/loadingBackground.png'),
+	},
 }
 
 function newAnimator(imagePath, frameWidth, frameHeight, frameAmmount, frameIndexes, durations, onLoop)
@@ -249,6 +254,11 @@ Animators = {
 	loadingSymbol = newAnimator('assets/animations/loadingSymbol.png', 287, 550, 26, nil, 0.15,'pauseAtEnd'),
 }
 
+Videos = {
+	intro = love.graphics.newVideo('assets/intro/intro.ogv'),
+	pIntro = love.graphics.newVideo('assets/intro/playerIntro.ogv')
+}
+
 Audios = {
 	select = love.audio.newSource('assets/audio/select.wav', 'static'),
 	flip = love.audio.newSource('assets/audio/Card-flip-sound-effect.mp3', 'static'),
@@ -256,6 +266,8 @@ Audios = {
 	positive = love.audio.newSource('assets/audio/positive.wav', 'static'),
 	negative = love.audio.newSource('assets/audio/negative.wav', 'static'),
 	tearInHalf = love.audio.newSource('assets/audio/tearInHalf.mp3', 'static'),
+	
+	intro = love.audio.newSource('assets/intro/bgm.mp3', 'stream'),
 }
 
 Fonts = {

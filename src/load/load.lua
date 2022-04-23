@@ -7,7 +7,11 @@ function Load:enter(from, background, cardsNum, baseDeck, wildCards, to)
 	if self.to == Game then
 		self.loadingScreen = Sprites.loadingScreens[math.random(1, 2)]
 	elseif self.to == Menu then
-		self.loadingScreen = Sprites.loadingScreens[math.random(3, 4)]
+		if from == Intro then
+			self.loadingScreen = Sprites.intro.loadingScreen
+		else
+			self.loadingScreen = Sprites.loadingScreens[math.random(3, 4)]
+		end
 	end
 	
 	self.background, self.cardsNum, self.baseDeck, self.wildCards = background, cardsNum, baseDeck, wildCards
@@ -31,7 +35,7 @@ function Load:_update(dt)
 	
 		self:fadeToDark(function() 
 					Gamestate.switch(self.to, self.background, self.cardsNum, self.baseDeck, self.wildCards)
-				end, 1.1)
+				end, 0.8)
 	end
 end
 
