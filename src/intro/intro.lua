@@ -8,7 +8,7 @@ function Intro:enter()
 	self.currentDrawable = nil
 	self:next()
 	
-	self.isFadingToDark = false
+	self.isFading = false
 end
 
 function Intro:next()
@@ -18,10 +18,10 @@ function Intro:next()
 		self.currentDrawable:play()
 		
 	elseif self.currentDrawable == Videos.intro then
-		if not self.isFadingToDark then
-			self.isFadingToDark = true
+		if not self.isFading then
+			self.isFading = true
 			self:fadeToDark(function()
-						self:fadeToBright(nil, 0.6)
+						self:fadeToBright(function() self.isFading = false end, 0.6)
 						
 						self.currentDrawable:pause()
 		
@@ -36,30 +36,26 @@ function Intro:next()
 		end
 		
 	elseif self.currentDrawable == Sprites.intro.title then
-		if not self.isFadingToDark then
-			self.isFadingToDark = true
+		if not self.isFading then
+			self.isFading = true
 			self:fadeToDark(function()
-						self:fadeToBright(nil, 0.6)
+						self:fadeToBright(function() self.isFading = false end, 0.6)
 						
 						Audios.intro:stop()
 			
 						self.currentDrawable = Videos.pIntro
 						self.currentDrawable:rewind()
 						self.currentDrawable:play()
-						
-						self.isFadingToDark = false
 					end, 0.3, nil, 'out-cubic')
 		end
 		
 	elseif self.currentDrawable == Videos.pIntro then
-		if not self.isFadingToDark then
-			self.isFadingToDark = true
+		if not self.isFading then
+			self.isFading = true
 			self:fadeToDark(function()
-						self:fadeToBright(nil, 0.6)
+						self:fadeToBright(function() self.isFading = false end, 0.6)
 						
 						self.currentDrawable:pause()
-						
-						self.isFadingToDark = false
 						
 						Gamestate.switch(Load, nil, nil, nil, nil, Menu)
 					end, 0.3, nil, 'out-cubic')

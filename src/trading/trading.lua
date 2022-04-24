@@ -3,7 +3,7 @@ local Manager = require 'src.game.manager'
 local MenuButton = require 'src.menu.menuButton'
 local Button = require 'src.game.button'
 
-function Trading:enter()
+function Trading:enter(from)
 	State.initialize(self)
 	
 	self:fadeToBright()
@@ -17,7 +17,7 @@ function Trading:enter()
 	self.buttons:add(MenuButton(Sprites.trading.metalsIngredients.normal, Sprites.trading.metalsIngredients.hovered,
 			990, 840, 428, 192, -30, 22, function() Gamestate.current().inDevFrame:setActive(true) end))
 	self.buttons:add(Button(Sprites.result.XButton,
-			1815, 94, 120, 120, function() self:setActive(false) end))
+			1815, 94, 120, 120, function() Gamestate.switch(Menu) end))
 end
 
 function Trading:update(dt)

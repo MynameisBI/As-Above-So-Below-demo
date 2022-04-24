@@ -198,6 +198,8 @@ function Game:_draw()
 end
 
 function Game:mousemoved(x, y)
+	if self._opacity <= 0.8 then return end
+
 	self.pauseFrame:mousemoved(x, y)
 	self.instructionFrame:mousemoved(x, y)
 	self.resultFrame:mousemoved(x, y)
@@ -213,6 +215,8 @@ function Game:mousemoved(x, y)
 end
 
 function Game:mousepressed(x, y, button)
+	if self._opacity <= 0.8 then return end
+
 	self.pauseFrame:mousepressed(x, y, button)
 	self.resultFrame:mousepressed(x, y, button)
 	self.instructionFrame:mousepressed(x, y, button)
@@ -228,6 +232,8 @@ function Game:mousepressed(x, y, button)
 end
 
 function Game:mousereleased(x, y, button)
+	if self._opacity <= 0.8 then return end
+
 	self.pauseFrame:mousereleased(x, y, button)
 	self.instructionFrame:mousereleased(x, y, button)
 	self.resultFrame:mousereleased(x, y, button)
@@ -240,6 +246,8 @@ function Game:mousereleased(x, y, button)
 end
 
 function Game:keypressed(key, scancode, isRepeat)
+	if self._opacity <= 0.8 then return end
+
 	if scancode == 'escape' and
 			((self:isAnyFrameActive() and self.pauseFrame.isActive) or not self:isAnyFrameActive()) then
 		if self.paused then self:resume()

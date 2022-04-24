@@ -18,8 +18,9 @@ function Load:enter(from, background, cardsNum, baseDeck, wildCards, to)
 	
 	self.progress = 0
 	self.timer = Timer.new()
-	self.timer:tween(3.9, self, {progress = 99}, 'cubic')
+	self.timer:tween(3.9, self, {progress = 99}, 'linear')
 	
+	Animators.loadingSymbol.animation:gotoFrame(1)
 	Animators.loadingSymbol.animation:resume()
 	
 	self.isAnimationEnded = false
