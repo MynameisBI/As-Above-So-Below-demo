@@ -65,6 +65,8 @@ function Deck:initialize(x, y, scoreOx, scoreOy)
 	self.isFlipping = false
 	
 	self.autoAddRemoveLeft = 0
+	
+	self.isVisible = true
 end
 
 function Deck:addCard(id)
@@ -73,7 +75,8 @@ function Deck:addCard(id)
 			Card(cardInfo.name, cardInfo.value, cardInfo.score, cardInfo.triValue,
 					cardInfo.group, cardInfo.type, cardInfo.triType,
 					cardInfo.event,
-					cardInfo.sprite, cardInfo.valueTextColor)
+					cardInfo.sprite, cardInfo.valueTextColor,
+					cardInfo.onElementFlip, cardInfo.onGoldEventFlip )
 			)
 end
 
@@ -116,6 +119,8 @@ function Deck:executeNextAction()
 	local action = self.actionQueue[1]
 	
 	if action == 'select' or action == 'remove' then
+		self.isVisible = false
+	
 		AudioManager:play(action)
 		
 		self.isFlipping = true
@@ -161,8 +166,25 @@ function Deck:executeNextAction()
 						
 						if self.currentFlippedCard.triValue ~= 0 then
 							Gamestate.current().tracker:onGoldEventFlip(self.currentFlippedCard.triType)
+							
+							local decks = Gamestate.current().decks.entities
+							for i = 1, #decks do
+								local cards = decks[i].cards
+								for j = 1, #cards do
+									cards[j]:onGoldEventFlip()
+								end
+							end
+							
 						elseif self.currentFlippedCard.group == 'element' then
 							Gamestate.current().tracker:onElementFlip(self.currentFlippedCard.type)
+							
+							local decks = Gamestate.current().decks.entities
+							for i = 1, #decks do
+								local cards = decks[i].cards
+								for j = 1, #cards do
+									cards[j]:onGoldEventFlip()
+								end
+							end
 						end
 						
 						if self.currentFlippedCard.event ~= nil then
@@ -292,29 +314,43 @@ function Deck:isAllDeckEmpty()
 	return isAllDeckEmpty
 end
 
+function Deck:moveAllActionsToQueue()
+	for i = 1, #self.toBeAddedActions do
+		self:addActionToBottom(self.toBeAddedActions[i])
+	end
+	self.toBeAddedActions = {}
+end
+
 function Deck:update(dt)
 	self.timer:update(dt)
 end
 
 function Deck:draw()
 	if #self.cards >= 1 then
-		if not Settings.isDebug then
-			local sprite = Sprites.cards.back
-			love.graphics.setColor(1, 1, 1)
-			love.graphics.draw(sprite, self.x, self.y,
-					0, - self.w / sprite:getWidth(), self.h / sprite:getHeight(),
-					sprite:getWidth(), 0)
-		else
+		local cardBackOpacity
+				
+		if Settings.isDebug or self.isVisible then
 			local sprite = self.cards[1].sprite
-			love.graphics.setColor(1, 1, 1)
+			love.graphics.setColor(1, 1, 1, 0.6)
 			love.graphics.draw(sprite, self.x, self.y,
 					0, - self.w / sprite:getWidth(), self.h / sprite:getHeight(),
 					sprite:getWidth(), 0)
-			love.graphics.setColor(0.2, 0.2, 0.2, 0.6)
-			love.graphics.rectangle('fill', self.x, self.y, self.w, self.h)
+			local defaultFont = love.graphics.getFont()
+			love.graphics.setColor(self.cards[1].valueTextColor)
+			love.graphics.setFont(Fonts.cardValue)
+			love.graphics.print(tostring(self.cards[1].value), self.x + 187, self.y + 273,
+					0, -1, 1, Fonts.cardValue:getWidth(tostring(self.cards[1].value))/2, 0)
+			cardBackOpacity = 0.2
+		else
+			cardBackOpacity = 1
 		end
+		
+		local sprite = Sprites.cards.back
+		love.graphics.setColor(1, 1, 1, cardBackOpacity)
+		love.graphics.draw(sprite, self.x, self.y,
+				0, - self.w / sprite:getWidth(), self.h / sprite:getHeight(),
+				sprite:getWidth(), 0)
 	end
-	
 	
 	if self.currentFlippedCard ~= nil then
 		self.mesh:setVertices(self.vertices)
@@ -324,8 +360,7 @@ function Deck:draw()
 			love.graphics.setCanvas(self.canvas)
 				love.graphics.setColor(1, 1, 1)
 				love.graphics.draw(self.currentFlippedSprite, 0, 0,
-						0, self.w / self.currentFlippedCard.sprite:getWidth(), self.h / self.currentFlippedCard.sprite:getHeight())
-						
+						0, self.w / self.currentFlippedCard.sprite:getWidth(), self.h / self.currentFlippedCard.sprite:getHeight())						
 						
 				local defaultFont = love.graphics.getFont()
 				love.graphics.setColor(self.currentFlippedCard.valueTextColor)
@@ -364,6 +399,16 @@ function Deck:mousepressed(x, y, button)
 	end
 	
 	if #self.cards == 0 and self.currentFlippedCard == nil then return end
+	
+	local equipmentManager = Gamestate.current().equipmentManager
+	local activeEquipment = equipmentManager.activeEquipment
+	if activeEquipment ~= nil then
+		equipmentManager:onDeckHit(self)
+		print(activeEquipment.drawCardOnNextDeckHit)
+		if activeEquipment.drawCardOnNextDeckHit == false then
+			return
+		end
+	end
 	
 	Gamestate.current().tracker:onDeckClicked(x, y, button)
 	

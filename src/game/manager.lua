@@ -42,4 +42,17 @@ function Manager:mousereleased(x, y, button)
 	end
 end
 
+function Manager:removeIndex(index)
+	table.remove(self.entities, index)
+end
+
+function Manager:removeEntity(entity_)
+	for i, entity in ipairs(self.entities) do
+		if entity_ == entity then
+			table.remove(self.entities, i)
+			break
+		end
+	end
+end
+
 return Manager

@@ -7,12 +7,13 @@ local ResultFrame = require 'src.game.resultFrame'
 local PauseFrame = require 'src.game.pauseFrame'
 local InstructionFrame = require 'src.game.instructionFrame'
 local Button = require 'src.game.button'
+local EquipmentManager = require 'src.game.equipmentManager'
 
 local Manager = require 'src.game.manager'
 
 local Game = Class('Game', State)
 
-function Game:enter(from, background, cardsNum, baseDeck, wildCards)
+function Game:enter(from, background, cardsNum, baseDeck, wildCards, startingPoint)
 	State.initialize(self)
 
 	self:fadeToBright(nil, 1.2, Sprites.gameIntros[background])
@@ -28,8 +29,9 @@ function Game:enter(from, background, cardsNum, baseDeck, wildCards)
 
 	self.decks = Manager()
 	self.hints = Manager()
+	self.equipmentManager = EquipmentManager()
 	
-	self.scoreManager = ScoreManager(5)
+	self.scoreManager = ScoreManager(startingPoint)
 	if cardsNum == 2 then self.scoreManager.y = 286 end
 	
 	self.tracker = Tracker()
@@ -73,15 +75,27 @@ function Game:setupGame(cardsNum)
 		decks[3] = self.decks:add(Deck(630, 635, -58, 164))
 		decks[4] = self.decks:add(Deck(1060, 635, 284, 164))
 	end
+	local goldEventCounter = {
+		index = 0,
+		onGoldEventId = function(self)
+			self.index = self.index + 1
+			if self.index > 3 then self.index = 1 end
+			if self.index == 1 then return 'geBo'
+			elseif self.index == 2 then return 'geSo'
+			elseif self.index == 3 then return 'geSp'
+			end
+		end,
+	}
 		-- add base cards
 	for i, deck in ipairs(self.decks.entities) do
-		for j, cardId in ipairs(DATA.deck.base) do
+		for j, cardId in ipairs(self.args.baseDeck) do
+			if cardId == 'ge' then cardId = goldEventCounter:onGoldEventId() end
 			deck:addCard(cardId)
 		end
 	end
 		-- add mixed cards
 	local mixedCardIds = {}
-	for i, mixedCardId in ipairs(DATA.deck.mixed) do
+	for i, mixedCardId in ipairs(self.args.wildCards) do
 		table.insert(mixedCardIds, mixedCardId)
 	end
 	local i = 0
@@ -175,6 +189,8 @@ function Game:_update(dt)
 	self.tracker:update(dt)
 	
 	self.instructionButton:update(dt)
+	
+	self.equipmentManager:update(dt)
 end
 
 function Game:_draw()
@@ -184,6 +200,8 @@ function Game:_draw()
 
 	self.decks:draw()
 	self.hints:draw()
+	
+	self.equipmentManager:draw()
 	
 	self.scoreManager:draw()
 	
@@ -198,7 +216,7 @@ function Game:_draw()
 end
 
 function Game:mousemoved(x, y)
-	if self._opacity <= 0.8 then return end
+	if self._opacity > 0.2 then return end
 
 	self.pauseFrame:mousemoved(x, y)
 	self.instructionFrame:mousemoved(x, y)
@@ -211,11 +229,13 @@ function Game:mousemoved(x, y)
 	self.decks:mousemoved(x, y)
 	self.hints:mousemoved(x, y)
 	
+	self.equipmentManager:mousemoved(x, y)
+	
 	self.instructionButton:mousemoved(x, y)
 end
 
 function Game:mousepressed(x, y, button)
-	if self._opacity <= 0.8 then return end
+	if self._opacity > 0.2 then return end
 
 	self.pauseFrame:mousepressed(x, y, button)
 	self.resultFrame:mousepressed(x, y, button)
@@ -228,11 +248,13 @@ function Game:mousepressed(x, y, button)
 	self.decks:mousepressed(x, y, button)
 	self.hints:mousepressed(x, y, button)
 	
+	self.equipmentManager:mousepressed(x, y, button)
+	
 	self.instructionButton:mousepressed(x, y, button)
 end
 
 function Game:mousereleased(x, y, button)
-	if self._opacity <= 0.8 then return end
+	if self._opacity > 0.2 then return end
 
 	self.pauseFrame:mousereleased(x, y, button)
 	self.instructionFrame:mousereleased(x, y, button)
@@ -240,13 +262,15 @@ function Game:mousereleased(x, y, button)
 
 	if self:isAnyFrameActive() then return end
 	
+	self.equipmentManager:mousereleased(x, y, button)
+	
 	self.pauseButton:mousereleased(x, y, button)
 	
 	self.instructionButton:mousereleased(x, y, button)
 end
 
 function Game:keypressed(key, scancode, isRepeat)
-	if self._opacity <= 0.8 then return end
+	if self._opacity > 0.2 then return end
 
 	if scancode == 'escape' and
 			((self:isAnyFrameActive() and self.pauseFrame.isActive) or not self:isAnyFrameActive()) then

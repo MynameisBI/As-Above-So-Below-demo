@@ -1,52 +1,44 @@
-local Button = Class('Button')
+local Equipment = Class('Equipment')
 
-local inGameSpriteSize = 1
-local minSize = 0.92
-local maxSize = 1.1
-
-function Button:initialize(sprite, x, y, w, h, executeFunc)
-	assert(sprite, 'sprite is nil')
-	
+function Equipment:initialize(sprite, x, y, onHit, drawCardOnNextDeckHit)
 	self.sprite = sprite
 	self.color = {1, 1, 1}
-	self.x, self.y = x or 0, y or 0
-	self.w, self.h = w or sprite:getWidth() * inGameSpriteSize, h or sprite:getHeight() * inGameSpriteSize
-	
+	self.x, self.y = x, y
+	self.w, self.h = 232, 315
+
 	self.size = 1
 	self.targetSize = 1
 	self.sizeTweenSpeed = 22
 	self.isHovered = false
 	self.isActive = false
-	self.isEnabled = true
 	
-	self.executeFunc = executeFunc or function(self, mx, my, button) end
+	local decks = Gamestate.current().decks.entities
+	self.onHit = onHit or function(self, decks) end
+	self.drawCardOnNextDeckHit = drawCardOnNextDeckHit
 end
 
-function Button:update(dt)
+function Equipment:update(dt)
 	if self.isHovered and self.isActive then
-		self.targetSize = minSize
+		self.targetSize = 1
 	elseif self.isHovered and not self.isActive then
-		self.targetSize = maxSize
+		self.targetSize = 1.1
 	elseif not self.isHovered and self.isActive then
 		self.targetSize = 1
 	else
 		self.targetSize = 1
 	end
 	
-	-- Cubic method
 	self.size = self.size + ((self.targetSize - self.size) * self.sizeTweenSpeed * dt)
-	-- Linear method
-	-- self.size = self.size + van van va may may toi luoi 
 end
 
-function Button:draw()
+function Equipment:draw()
 	love.graphics.setColor(self.color)
 	love.graphics.draw(self.sprite, self.x, self.y,
-			0, self.size * inGameSpriteSize, self.size * inGameSpriteSize,
+			0, self.size * 232 / self.sprite:getWidth(), self.size * 315 / self.sprite:getHeight(),
 			self.sprite:getWidth() / 2, self.sprite:getHeight() / 2)
 end
 
-function Button:mousemoved(x, y)
+function Equipment:mousemoved(x, y)
 	self.isHovered = false
 	if self.x - self.w / 2 <= x and x <= self.x + self.w / 2 and
 			self.y - self.h / 2 <= y and y <= self.y + self.h / 2 then
@@ -54,14 +46,14 @@ function Button:mousemoved(x, y)
 	end
 end
 
-function Button:mousepressed(x, y, button)
+function Equipment:mousepressed(x, y, button)
 	if self.x - self.w / 2 <= x and x <= self.x + self.w / 2 and
 			self.y - self.h / 2 <= y and y <= self.y + self.h / 2 then
 		self.isActive = true
 	end
 end
 
-function Button:mousereleased(x, y, button)
+function Equipment:mousereleased(x, y, button)
 	if self.isActive and
 			self.x - self.w / 2 <= x and x <= self.x + self.w / 2 and
 			self.y - self.h / 2 <= y and y <= self.y + self.h / 2 then
@@ -70,9 +62,14 @@ function Button:mousereleased(x, y, button)
 	self.isActive = false
 end
 
-function Button:hit(x, y, button)
-	self.executeFunc(self, x, y, button)
+function Equipment:hit(x, y, button)
+	Gamestate.current().equipmentManager:setActiveEquipment(self)
+
+	decks = Gamestate.current().decks.entities
+	
+	for _, deck in ipairs(decks) do
+		deck:moveAllActionsToQueue()
+	end
 end
 
-return Button
-
+return Equipment

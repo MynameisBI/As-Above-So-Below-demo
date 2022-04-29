@@ -1,6 +1,6 @@
 local Load = Class('Load', State)
 
-function Load:enter(from, background, cardsNum, baseDeck, wildCards, to)
+function Load:enter(from, background, cardsNum, baseDeck, wildCards, startingPoint, to)
 	State.initialize(self)
 
 	self.to = to or Game
@@ -15,6 +15,7 @@ function Load:enter(from, background, cardsNum, baseDeck, wildCards, to)
 	end
 	
 	self.background, self.cardsNum, self.baseDeck, self.wildCards = background, cardsNum, baseDeck, wildCards
+	self.startingPoint = startingPoint
 	
 	self.progress = 0
 	self.timer = Timer.new()
@@ -35,8 +36,8 @@ function Load:_update(dt)
 		self.isAnimationEnded = true
 	
 		self:fadeToDark(function() 
-					Gamestate.switch(self.to, self.background, self.cardsNum, self.baseDeck, self.wildCards)
-				end, 0.8)
+					Gamestate.switch(self.to, self.background, self.cardsNum, self.baseDeck, self.wildCards, self.startingPoint)
+				end, 0.5)
 	end
 end
 

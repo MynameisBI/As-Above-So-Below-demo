@@ -19,8 +19,9 @@ function love.load()
 	math.randomseed(os.time())
 
 	Gamestate.registerEvents()
-	--Gamestate.switch(Load, 'theBeginning', 2)
-	Gamestate.switch(Intro)
+	--Gamestate.switch(Load, 'theBeginning')
+	--Gamestate.switch(Game, 'theBeginning')
+	Gamestate.switch(Level)
 end
 
 function love.update()

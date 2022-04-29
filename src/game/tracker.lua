@@ -60,6 +60,14 @@ function Tracker:onGoldEventFlip(eventType)
 	Animators.explosions.goldEvent.animation:resume()
 end
 
+function Tracker:getGoldEventNum()
+	local num = 0
+	for _, point in pairs(self.goldEventFlipped) do
+		num = num + point
+	end
+	return num
+end
+
 function Tracker:onElementFlip(element)
 	self.elementFlipped[element] = self.elementFlipped[element] + 1
 	
@@ -77,6 +85,14 @@ function Tracker:onElementFlip(element)
 	end
 end
 
+function Tracker:getElementNum()
+	local num = 0
+	for _, point in pairs(self.elementFlipped) do
+		num = num + point
+	end
+	return num
+end
+
 function Tracker:hasAllElements()
 	local elementFlipped = self.elementFlipped
 
@@ -87,6 +103,8 @@ function Tracker:hasAllElements()
 		return false
 	end
 end
+
+
 
 function Tracker:update(dt)
 	self.timer:update(dt)

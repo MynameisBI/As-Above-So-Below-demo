@@ -13,12 +13,12 @@ function Level:enter()
 	self:fadeToBright()
 
 	local UIs = {
-		fortress = LevelUI(Sprites.level.levelsUI.fortress, 'theRoyalFortress', 4),
-		monastery = LevelUI(Sprites.level.levelsUI.monastery, 'monastery', 3),
-		tavern = LevelUI(Sprites.level.levelsUI.tavern, 'nightTavern', 4),
-		bridge = LevelUI(Sprites.level.levelsUI.bridge, 'bridgeTown', 3),
-		mainGate = LevelUI(Sprites.level.levelsUI.mainGate, 'mainGate', 3),
-		beginning = LevelUI(Sprites.level.levelsUI.beginning, 'theBeginning', 2),
+		fortress = LevelUI(Sprites.level.levelsUI.fortress, 'theRoyalFortress'),
+		monastery = LevelUI(Sprites.level.levelsUI.monastery, 'monastery'),
+		tavern = LevelUI(Sprites.level.levelsUI.tavern, 'nightTavern'),
+		bridge = LevelUI(Sprites.level.levelsUI.bridge, 'bridgeTown'),
+		mainGate = LevelUI(Sprites.level.levelsUI.mainGate, 'mainGate'),
+		beginning = LevelUI(Sprites.level.levelsUI.beginning, 'theBeginning'),
 	}
 
 	self.frames = Manager(UIs.fortress, UIs.monastery, UIs.tavern,

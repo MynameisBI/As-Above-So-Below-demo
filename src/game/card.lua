@@ -1,6 +1,6 @@
 local Card = Class('Card')
 
-function Card:initialize(name, value, score, triValue, group, type, triType, event, sprite, valueTextColor)
+function Card:initialize(name, value, score, triValue, group, type, triType, event, sprite, valueTextColor, onElementFlip, onGoldEventFlip)
 	self.name = name
 	
 	self.value = value
@@ -18,6 +18,9 @@ function Card:initialize(name, value, score, triValue, group, type, triType, eve
 	
 	self.sprite = Sprites.cards.front[sprite]
 	self.valueTextColor = valueTextColor or {0, 0, 0}
+	
+	self.onElementFlip = onElementFlip or function() end
+	self.onGoldEventFlip = onGoldEventFlip or function() end
 end
 
 function Card:isPositive()

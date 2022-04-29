@@ -3,7 +3,7 @@ local Button = require 'src.game.button'
 
 local LevelUI = Class('LevelUI', Frame)
 
-function LevelUI:initialize(sprite, background, cardsNum, baseDeck, wildCards)
+function LevelUI:initialize(sprite, levelId)
 	Frame.initialize(self)
 	
 	self.UISprite = sprite
@@ -11,7 +11,9 @@ function LevelUI:initialize(sprite, background, cardsNum, baseDeck, wildCards)
 	self:addButton('X', Button(Sprites.result.XButton, 1815, 94, 120, 120, function() self:setActive(false) end))
 	self:addButton('start',Button(Sprites.level.levelsUI.start, 960, 910, 494, 260, function()
 				Gamestate.current():fadeToDark(function()
-							Gamestate.switch(Load, background, cardsNum, baseDeck, wildCards)
+							local levelInfo = DATA.levels[levelId]
+							Gamestate.switch(Load, levelInfo.background, levelInfo.cardsNum,
+									levelInfo.baseDeck, levelInfo.wildCards, levelInfo.startingPoint)
 						end)
 			end))
 	self:addButton('equipment', Button(Sprites.level.levelsUI.equipmentCards, 1374, 902, 262, 262,

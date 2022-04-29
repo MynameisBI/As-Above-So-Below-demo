@@ -5,10 +5,17 @@ function ScoreManager:initialize(startingScore, x, y)
 
 	self.score = startingScore or 0
 	self.triPrimaObtained = 0
+	
+	self.scoreAmplifier = 1
+end
+
+function ScoreManager:setScoreAmplifier(amplifier)
+	self.scoreAmplifier = amplifier or 1
 end
 
 function ScoreManager:modifyScore(modifier)
-	self.score = self.score + modifier
+	self.score = self.score + modifier * self.scoreAmplifier
+	self.scoreAmplifier = 1
 	return self.score
 end
 

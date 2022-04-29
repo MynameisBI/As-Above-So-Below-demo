@@ -11,8 +11,9 @@ Sprites = {
 			['gold event soul'] = love.graphics.newImage('assets/cards/gold_event_Soul.png'),
 			['gold event spirit'] = love.graphics.newImage('assets/cards/gold_event_Spirit.png'),
 			black = love.graphics.newImage('assets/cards/black.png'),
-			['black event 1'] = love.graphics.newImage('assets/cards/black_event_1.png'),
-			['black event 2'] = love.graphics.newImage('assets/cards/black_event_2.png'),
+			heresy = love.graphics.newImage('assets/cards/heresy.png'),
+			charlatan = love.graphics.newImage('assets/cards/charlatan.png'),
+			hardLabor = love.graphics.newImage('assets/cards/hard_labor.png'),
 		}
 	},
 	hints = {
@@ -205,6 +206,12 @@ Sprites = {
 		title = love.graphics.newImage('assets/intro/titleIntro.png'),
 		loadingScreen = love.graphics.newImage('assets/intro/loadingBackground.png'),
 	},
+	
+	equipments = {
+		alembic = love.graphics.newImage('assets/equipments/alembic.png'),
+		mortarAndPestle = love.graphics.newImage('assets/equipments/mortarAndPestle.png'),
+		philosopherStone = love.graphics.newImage('assets/equipments/philosopherStone.png'),
+	}
 }
 
 function newAnimator(imagePath, frameWidth, frameHeight, frameAmmount, frameIndexes, durations, onLoop)
@@ -235,7 +242,8 @@ Animators = {
 		goldEvent = newAnimator('assets/animations/explosion_GE.png', 96, 96, 28, nil, 0.02, 'pauseAtStart'),
 		element = newAnimator('assets/animations/explosion_element.png', 64, 64, 33, nil, 0.02, 'pauseAtStart'),
 		done = newAnimator('assets/animations/done_element.png', 133, 133, 60, nil, 0.02, 'pauseAtStart'),
-		cardClick = newAnimator('assets/animations/card_click.png', 64, 32, 5, {1, '1-5'}, 0.03, 'pauseAtStart')
+		cardClick = newAnimator('assets/animations/card_click.png', 64, 32, 5, {1, '1-5'}, 0.03, 'pauseAtStart'),
+		equipmentUse = newAnimator('assets/animations/equipmentUse.png', 96, 96, 28, nil, 0.02, 'pauseAtStart')
 	},
 	flames = {
 		goldEvent = newAnimator('assets/animations/flame_GE.png', 96, 96, 60, nil, 0.02),
