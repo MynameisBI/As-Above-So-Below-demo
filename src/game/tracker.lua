@@ -52,7 +52,6 @@ function Tracker:onDeckStabCard(deckX, deckY)
 end
 
 function Tracker:onGoldEventFlip(eventType)
-	print(eventType)
 	self.goldEventFlipped[eventType] = self.goldEventFlipped[eventType] + 1
 	
 	self.goldEventExplosionX = pos.goldEvents[eventType].x

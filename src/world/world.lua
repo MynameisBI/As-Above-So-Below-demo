@@ -14,8 +14,8 @@ function World:enter()
 
 	self:fadeToBright()
 
-	self.wonders = Manager(Wonder(Sprites.world.startingPoint, 968, 992, true),
-			Wonder(Sprites.world.europe, 1340, 700, true), Wonder(Sprites.world.greece, 1750, 900),
+	self.wonders = Manager(Wonder(Sprites.world.startingPoint, 968, 992, TutorialLevel),
+			Wonder(Sprites.world.europe, 1340, 700, Level), Wonder(Sprites.world.greece, 1750, 900),
 			Wonder(Sprites.world.egypt, 1806, 1346), Wonder(Sprites.world.arab, 2338, 1204),
 			Wonder(Sprites.world.india, 3258, 1508), Wonder(Sprites.world.eastAsia, 4274, 1100))
 	

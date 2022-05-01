@@ -20,6 +20,12 @@ function Button:initialize(sprite, x, y, w, h, executeFunc)
 	self.isEnabled = true
 	
 	self.executeFunc = executeFunc or function(self, mx, my, button) end
+	
+	self.isEnabled = true
+end
+
+function Button:toggleEnable()
+	self.isEnabled = not self.isEnabled
 end
 
 function Button:update(dt)

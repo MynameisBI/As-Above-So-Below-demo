@@ -176,6 +176,44 @@ Sprites = {
 		}
 	},
 	
+	levels = {
+		tutorial = {
+			levelMap = love.graphics.newImage('assets/levels/tutorial/map.png'),
+			
+			t1 = {
+				normal = love.graphics.newImage('assets/levels/tutorial/tutorial 1.png'),
+				hovered = love.graphics.newImage('assets/levels/tutorial/tutorial 1 (after).png')
+			},
+			t2 = {
+				normal = love.graphics.newImage('assets/levels/tutorial/tutorial 2.png'),
+				hovered = love.graphics.newImage('assets/levels/tutorial/tutorial 2 (after).png')
+			},
+			t3 = {
+				normal = love.graphics.newImage('assets/levels/tutorial/tutorial 3.png'),
+				hovered = love.graphics.newImage('assets/levels/tutorial/tutorial 3 (after).png')
+			},
+			t4 = {
+				normal = love.graphics.newImage('assets/levels/tutorial/tutorial 4.png'),
+				hovered = love.graphics.newImage('assets/levels/tutorial/tutorial 4 (after).png')
+			},
+			t5 = {
+				normal = love.graphics.newImage('assets/levels/tutorial/tutorial 5.png'),
+				hovered = love.graphics.newImage('assets/levels/tutorial/tutorial 5 (after).png')
+			},
+			t6 = {
+				normal = love.graphics.newImage('assets/levels/tutorial/tutorial 6.png'),
+				hovered = love.graphics.newImage('assets/levels/tutorial/tutorial 6 (after).png')
+			},
+			t7 = {
+				normal = love.graphics.newImage('assets/levels/tutorial/tutorial 7.png'),
+				hovered = love.graphics.newImage('assets/levels/tutorial/tutorial 7 (after).png')
+			},
+			warmUp = love.graphics.newImage('assets/levels/tutorial/warm up level.png'),
+			warmUpUI = love.graphics.newImage('assets/levels/tutorial/warm up UI.png'),
+			XButton = love.graphics.newImage('assets/levels/tutorial/x button (tutorial).png')
+		}
+	},
+	
 	trading = {
 		background = love.graphics.newImage('assets/trading/tradings bg.png'),
 		equipmentCards = {

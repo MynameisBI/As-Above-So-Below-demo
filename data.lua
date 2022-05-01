@@ -298,6 +298,7 @@ return {
 								cardInfo.event,
 								cardInfo.sprite, cardInfo.valueTextColor,
 								cardInfo.onElementFlip, cardInfo.onGoldEventFlip)
+				deckHit:emitOnCardChangedEvent()
 			end,
 			drawCardOnNextDeckHit = false,
 		},

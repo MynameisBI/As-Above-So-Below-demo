@@ -1,13 +1,14 @@
-local Wonder = Class('Wonder')
+local Icon = Class('Icon')
 
-local inGameSpriteSize = 1
+local inGameSpriteSize = 0.35
 
-function Wonder:initialize(sprite, x, y, stateToSwitch)
-	assert(sprite)
+function Icon:initialize(sprite, hoveredSprite, x, y, levelUI, func)
+	assert(sprite, 'sprite is nil')
 	
 	self.sprite = sprite
-	self.x, self.y = x or 0, y or 0
-	self.w, self.h = sprite:getWidth() * inGameSpriteSize, sprite:getHeight() * inGameSpriteSize
+	self.hoveredSprite = hoveredSprite or self.sprite
+	self.x, self.y = x or 0, y + 14 or 0
+	self.w, self.h = sprite:getWidth() * inGameSpriteSize * 0.3, sprite:getHeight() * inGameSpriteSize * 0.3
 	
 	self.size = 1
 	self.targetSize = 1
@@ -15,14 +16,15 @@ function Wonder:initialize(sprite, x, y, stateToSwitch)
 	self.isHovered = false
 	self.isActive = false
 	
-	self.stateToSwitch = stateToSwitch
+	self.levelUI = levelUI
+	self.func = func
 end
 
-function Wonder:update(dt)
+function Icon:update(dt)
 	if self.isHovered and self.isActive then
-		self.targetSize = 0.9
+		self.targetSize = 0.85
 	elseif self.isHovered and not self.isActive then
-		self.targetSize = 1.1
+		self.targetSize = 1.15
 	elseif not self.isHovered and self.isActive then
 		self.targetSize = 1
 	else
@@ -35,14 +37,18 @@ function Wonder:update(dt)
 	-- self.size = self.size + van van va may may toi luoi 
 end
 
-function Wonder:draw()
+function Icon:draw()
 	love.graphics.setColor(1, 1, 1)
-	love.graphics.draw(self.sprite, self.x, self.y,
+	local sprite
+	if self.isHovered then sprite = self.hoveredSprite
+	else sprite = self.sprite
+	end
+	love.graphics.draw(sprite, self.x, self.y,
 			0, self.size * inGameSpriteSize, self.size * inGameSpriteSize,
-			self.sprite:getWidth() / 2, self.sprite:getHeight() / 2)
+			sprite:getWidth() / 2, sprite:getHeight() / 2)
 end
 
-function Wonder:mousemoved(x, y)
+function Icon:mousemoved(x, y)
 	self.isHovered = false
 	if self.x - self.w / 2 <= x and x <= self.x + self.w / 2 and
 			self.y - self.w / 2 <= y and y <= self.y + self.h / 2 then
@@ -50,14 +56,14 @@ function Wonder:mousemoved(x, y)
 	end
 end
 
-function Wonder:mousepressed(x, y, button)
+function Icon:mousepressed(x, y, button)
 	if self.x - self.w / 2 <= x and x <= self.x + self.w / 2 and
 			self.y - self.w / 2 <= y and y <= self.y + self.h / 2 then
 		self.isActive = true
 	end
 end
 
-function Wonder:mousereleased(x, y, button)
+function Icon:mousereleased(x, y, button)
 	if self.isActive and
 			self.x - self.w / 2 <= x and x <= self.x + self.w / 2 and
 			self.y - self.w / 2 <= y and y <= self.y + self.h / 2 then
@@ -67,12 +73,13 @@ function Wonder:mousereleased(x, y, button)
 	end
 end
 
-function Wonder:hit(x, y, button)
-	if self.stateToSwitch ~= nil then
-		Gamestate.current():fadeToDark(function() Gamestate.switch(self.stateToSwitch) end)
-	else
-		Gamestate.current().inDevFrame:setActive(true)
+function Icon:hit(x, y, button)
+	if self.levelUI ~= nil then
+		self.levelUI:setActive(true)
+	elseif self.func ~= nil then
+		self.func()
 	end
 end
 
-return Wonder
+return Icon
+

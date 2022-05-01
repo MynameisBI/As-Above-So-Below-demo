@@ -57,7 +57,7 @@ function Intro:next()
 						
 						self.currentDrawable:pause()
 						
-						Gamestate.switch(Load, nil, nil, nil, nil, Menu)
+						Gamestate.switch(Load, nil, nil, nil, nil, nil, Menu)
 					end, 0.3, nil, 'out-cubic')
 		end
 		

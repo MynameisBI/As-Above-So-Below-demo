@@ -10,6 +10,7 @@ Intro = require 'src.intro.intro'
 Menu = require 'src.menu.menu'
 World = require 'src.world.world'
 Level = require 'src.level.level'
+TutorialLevel = require 'src.tutorialLevel.tutorialLevel'
 Trading = require 'src.trading.trading'
 Load = require 'src.load.load'
 Game = require 'src.game.game'
@@ -19,9 +20,9 @@ function love.load()
 	math.randomseed(os.time())
 
 	Gamestate.registerEvents()
-	--Gamestate.switch(Load, 'theBeginning')
-	--Gamestate.switch(Game, 'theBeginning')
-	Gamestate.switch(Level)
+	--Gamestate.switch(Intro)
+	Gamestate.switch(World)
+	--Gamestate.switch(Game, 'theBeginning', 2, {'b'}, {'f1', 'f2', 'f3', 'w1', 'w2', 'w3'}, 7)
 end
 
 function love.update()

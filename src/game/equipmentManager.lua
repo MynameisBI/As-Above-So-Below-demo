@@ -6,11 +6,11 @@ local EquipmentManager = Class('EquipmentManager', Manager)
 function EquipmentManager:initialize()
 	Manager.initialize(self)
 	
-	local x = 100
+	local x = 1254
 	for id, info in pairs(DATA.equipments) do
 		self:add(Equipment(Sprites.equipments[info.sprite],
-				x, 400, info.onHit, info.drawCardOnNextDeckHit))
-		x = x + 200
+				x, 1060, info.onHit, info.drawCardOnNextDeckHit))
+		x = x + 260
 	end
 	
 	self.activeEquipment = nil

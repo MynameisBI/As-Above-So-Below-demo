@@ -66,7 +66,7 @@ function Deck:initialize(x, y, scoreOx, scoreOy)
 	
 	self.autoAddRemoveLeft = 0
 	
-	self.isVisible = true
+	self.isVisible = false
 end
 
 function Deck:addCard(id)

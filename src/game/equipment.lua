@@ -9,6 +9,10 @@ function Equipment:initialize(sprite, x, y, onHit, drawCardOnNextDeckHit)
 	self.size = 1
 	self.targetSize = 1
 	self.sizeTweenSpeed = 22
+	
+	self.targetOy = 0
+	self.oy = 0
+	
 	self.isHovered = false
 	self.isActive = false
 	
@@ -20,21 +24,26 @@ end
 function Equipment:update(dt)
 	if self.isHovered and self.isActive then
 		self.targetSize = 1
+		self.targetOy = 0
 	elseif self.isHovered and not self.isActive then
 		self.targetSize = 1.1
+		self.targetOy = -80
 	elseif not self.isHovered and self.isActive then
 		self.targetSize = 1
+		self.targetOy = 0
 	else
 		self.targetSize = 1
+		self.targetOy = 0
 	end
 	
 	self.size = self.size + ((self.targetSize - self.size) * self.sizeTweenSpeed * dt)
+	self.oy = self.oy + ((self.targetOy - self.oy) * self.sizeTweenSpeed * dt)
 end
 
 function Equipment:draw()
 	love.graphics.setColor(self.color)
-	love.graphics.draw(self.sprite, self.x, self.y,
-			0, self.size * 232 / self.sprite:getWidth(), self.size * 315 / self.sprite:getHeight(),
+	love.graphics.draw(self.sprite, self.x, self.y + self.oy,
+			0, self.size * 232 / self.sprite:getWidth() * 0.6, self.size * 315 / self.sprite:getHeight() * 0.6,
 			self.sprite:getWidth() / 2, self.sprite:getHeight() / 2)
 end
 
