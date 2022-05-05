@@ -21,8 +21,8 @@ function love.load()
 
 	Gamestate.registerEvents()
 	--Gamestate.switch(Intro)
-	Gamestate.switch(World)
-	--Gamestate.switch(Game, 'theBeginning', 2, {'b'}, {'f1', 'f2', 'f3', 'w1', 'w2', 'w3'}, 7)
+	--Gamestate.switch(World)
+	Gamestate.switch(Game, 'theBeginning', 2, {'b'}, {'f1', 'f2', 'f3', 'w1', 'w2', 'w3'}, 7)
 end
 
 function love.update()

@@ -24,7 +24,7 @@ function Button:initialize(sprite, x, y, w, h, executeFunc)
 	self.isEnabled = true
 end
 
-function Button:toggleEnable()
+function Button:toggleEnabled()
 	self.isEnabled = not self.isEnabled
 end
 
