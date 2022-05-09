@@ -249,6 +249,19 @@ Sprites = {
 		alembic = love.graphics.newImage('assets/equipments/alembic.png'),
 		mortarAndPestle = love.graphics.newImage('assets/equipments/mortarAndPestle.png'),
 		philosopherStone = love.graphics.newImage('assets/equipments/philosopherStone.png'),
+	},
+	
+	dialogue = {
+		textBox = love.graphics.newImage('assets/dialogue/text box.png'),
+		oppy = {
+			love.graphics.newImage('assets/dialogue/1.png'),
+			love.graphics.newImage('assets/dialogue/2.png'),
+			love.graphics.newImage('assets/dialogue/3.png'),
+			love.graphics.newImage('assets/dialogue/4.png'),
+			love.graphics.newImage('assets/dialogue/5.png'),
+			love.graphics.newImage('assets/dialogue/6.png'),
+		},
+		skipButton = love.graphics.newImage('assets/dialogue/skip button.png')
 	}
 }
 
@@ -325,4 +338,6 @@ Fonts = {
 	result_small = love.graphics.newFont('assets/fonts/JMH Beda.ttf', 52),
 	result_big = love.graphics.newFont('assets/fonts/JMH Beda.ttf', 180),
 	result_number = love.graphics.newFont('assets/fonts/Olondon_.otf', 254),
+	
+	dialogue = love.graphics.newFont('assets/fonts/JMH Beda.ttf', 46),
 }

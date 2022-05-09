@@ -9,7 +9,7 @@ local zoom = 0.5
 local minZoom, maxZoom = 0.5, 1.125
 local zoomSpeed = 0.125
 
-function World:enter()
+function World:enter(from)
 	State.initialize(self)
 
 	self:fadeToBright()
@@ -28,6 +28,26 @@ function World:enter()
 	
 	self.returnButton = Button(Sprites.world.returnButton, 1820, 100, 500, 500,
 			function() self:fadeToDark(function() Gamestate.switch(Menu) end) end)
+			
+	if not Settings.hasEnteredWorld then
+		Settings.hasEnteredWorld = true
+		_dialogue:setNewLines(
+				Line('This is a part of alchemy world map. You can zoom in and out.', 1),
+				Line("The location we are in right now is Europe. It doesn't really matter."),
+				Line("Click 'The starting point' to get a basic look at how to do alchemy."),
+				Line("Again, you can do whatever you like. Make sure you understand the basics for doing it."))
+				
+	elseif from == TutorialLevel and not Settings.hasReturnedFromTutorialLevel then
+		Settings.hasReturnedFromTutorialLevel = true
+		_dialogue:setNewLines(
+				Line("Congratulations on completing the beginner's tutorial. Haha.", 1),
+				Line("You see, our boat docked in Europe a few days ago."),
+				
+				Line("Europe has the current great development of alchemy, but there are also many negative stereotypes about it.", 5),
+				Line("On the path you chose, it was necessary to explore the world with different views on alchemy."),
+				
+				Line("You can afford to explore on your own. We will meet again later. Good luck on your journey.", 1))
+	end
 end
 
 function World:getMinX()

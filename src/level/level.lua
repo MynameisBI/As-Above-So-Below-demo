@@ -33,8 +33,9 @@ function Level:enter()
 			Icon(Sprites.level.tradingPlace, 1150, 1320, nil, function() self:fadeToDark(function() Gamestate.switch(Trading) end) end))
 	
 	self.camera = Camera.new()
-	self.targetY = self.camera.y
-	self.halfScreenHeight = self.targetY
+	self.backgroundHeight = Sprites.level.levelMap:getHeight()
+	self.targetY = self.backgroundHeight - self.halfScreenHeight
+	self.halfScreenHeight = self.camera.y
 	self.screenHeight = self.halfScreenHeight * 2
 	self.smoother = Camera.smooth.linear(7360)
 	
@@ -62,7 +63,7 @@ function Level:_update(dt)
 		self.targetY = math.max(self.targetY, self.halfScreenHeight)
 	elseif mouseY > self.screenHeight - 14 then
 		self.targetY = self.targetY + scrollSpeed * dt
-		self.targetY = math.min(self.targetY, 1570 - self.halfScreenHeight)
+		self.targetY = math.min(self.targetY, self.backgroundHeight - self.halfScreenHeight)
 	end
 	self.camera:lockY(self.targetY, self.smoother)
 	

@@ -11,8 +11,6 @@ function ResultFrame:initialize(args)
 			function() Gamestate.current():fadeToDark(function() Gamestate.switch(Load, args.background, args.cardsNum, args.baseDeck, args.wildCards, Game) end) end))
 	self:addButton('openLevelMap', Button(Sprites.result.openLevelMap, 183, 864, 274, 442,
 			function() Gamestate.current():fadeToDark(function() Gamestate.switch(Level) end) end))
-	self:addButton('X', Button(Sprites.result.XButton, 1815, 94, 120, 120,
-			function() Gamestate.current():fadeToDark(function() Gamestate.switch(Load, nil, nil, nil, nil, Menu) end) end))
 	self:addButton('openTrading', Button(Sprites.result.openTradingPlace, 1725, 895, 470, 370,
 			function() self:fadeToDark(function() Gamestate.switch(Trading) end) end))
 end
@@ -21,6 +19,41 @@ function ResultFrame:setResultInfo(result, score, reward)
 	self.result = result
 	self.score = score
 	self.reward = reward
+	
+	if result == 'win' then
+		if Settings.hasWon == false then
+			Settings.hasWon = true
+			_dialogue:setNewLines(
+					Line('First time and you nailed it! You are clearly gifted in alchemy! Keep it up.', 6))
+		end
+	
+	elseif result == 'lose' then
+		if Settings.hasLost == false then
+			Settings.hasLost = true
+			_dialogue:setNewLines(
+					Line("It's a bit disappointing. You can try again, but remember that everything has its price.", 2))
+		end
+	end
+	
+	if Settings.hasSeenResult == false then
+		Settings.hasSeenResult = true
+		_dialogue:addLines(
+				Line("You will receive rewards after completing each level. You can play again to keep getting them.", 1),
+				
+				Line("They are metal ingots formed by The Great Work.", 4),
+				Line("Based on the components aka flames (elements and principles) you earn, the rarity of those metal ingots will be determined."),
+				Line("The cheapest is lead, to the rarest is gold."),
+				
+				Line("You can sell them for money. Use money to buy equipment and ingredients for more difficult levels. That's how it works.", 3),
+				
+				Line("But remember this, choose the right time to sell to get a better price.", 5)
+				)
+	end
+end
+
+function ResultFrame:setActive(isActive)
+	self.isActive = isActive 
+	
 end
 
 function ResultFrame:draw()

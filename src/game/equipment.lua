@@ -4,7 +4,7 @@ function Equipment:initialize(sprite, x, y, onHit, drawCardOnNextDeckHit)
 	self.sprite = sprite
 	self.color = {1, 1, 1}
 	self.x, self.y = x, y
-	self.w, self.h = 232, 315
+	self.w, self.h = 232 * 0.65, 315 * 0.65
 
 	self.size = 1
 	self.targetSize = 1
@@ -43,7 +43,7 @@ end
 function Equipment:draw()
 	love.graphics.setColor(self.color)
 	love.graphics.draw(self.sprite, self.x, self.y + self.oy,
-			0, self.size * 232 / self.sprite:getWidth() * 0.6, self.size * 315 / self.sprite:getHeight() * 0.6,
+			0, self.size * 232 / self.sprite:getWidth() * 0.65, self.size * 315 / self.sprite:getHeight() * 0.65,
 			self.sprite:getWidth() / 2, self.sprite:getHeight() / 2)
 end
 

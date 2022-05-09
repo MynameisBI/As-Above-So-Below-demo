@@ -30,6 +30,32 @@ function Menu:enter()
 		worldMap = MenuButton(Sprites.menu.worldMap.normal, Sprites.menu.worldMap.hovered,
 				769, 685, 778, 422, -4, -32, function() self:fadeToDark(function() Gamestate.switch(World) end) end),
 	}
+	
+	
+	if not Settings.hasEnteredMenu then
+		Settings.hasEnteredMenu = true
+		_dialogue:setNewLines(
+				Line('Hey, wake up.', 2),
+				Line("Don't tell me you forgot who I am."),
+				
+				Line('My name is Magnum Opus. Just call me Opus for short.', 1),
+				Line('I am the guide to the beginning of your journey.'),
+				Line("You're the chosen one, a lucky freak."),
+				
+				Line("Remember yet?", 4),
+				Line("You are an alchemist."),
+				Line("You were blessed to fulfill your own mission, as an alchemist."),
+				Line("Not coincidentally, the higher beings believed that your blessing was something worthy of taking a big step forward for humankind."),
+				
+				Line("What that mission is, you have to figure it out for yourself. It is inside you.", 3),
+				
+				Line("Hey. Whether you are an expert or a novice in the world of alchemy, at this early stage do as I say.", 1),
+				Line("However, you can do whatever you like. Freedom to explore."),
+				Line('First, open the map, clearly define where we need to head. Click "World map".'))
+				
+	else
+	
+	end
 end
 
 function Menu:isAnyFrameActive()
@@ -82,10 +108,10 @@ function Menu:mousepressed(x, y, button)
 	self.settingsFrame:mousepressed(x, y, button)
 	self.creditsFrame:mousepressed(x, y, button)
 
-	if self:isAnyFrameActive() then return end
-
-	for _, button in pairs(self.buttons) do
-		button:mousepressed(x, y, button)
+	if not self:isAnyFrameActive() then
+		for _, button in pairs(self.buttons) do
+			button:mousepressed(x, y, button)
+		end
 	end
 end
 

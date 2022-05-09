@@ -40,7 +40,7 @@ function Game:enter(from, background, cardsNum, baseDeck, wildCards, startingPoi
 	
 	self.paused = false
 	self.pauseFrame = PauseFrame(self.args)
-	self.pauseButton = Button(Sprites.pauseButton, 1853, 57, 114, 114,
+	self.pauseButton = Button(Sprites.pauseButton, 1828, 82, 114, 114,
 			function()
 				if self.paused then self:resume()
 				else self:pause()

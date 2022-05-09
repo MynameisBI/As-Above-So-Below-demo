@@ -27,13 +27,25 @@ function TutorialLevel:enter()
 			Icon(Sprites.levels.tutorial.warmUp, nil, 954, 213, warmUpUI))
 	
 	self.camera = Camera.new()
-	self.targetY = self.camera.y
-	self.halfScreenHeight = self.targetY
+	self.backgroundHeight = Sprites.levels.tutorial.levelMap:getHeight()
+	self.targetY = self.backgroundHeight - self.halfScreenHeight
+	self.halfScreenHeight = self.camera.y
 	self.screenHeight = self.halfScreenHeight * 2
 	self.smoother = Camera.smooth.linear(7360)
 	
 	self.returnButton = Button(Sprites.levels.tutorial.XButton, 1350, 100, 500, 500,
 			function() self:fadeToDark(function() Gamestate.switch(World) end) end)
+			
+			
+	if not Settings.hasEnteredTutorialLevel then
+		Settings.hasEnteredTutorialLevel = true
+		_dialogue:setNewLines(
+				Line('The Great Work. It is the name of the alchemical ritual.', 4),
+				Line("Its purpose is understandably to transform base metals (like lead) into noble metals (like gold)."),
+				
+				Line("These are some basic things to be familiar with how The Great Work works.", 1), 
+				Line("Learn them and come back to me when you're finished."))
+	end
 end
 
 function TutorialLevel:isAnyFrameActive()
@@ -122,6 +134,12 @@ function TutorialLevel:wheelmoved(x, y)
 		--self.targetY = self.targetY + wheelSpeed
 		--self.targetY = math.min(self.targetY, 1570 - self.halfScreenHeight)
 	--end
+end
+
+function TutorialLevel:keypressed(key, scancode, isRepeat)
+	if key == 'escape' then
+		Gamestate.switch(World)
+	end
 end
 
 return TutorialLevel

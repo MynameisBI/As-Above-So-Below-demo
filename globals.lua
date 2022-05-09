@@ -8,4 +8,12 @@ Anim8 = require 'libs.anim8'
 Settings = {
 	isDebug = false,
 	cardAutomaticallyFadeAway = false,
+	
+	hasEnteredMenu = false,
+	hasEnteredWorld = false,
+	hasEnteredTutorialLevel = false,	
+	hasReturnedFromTutorialLevel = false,
+	hasWon = false,
+	hasLost = false,
+	hasSeenResult = false
 }

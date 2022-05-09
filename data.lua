@@ -62,8 +62,8 @@ return {
 			startingPoint = 20,
 		},
 		theRoyalFortress	 = {
-			background = 'mainGate',
-			cardsNum = 3,
+			background = 'theRoyalFortress',
+			cardsNum = 4,
 			baseDeck = {'b', 'g', 'ge', 'ha'},
 			wildCards = {'f1', 'f2', 'f3', 'f4', 'w1', 'w2', 'w3', 'w4',
 					'e1', 'e2', 'e3', 'a1', 'a2', 'a3', 'a4',
