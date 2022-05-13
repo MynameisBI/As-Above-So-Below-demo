@@ -34,6 +34,7 @@ function PauseFrame:initialize()
 			function() Gamestate.current():resume() end))
 	self:addButton('replay', Button(Sprites.pause.replay, 1150, 535, 120, 120,
 			function()
+				AudioManager:play('otherSounds', 'replay')
 				Gamestate.current():fadeToDark(function()
 							local args = Gamestate.current().args
 							Gamestate.switch(Load, args.background, args.cardsNum, args.baseDeck, args.wildCards)

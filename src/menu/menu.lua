@@ -26,9 +26,9 @@ function Menu:enter()
 		settings = MenuButton(Sprites.menu.settings.normal, Sprites.menu.settings.hovered,
 				1703, 57, 114, 114, 0, -20, function() self.settingsFrame:setActive(true); self.settingsFrame.isHovered = false end),
 		tradings = MenuButton(Sprites.menu.tradings.normal, Sprites.menu.tradings.hovered,
-				642, 273, 652, 366, -44, -61, function() self:fadeToDark(function() Gamestate.switch(Trading) end) end),
+				642, 273, 652, 366, -44, -61, function() self:fadeToDark(function() Gamestate.switch(Trading); AudioManager:play('otherSounds', 'tradings') end) end),
 		worldMap = MenuButton(Sprites.menu.worldMap.normal, Sprites.menu.worldMap.hovered,
-				769, 685, 778, 422, -4, -32, function() self:fadeToDark(function() Gamestate.switch(World) end) end),
+				769, 685, 778, 422, -4, -32, function() self:fadeToDark(function() Gamestate.switch(World); AudioManager:play('otherSounds', 'map') end) end),
 	}
 	
 	
@@ -56,6 +56,12 @@ function Menu:enter()
 	else
 	
 	end
+	
+	AudioManager:play('bgm', 'menu')
+end
+
+function Menu:leave()
+	AudioManager:stop('bgm', 'menu')
 end
 
 function Menu:isAnyFrameActive()

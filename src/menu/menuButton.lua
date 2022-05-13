@@ -25,4 +25,8 @@ function MenuButton:draw()
 			sprite:getWidth() / 2 + self.spriteOx, sprite:getHeight() / 2 + self.spriteOy)
 end
 
+function MenuButton:hit(x, y, button)
+	self.executeFunc(self, x, y, button)
+end
+
 return MenuButton

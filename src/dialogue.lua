@@ -5,10 +5,14 @@ local Dialogue = Class('Dialogue')
 function Dialogue:initialize()
 	self.lines = {}
 	self.currentLineIndex = 1
-	self.currentOppyIndex = 1
 	self.currentLineLength = 1
 	self.secondsPerAddChar = 0.035
 	self.secondsToAddChar = 0
+	
+	self.isTutorial = false
+	self.currentOppyIndex = 1
+	self.currentTutorialIndex = 1
+	self.currentOverlayIndex = 1
 	
 	self.skipButton = Button(Sprites.dialogue.skipButton, 1780, 734, nil, nil, function() self:skipAll() end)
 	
@@ -17,9 +21,20 @@ end
 
 function Dialogue:setNewLines(...)
 	self.lines = {...}
+	
 	self.currentLineIndex = 1
-	self.currentOppyIndex = 1
 	self.currentLineLength = 1
+	
+	local firstLine = self.lines[1]
+	if firstLine.oppyIndex ~= nil then
+		self.isTutorial = false
+		self.currentOppyIndex = firstLine.oppyIndex
+	else
+		self.isTutorial = true
+		self.currentTutorialIndex = firstLine.tutorialIndex
+		self.currentOverlayIndex = firstLine.overlayIndex
+	end
+	
 	self.isActive = true
 end
 
@@ -42,11 +57,22 @@ function Dialogue:nextLine()
 		if self.currentLineIndex > #self.lines then
 			self.isActive = false
 			self.currentLineIndex = self.currentLineIndex - 1
+			
+			if Gamestate.current().onDialogueEnd then
+				Gamestate.current():onDialogueEnd()
+			end
+			
 			return
 		end
 		
-		if self.lines[self.currentLineIndex].oppyIndex ~= nil then
-			self.currentOppyIndex = self.lines[self.currentLineIndex].oppyIndex
+		local currentLine = self.lines[self.currentLineIndex]
+		if currentLine.oppyIndex ~= nil then
+			self.isTutorial = false
+			self.currentOppyIndex = currentLine.oppyIndex
+		elseif currentLine.overlayIndex ~= nil then
+			self.isTutorial = true
+			self.currentOverlayIndex = currentLine.overlayIndex
+			self.currentTutorialIndex = currentLine.tutorialIndex
 		end
 	end
 end
@@ -54,6 +80,10 @@ end
 function Dialogue:skipAll()
 	self.isActive = false
 	self.currentLineIndex = #self.lines
+	
+	if Gamestate.current().onDialogueEnd then
+		Gamestate.current():onDialogueEnd()
+	end
 end
 
 function Dialogue:update(dt)
@@ -74,20 +104,39 @@ function Dialogue:draw()
 	if not self.isActive then return false end
 
 	love.graphics.setColor(1, 1, 1)
+	if self.isTutorial == false then
+		love.graphics.draw(Sprites.dialogue.textBox, 0, 628)
+		
+		self.skipButton.y = 734
+		self.skipButton:draw()
+		
+		love.graphics.draw(Sprites.dialogue.oppy[self.currentOppyIndex], 20, 628)
+		
+		local t = string.sub(self.lines[self.currentLineIndex].text, 1, self.currentLineLength)
+		local f = Fonts.dialogue
+		if t == nil then return end
+		love.graphics.setFont(f)
+		local width, lines = f:getWrap(t, 1230)
+		for i = 1, #lines do
+			love.graphics.print(lines[i], 510, 816 + (f:getHeight(t) + 4) * (-#lines/2 + i))
+		end
+		
+	elseif self.isTutorial == true then
+		love.graphics.draw(Sprites.dialogue.tutorials[self.currentTutorialIndex][self.currentOverlayIndex])
 	
-	love.graphics.draw(Sprites.dialogue.textBox, 0, 628)
-	
-	self.skipButton:draw()
-	
-	love.graphics.draw(Sprites.dialogue.oppy[self.currentOppyIndex], 20, 628)
-	
-	local t = string.sub(self.lines[self.currentLineIndex].text, 1, self.currentLineLength)
-	local f = Fonts.result_small
-	if t == nil then return end
-	love.graphics.setFont(f)
-	local width, lines = f:getWrap(t, 1230)
-	for i = 1, #lines do
-		love.graphics.print(lines[i], 510, 816 + (f:getHeight(t) + 4) * (-#lines/2 + i))
+		love.graphics.draw(Sprites.dialogue.textBox, 0, 854, 0, 1, 0.5)
+		
+		self.skipButton.y = 960
+		self.skipButton:draw()
+		
+		local t = string.sub(self.lines[self.currentLineIndex].text, 1, self.currentLineLength)
+		local f = Fonts.dialogue_small
+		if t == nil then return end
+		love.graphics.setFont(f)
+		local width, lines = f:getWrap(t, 1560)
+		for i = 1, #lines do
+			love.graphics.print(lines[i], 180, 930 + (f:getHeight(t) + 4) * (-#lines/2 + i))
+		end
 	end
 	
 	return true

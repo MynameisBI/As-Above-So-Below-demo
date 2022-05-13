@@ -18,6 +18,12 @@ function Trading:enter(from)
 			990, 840, 428, 192, -30, 22, function() Gamestate.current().inDevFrame:setActive(true) end))
 	self.buttons:add(Button(Sprites.result.XButton,
 			1815, 94, 120, 120, function() Gamestate.switch(Menu) end))
+			
+	AudioManager:play('bgm', 'tradings')
+end
+
+function Menu:leave()
+	AudioManager:stop('bgm', 'tradings')
 end
 
 function Trading:update(dt)

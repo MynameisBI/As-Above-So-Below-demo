@@ -8,11 +8,11 @@ function ResultFrame:initialize(args)
 	Frame.initialize(self)
 
 	self:addButton('replayButton', Button(Sprites.result.replay, 960, 1025, 540, 130,
-			function() Gamestate.current():fadeToDark(function() Gamestate.switch(Load, args.background, args.cardsNum, args.baseDeck, args.wildCards, Game) end) end))
+			function() Gamestate.current():fadeToDark(function() Gamestate.switch(Load, args.background, args.cardsNum, args.baseDeck, args.wildCards, Game); AudioManager:play('otherSounds', 'replay') end) end))
 	self:addButton('openLevelMap', Button(Sprites.result.openLevelMap, 183, 864, 274, 442,
-			function() Gamestate.current():fadeToDark(function() Gamestate.switch(Level) end) end))
+			function() Gamestate.current():fadeToDark(function() Gamestate.switch(Level); AudioManager:play('otherSounds', 'map') end) end))
 	self:addButton('openTrading', Button(Sprites.result.openTradingPlace, 1725, 895, 470, 370,
-			function() self:fadeToDark(function() Gamestate.switch(Trading) end) end))
+			function() self:fadeToDark(function() Gamestate.switch(Trading); AudioManager:play('otherSounds', 'tradings') end) end))
 end
 
 function ResultFrame:setResultInfo(result, score, reward)
@@ -25,6 +25,7 @@ function ResultFrame:setResultInfo(result, score, reward)
 			Settings.hasWon = true
 			_dialogue:setNewLines(
 					Line('First time and you nailed it! You are clearly gifted in alchemy! Keep it up.', 6))
+			AudioManager:play('otherSounds', 'win')
 		end
 	
 	elseif result == 'lose' then
@@ -32,6 +33,7 @@ function ResultFrame:setResultInfo(result, score, reward)
 			Settings.hasLost = true
 			_dialogue:setNewLines(
 					Line("It's a bit disappointing. You can try again, but remember that everything has its price.", 2))
+			AudioManager:play('otherSounds', 'lost')
 		end
 	end
 	

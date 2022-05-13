@@ -69,6 +69,7 @@ end
 
 function Wonder:hit(x, y, button)
 	if self.stateToSwitch ~= nil then
+		AudioManager:play('otherSounds', 'worldMapWonder')
 		Gamestate.current():fadeToDark(function() Gamestate.switch(self.stateToSwitch) end)
 	else
 		Gamestate.current().inDevFrame:setActive(true)

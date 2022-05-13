@@ -54,6 +54,12 @@ function Game:enter(from, background, cardsNum, baseDeck, wildCards, startingPoi
 			end)
 	
 	self:setupGame(cardsNum)
+	
+	AudioManager:play('bgm', background)
+end
+
+function Game:leave()
+	AudioManager:stop('bgm', self.args.background)
 end
 
 function Game:setupGame(cardsNum)

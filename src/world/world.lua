@@ -48,6 +48,12 @@ function World:enter(from)
 				
 				Line("You can afford to explore on your own. We will meet again later. Good luck on your journey.", 1))
 	end
+	
+	AudioManager:play('bgm', 'worldMap')
+end
+
+function Menu:leave()
+	AudioManager:stop('bgm', 'worldMap')
 end
 
 function World:getMinX()

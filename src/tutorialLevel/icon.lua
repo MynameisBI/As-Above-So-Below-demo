@@ -2,7 +2,7 @@ local Icon = Class('Icon')
 
 local inGameSpriteSize = 0.35
 
-function Icon:initialize(sprite, hoveredSprite, x, y, levelUI, func)
+function Icon:initialize(sprite, hoveredSprite, x, y, levelUI, dialogueLines)
 	assert(sprite, 'sprite is nil')
 	
 	self.sprite = sprite
@@ -18,6 +18,8 @@ function Icon:initialize(sprite, hoveredSprite, x, y, levelUI, func)
 	
 	self.levelUI = levelUI
 	self.func = func
+	
+	self.dialogueLines = dialogueLines
 end
 
 function Icon:update(dt)
@@ -33,8 +35,6 @@ function Icon:update(dt)
 	
 	-- Cubic method
 	self.size = self.size + ((self.targetSize - self.size) * self.sizeTweenSpeed * dt)
-	-- Linear method
-	-- self.size = self.size + van van va may may toi luoi 
 end
 
 function Icon:draw()
@@ -76,8 +76,8 @@ end
 function Icon:hit(x, y, button)
 	if self.levelUI ~= nil then
 		self.levelUI:setActive(true)
-	elseif self.func ~= nil then
-		self.func()
+	elseif self.dialogueLines ~= nil then
+		Gamestate.current():fadeToDark(function() Gamestate.switch(Tutorial, self.dialogueLines) end)
 	end
 end
 

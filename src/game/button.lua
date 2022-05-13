@@ -77,6 +77,8 @@ function Button:mousereleased(x, y, button)
 end
 
 function Button:hit(x, y, button)
+	AudioManager:play('otherSounds', 'button')
+
 	self.executeFunc(self, x, y, button)
 end
 

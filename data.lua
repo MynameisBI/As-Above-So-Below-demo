@@ -18,7 +18,7 @@ return {
 	},
 	
 	levels = {
-		tutorial = {
+		warmUp = {
 			background = 'theBeginning',
 			cardsNum = 2,
 			baseDeck = {'b'},

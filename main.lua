@@ -13,6 +13,7 @@ Level = require 'src.level.level'
 TutorialLevel = require 'src.tutorialLevel.tutorialLevel'
 Trading = require 'src.trading.trading'
 Load = require 'src.load.load'
+Tutorial = require 'src.tutorial.tutorial'
 Game = require 'src.game.game'
 
 
@@ -26,7 +27,7 @@ function love.load()
 
 	--Gamestate.registerEvents()
 	--Gamestate.switch(Intro)
-	Gamestate.switch(Menu)
+	Gamestate.switch(TutorialLevel)
 	--Gamestate.switch(Game, 'theBeginning', 2, {'b'}, {'f1', 'f2', 'f3', 'w1', 'w2', 'w3'}, 7)
 end
 

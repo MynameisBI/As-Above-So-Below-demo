@@ -27,9 +27,8 @@ function Intro:next()
 		
 						self.currentDrawable = Sprites.intro.title
 						
-						Audios.intro:seek(2)
-						Audios.intro:setLooping(true)
-						Audios.intro:play()
+						Audios.bgm.titleIntro:setLooping(true)
+						Audios.bgm.titleIntro:play()
 						
 						self.isFadingToDark = false
 					end, 0.3, nil, 'out-cubic')
@@ -41,7 +40,7 @@ function Intro:next()
 			self:fadeToDark(function()
 						self:fadeToBright(function() self.isFading = false end, 0.6)
 						
-						Audios.intro:stop()
+						Audios.bgm.titleIntro:stop()
 			
 						self.currentDrawable = Videos.pIntro
 						self.currentDrawable:rewind()

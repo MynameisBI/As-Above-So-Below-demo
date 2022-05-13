@@ -34,13 +34,19 @@ function Level:enter()
 	
 	self.camera = Camera.new()
 	self.backgroundHeight = Sprites.level.levelMap:getHeight()
-	self.targetY = self.backgroundHeight - self.halfScreenHeight
 	self.halfScreenHeight = self.camera.y
+	self.targetY = self.backgroundHeight - self.halfScreenHeight
 	self.screenHeight = self.halfScreenHeight * 2
 	self.smoother = Camera.smooth.linear(7360)
 	
 	self.returnButton = Button(Sprites.world.returnButton, 1350, 100, 500, 500,
 			function() self:fadeToDark(function() Gamestate.switch(World) end) end)
+			
+	AudioManager:play('bgm', 'levelMap')
+end
+
+function Level:leave()
+	AudioManager:stop('bgm', 'levelMap')
 end
 
 function Level:isAnyFrameActive()

@@ -36,7 +36,8 @@ function Load:_update(dt)
 		self.isAnimationEnded = true
 	
 		self:fadeToDark(function() 
-					Gamestate.switch(self.to, self.background, self.cardsNum, self.baseDeck, self.wildCards, self.startingPoint)
+					Gamestate.switch(self.to, self.background,
+							self.cardsNum, self.baseDeck, self.wildCards, self.startingPoint)
 				end, 0.5)
 	end
 end

@@ -121,8 +121,8 @@ function Deck:executeNextAction()
 	if action == 'select' or action == 'stab' or action == 'remove' then
 		self.isVisible = false
 	
-		if action == 'select' then AudioManager:play('select')
-		elseif action == 'stab' or action == 'remove' then AudioManager:play('remove')
+		if action == 'select' then AudioManager:play('cardSounds', 'select')
+		elseif action == 'stab' or action == 'remove' then AudioManager:play('cardSounds', 'remove')
 		end
 		
 		self.isFlipping = true
@@ -153,7 +153,7 @@ function Deck:executeNextAction()
 		
 		self.timer:after(flipAnimationInfo.flipTime/2 + 0.01,
 				function()
-					AudioManager:play('flip')
+					AudioManager:play('cardSounds', 'flip')
 				
 					self.currentFlippedSprite = self.currentFlippedCard.sprite
 				
@@ -206,6 +206,23 @@ function Deck:executeNextAction()
 		if Settings.cardAutomaticallyFadeAway then delay = flipAnimationInfo.delayToFade
 		else delay = 0.05
 		end
+		
+		if self.currentFlippedCard.name == 'Black 4' then
+			AudioManager:play('cardSounds', 'black')
+		elseif self.currentFlippedCard.name == 'Charlatan' then
+			AudioManager:play('cardSounds', 'charlatan')
+		elseif self.currentFlippedCard.name == 'Hard Labor' then
+			AudioManager:play('cardSounds', 'hardLabor')
+		elseif self.currentFlippedCard.name == 'Heresy' then
+			AudioManager:play('cardSounds', 'heresy')
+		elseif self.currentFlippedCard.name == 'Gold' then
+			AudioManager:play('cardSounds', 'gold')
+		elseif self.currentFlippedCard.type == 'gold event' then
+			AudioManager:play('cardSounds', 'goldEvent')
+		elseif self.currentFlippedCard.group == 'element' then
+			AudioManager:play('cardSounds', 'element')
+		end
+		
 		self.timer:after(delay, 
 				function()
 					self.timer:tween(flipAnimationInfo.fadeTime, self,
@@ -246,7 +263,7 @@ function Deck:executeNextAction()
 		end
 		self.timer:after(delay, 
 				function()
-					AudioManager:play('tearInHalf')
+					AudioManager:play('cardSounds', 'tearInHalf')
 				
 					self.currentFlippedCardOpacity = 0
 					

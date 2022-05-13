@@ -261,8 +261,89 @@ Sprites = {
 			love.graphics.newImage('assets/dialogue/5.png'),
 			love.graphics.newImage('assets/dialogue/6.png'),
 		},
-		skipButton = love.graphics.newImage('assets/dialogue/skip button.png')
-	}
+		skipButton = love.graphics.newImage('assets/dialogue/skip button.png'),
+		tutorials = {
+			[1] = {
+				[1] = love.graphics.newImage('assets/dialogue/tutorial/1/1.png'),
+				[2] = love.graphics.newImage('assets/dialogue/tutorial/1/2.png'),
+				[2.5] = love.graphics.newImage('assets/dialogue/tutorial/1/2.5.png'),
+				[3] = love.graphics.newImage('assets/dialogue/tutorial/1/3.png'),
+				[4] = love.graphics.newImage('assets/dialogue/tutorial/1/4.png'),
+				[5] = love.graphics.newImage('assets/dialogue/tutorial/1/5.png'),
+				[6] = love.graphics.newImage('assets/dialogue/tutorial/1/6.png'),
+			},
+			[2] = {
+				[1] = love.graphics.newImage('assets/dialogue/tutorial/2/1.png'),
+				[2] = love.graphics.newImage('assets/dialogue/tutorial/2/2.png'),
+				[3] = love.graphics.newImage('assets/dialogue/tutorial/2/3.png'),
+				[4] = love.graphics.newImage('assets/dialogue/tutorial/2/4.png'),
+				[5] = love.graphics.newImage('assets/dialogue/tutorial/2/5.png'),
+				[6] = love.graphics.newImage('assets/dialogue/tutorial/2/6.png'),
+			},
+			[3] = {
+				[1.1] = love.graphics.newImage('assets/dialogue/tutorial/3/1.1.png'),
+				[1.2] = love.graphics.newImage('assets/dialogue/tutorial/3/1.2.png'),
+				[1.3] = love.graphics.newImage('assets/dialogue/tutorial/3/1.3.png'),
+				[1.4] = love.graphics.newImage('assets/dialogue/tutorial/3/1.4.png'),
+				[1.5] = love.graphics.newImage('assets/dialogue/tutorial/3/1.5.png'),
+				[2.1] = love.graphics.newImage('assets/dialogue/tutorial/3/2.1.png'),
+				[2.2] = love.graphics.newImage('assets/dialogue/tutorial/3/2.2.png'),
+				[2.3] = love.graphics.newImage('assets/dialogue/tutorial/3/2.3.png'),
+				[3.1] = love.graphics.newImage('assets/dialogue/tutorial/3/3.1.png'),
+				[3.2] = love.graphics.newImage('assets/dialogue/tutorial/3/3.2.png'),
+				[3.3] = love.graphics.newImage('assets/dialogue/tutorial/3/3.3.png'),
+				[3.4] = love.graphics.newImage('assets/dialogue/tutorial/3/3.4.png'),
+				[4.1] = love.graphics.newImage('assets/dialogue/tutorial/3/4.1.png'),
+				[4.2] = love.graphics.newImage('assets/dialogue/tutorial/3/4.2.png'),
+				[4.3] = love.graphics.newImage('assets/dialogue/tutorial/3/4.3.png'),
+				[5.1] = love.graphics.newImage('assets/dialogue/tutorial/3/5.1.png'),
+				[5.2] = love.graphics.newImage('assets/dialogue/tutorial/3/5.2.png'),
+			},
+			[4] = {
+				[1] = love.graphics.newImage('assets/dialogue/tutorial/4/1.png'),
+				[1.5] = love.graphics.newImage('assets/dialogue/tutorial/4/1.5.png'),
+				[2] = love.graphics.newImage('assets/dialogue/tutorial/4/2.png'),
+				[2.5] = love.graphics.newImage('assets/dialogue/tutorial/4/2.5.png'),
+				[3.1] = love.graphics.newImage('assets/dialogue/tutorial/4/3.1.png'),
+				[3.2] = love.graphics.newImage('assets/dialogue/tutorial/4/3.2.png'),
+				[3.3] = love.graphics.newImage('assets/dialogue/tutorial/4/3.3.png'),
+				[4.1] = love.graphics.newImage('assets/dialogue/tutorial/4/4.1.png'),
+				[4.2] = love.graphics.newImage('assets/dialogue/tutorial/4/4.2.png'),
+				[4.3] = love.graphics.newImage('assets/dialogue/tutorial/4/3.3.png'),
+			},
+			[5] = {
+				[1.1] = love.graphics.newImage('assets/dialogue/tutorial/5/1.1.png'),
+				[1.2] = love.graphics.newImage('assets/dialogue/tutorial/5/1.2.png'),
+				[1.3] = love.graphics.newImage('assets/dialogue/tutorial/5/1.3.png'),
+				[2.1] = love.graphics.newImage('assets/dialogue/tutorial/5/2.1.png'),
+				[2.2] = love.graphics.newImage('assets/dialogue/tutorial/5/2.2.png'),
+				[3.1] = love.graphics.newImage('assets/dialogue/tutorial/5/3.1.png'),
+				[3.2] = love.graphics.newImage('assets/dialogue/tutorial/5/3.2.png'),
+				[3.3] = love.graphics.newImage('assets/dialogue/tutorial/5/3.3.png'),
+				[3.4] = love.graphics.newImage('assets/dialogue/tutorial/5/3.4.png'),
+			},
+			[6] = {
+				[1.1] = love.graphics.newImage('assets/dialogue/tutorial/6/1.1.png'),
+				[1.2] = love.graphics.newImage('assets/dialogue/tutorial/6/1.2.png'),
+				[2.1] = love.graphics.newImage('assets/dialogue/tutorial/6/2.1.png'),
+				[2.2] = love.graphics.newImage('assets/dialogue/tutorial/6/2.2.png'),
+				[2.3] = love.graphics.newImage('assets/dialogue/tutorial/6/2.3.png'),
+				[3.1] = love.graphics.newImage('assets/dialogue/tutorial/6/3.1.png'),
+				[3.2] = love.graphics.newImage('assets/dialogue/tutorial/6/3.2.png'),
+				[3.3] = love.graphics.newImage('assets/dialogue/tutorial/6/3.3.png'),
+				[4] = love.graphics.newImage('assets/dialogue/tutorial/6/4.png'),
+			},
+			[7] = {
+				[1] = love.graphics.newImage('assets/dialogue/tutorial/7/1.png'),
+				[2.1] = love.graphics.newImage('assets/dialogue/tutorial/7/2.1.png'),
+				[2.2] = love.graphics.newImage('assets/dialogue/tutorial/7/2.2.png'),
+				[3.1] = love.graphics.newImage('assets/dialogue/tutorial/7/3.1.png'),
+				[3.2] = love.graphics.newImage('assets/dialogue/tutorial/7/3.2.png'),
+				[4] = love.graphics.newImage('assets/dialogue/tutorial/7/4.png'),
+				[5] = love.graphics.newImage('assets/dialogue/tutorial/7/5.png'),
+			},
+		}
+	},
 }
 
 function newAnimator(imagePath, frameWidth, frameHeight, frameAmmount, frameIndexes, durations, onLoop)
@@ -320,14 +401,51 @@ Videos = {
 }
 
 Audios = {
-	select = love.audio.newSource('assets/audio/select.wav', 'static'),
-	flip = love.audio.newSource('assets/audio/Card-flip-sound-effect.mp3', 'static'),
-	remove = love.audio.newSource('assets/audio/remove.wav', 'static'),
 	positive = love.audio.newSource('assets/audio/positive.wav', 'static'),
 	negative = love.audio.newSource('assets/audio/negative.wav', 'static'),
-	tearInHalf = love.audio.newSource('assets/audio/tearInHalf.mp3', 'static'),
 	
 	intro = love.audio.newSource('assets/intro/bgm.mp3', 'stream'),
+	
+	bgm = {
+		tutorial = love.audio.newSource('assets/audio/bgm/all tutorial levels bgm.mp3', 'stream'),
+		bridgeTown = love.audio.newSource('assets/audio/bgm/bridge town level bgm.mp3', 'stream'),
+		mainGate = love.audio.newSource('assets/audio/bgm/main gate level bgm.mp3', 'stream'),
+		monastery = love.audio.newSource('assets/audio/bgm/monastery bgm.mp3', 'stream'),
+		nightTavern = love.audio.newSource('assets/audio/bgm/night tavern level bgm.mp3', 'stream'),
+		theBeginning = love.audio.newSource('assets/audio/bgm/the beginning level bgm.mp3', 'stream'),
+		theRoyalFortress = love.audio.newSource('assets/audio/bgm/the royal fortress level bgm.mp3', 'stream'),
+		warmUp = love.audio.newSource('assets/audio/bgm/warm up level bgm bgm.mp3', 'stream'),
+		levelMap = love.audio.newSource('assets/audio/bgm/levelmap bgm.mp3', 'stream'),
+		menu = love.audio.newSource('assets/audio/bgm/menu bgm.mp3', 'stream'),
+		titleIntro = love.audio.newSource('assets/audio/bgm/title intro bgm.mp3', 'stream'),
+		tradings = love.audio.newSource('assets/audio/bgm/tradings bgm.mp3', 'stream'),
+		worldMap = love.audio.newSource('assets/audio/bgm/worldmap bgm.mp3', 'stream'),
+	},
+	
+	cardSounds = {
+		black = love.audio.newSource('assets/audio/card sounds/black.mp3', 'static'),
+		flip = love.audio.newSource('assets/audio/card sounds/card flip.mp3', 'static'),
+		charlatan = love.audio.newSource('assets/audio/card sounds/charlatan.mp3', 'static'),
+		element = love.audio.newSource('assets/audio/card sounds/element.mp3', 'static'),
+		goldEvent = love.audio.newSource('assets/audio/card sounds/gold event.mp3', 'static'),
+		gold = love.audio.newSource('assets/audio/card sounds/gold.mp3', 'static'),
+		hardLabor = love.audio.newSource('assets/audio/card sounds/hard labor.mp3', 'static'),
+		heresy = love.audio.newSource('assets/audio/card sounds/heresy.mp3', 'static'),
+		remove = love.audio.newSource('assets/audio/card sounds/remove.mp3', 'static'),
+		select = love.audio.newSource('assets/audio/card sounds/select.mp3', 'static'),
+		tearInHalf = love.audio.newSource('assets/audio/card sounds/tear in half.mp3', 'static'),
+	},
+	
+	otherSounds = {
+		button = love.audio.newSource('assets/audio/other sounds/button.mp3', 'static'),
+		europeLevel = love.audio.newSource('assets/audio/other sounds/button.mp3', 'static'),
+		lost = love.audio.newSource('assets/audio/other sounds/button.mp3', 'static'),
+		map = love.audio.newSource('assets/audio/other sounds/button.mp3', 'static'),
+		replay = love.audio.newSource('assets/audio/other sounds/button.mp3', 'static'),
+		tradings = love.audio.newSource('assets/audio/other sounds/button.mp3', 'static'),
+		win = love.audio.newSource('assets/audio/other sounds/button.mp3', 'static'),
+		worldMapWonder = love.audio.newSource('assets/audio/other sounds/button.mp3', 'static'),
+	},
 }
 
 Fonts = {
@@ -340,4 +458,5 @@ Fonts = {
 	result_number = love.graphics.newFont('assets/fonts/Olondon_.otf', 254),
 	
 	dialogue = love.graphics.newFont('assets/fonts/JMH Beda.ttf', 46),
+	dialogue_small = love.graphics.newFont('assets/fonts/JMH Beda.ttf', 32),
 }
