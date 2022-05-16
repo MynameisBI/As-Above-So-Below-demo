@@ -215,7 +215,7 @@ function Deck:executeNextAction()
 			AudioManager:play('cardSounds', 'hardLabor')
 		elseif self.currentFlippedCard.name == 'Heresy' then
 			AudioManager:play('cardSounds', 'heresy')
-		elseif self.currentFlippedCard.name == 'Gold' then
+		elseif self.currentFlippedCard.name == 'Gold 4' then
 			AudioManager:play('cardSounds', 'gold')
 		elseif self.currentFlippedCard.type == 'gold event' then
 			AudioManager:play('cardSounds', 'goldEvent')

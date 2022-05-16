@@ -61,6 +61,7 @@ function Menu:enter()
 end
 
 function Menu:leave()
+	print('what now?')
 	AudioManager:stop('bgm', 'menu')
 end
 

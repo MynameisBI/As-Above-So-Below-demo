@@ -52,7 +52,7 @@ function World:enter(from)
 	AudioManager:play('bgm', 'worldMap')
 end
 
-function Menu:leave()
+function World:leave()
 	AudioManager:stop('bgm', 'worldMap')
 end
 

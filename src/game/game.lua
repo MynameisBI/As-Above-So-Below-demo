@@ -22,7 +22,8 @@ function Game:enter(from, background, cardsNum, baseDeck, wildCards, startingPoi
 		background = background,
 		cardsNum = cardsNum,
 		baseDeck = baseDeck,
-		wildCards = wildCards
+		wildCards = wildCards,
+		startingPoint = startingPoint,
 	}
 
 	self.background = Sprites.backgrounds[background]

@@ -22,7 +22,7 @@ function Trading:enter(from)
 	AudioManager:play('bgm', 'tradings')
 end
 
-function Menu:leave()
+function Trading:leave()
 	AudioManager:stop('bgm', 'tradings')
 end
 

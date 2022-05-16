@@ -26,6 +26,8 @@ function MenuButton:draw()
 end
 
 function MenuButton:hit(x, y, button)
+	AudioManager:play('otherSounds', 'button')
+
 	self.executeFunc(self, x, y, button)
 end
 
