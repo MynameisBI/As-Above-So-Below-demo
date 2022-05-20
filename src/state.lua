@@ -46,7 +46,7 @@ function State:fadeToDark(after, delay, image, method)
 			end)
 end
 
-function State:fadeToBright(after, delay, image)
+function State:fadeToBright(after, delay, image, method)
 	self._image = image
 	self._opacity = 1
 	self._timer:after(delay or 0, function()

@@ -191,7 +191,7 @@ return {
 
 		g = {
 			name = 'Gold 4',
-			value = 4,
+			value = 5,
 			group = 'gold',
 			type = 'gold',
 			sprite = 'gold',
@@ -225,8 +225,8 @@ return {
 		},
 		b = {
 			name = 'Black 4',
-			value = 4,
-			score = -4,
+			value = 5,
+			score = -5,
 			group = 'black',
 			type = 'black',
 			sprite = 'black',

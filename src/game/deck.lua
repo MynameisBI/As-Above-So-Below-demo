@@ -121,8 +121,10 @@ function Deck:executeNextAction()
 	if action == 'select' or action == 'stab' or action == 'remove' then
 		self.isVisible = false
 	
-		if action == 'select' then AudioManager:play('cardSounds', 'select')
-		elseif action == 'stab' or action == 'remove' then AudioManager:play('cardSounds', 'remove')
+		if action == 'select' then
+			AudioManager:play('cardSounds', 'select')
+		elseif action == 'stab' or action == 'remove' then
+			AudioManager:play('cardSounds', 'remove')
 		end
 		
 		self.isFlipping = true
@@ -134,8 +136,10 @@ function Deck:executeNextAction()
 				
 		local center = {x = self.x + self.w/2, y = self.y + self.h/2}
 		if action == 'select' then
+			Gamestate.current().signal:emit('draw card')
 			Gamestate.current().tracker:onDeckDrawCard(center.x, center.y)
 		elseif action == 'stab' then
+			Gamestate.current().signal:emit('stab card')
 			Gamestate.current().tracker:onDeckStabCard(center.x, center.y)
 		end
 		
@@ -143,6 +147,12 @@ function Deck:executeNextAction()
 	elseif action == 'flip and count' or action == 'flip and ignore' then
 		self.currentFlippedCard = table.remove(self.cards, 1)
 		if self.currentFlippedCard == nil then return end
+		
+		if action == 'flip and count' then
+			Gamestate.current().signal:emit('flip and count', self.currentFlippedCard)
+		elseif action == 'flip and ignore' then
+			Gamestate.current().signal:emit('flip and ignore', self.currentFlippedCard)
+		end
 		
 		self.currentFlippedSprite = nil
 		

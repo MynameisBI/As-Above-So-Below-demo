@@ -51,6 +51,9 @@ function Equipment:mousemoved(x, y)
 	self.isHovered = false
 	if self.x - self.w / 2 <= x and x <= self.x + self.w / 2 and
 			self.y - self.h / 2 <= y and y <= self.y + self.h / 2 then
+		if self.isHovered == false then
+			Gamestate.current().signal:emit('hover equipment', self)
+		end
 		self.isHovered = true
 	end
 end
@@ -72,6 +75,8 @@ function Equipment:mousereleased(x, y, button)
 end
 
 function Equipment:hit(x, y, button)
+	Gamestate.current().signal:emit('use equipment')
+
 	Gamestate.current().equipmentManager:setActiveEquipment(self)
 
 	decks = Gamestate.current().decks.entities

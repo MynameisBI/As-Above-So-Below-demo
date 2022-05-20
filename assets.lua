@@ -14,7 +14,7 @@ Sprites = {
 			heresy = love.graphics.newImage('assets/cards/heresy.png'),
 			charlatan = love.graphics.newImage('assets/cards/charlatan.png'),
 			hardLabor = love.graphics.newImage('assets/cards/hard_labor.png'),
-		}
+		},
 	},
 	hints = {
 		typeHints = {
@@ -39,7 +39,7 @@ Sprites = {
 				['='] = love.graphics.newImage('assets/hints/vHint_ver_=.png'),
 				['<'] = love.graphics.newImage('assets/hints/vHint_ver_down.png'),
 				['>'] = love.graphics.newImage('assets/hints/vHint_ver_up.png'),
-			}
+			},
 		},
 	},
 	background = love.graphics.newImage('assets/game_background.png'),
@@ -49,6 +49,7 @@ Sprites = {
 		monastery = love.graphics.newImage('assets/gameBackgrounds/monastery.png'),
 		nightTavern = love.graphics.newImage('assets/gameBackgrounds/nightTavern.png'),
 		theBeginning = love.graphics.newImage('assets/gameBackgrounds/theBeginning.png'),
+		warmUp = love.graphics.newImage('assets/gameBackgrounds/theBeginning.png'),
 		theRoyalFortress = love.graphics.newImage('assets/gameBackgrounds/theRoyalFortress.png'),
 	},
 	result = {
@@ -76,17 +77,89 @@ Sprites = {
 		X = love.graphics.newImage('assets/pause/X button.png'),
 	},
 	instruction = {
+		-- instructionFrame
 		button = love.graphics.newImage('assets/instruction/emerald tablet.png'),
 		XButton = love.graphics.newImage('assets/instruction/X button.png'),
 		background = love.graphics.newImage('assets/instruction/instruction bg.png'),
+		frameButtons = {
+			cardTypes = love.graphics.newImage('assets/instruction/cardtypes button.png'),
+			cardTypesEachDeck = love.graphics.newImage('assets/instruction/cardtypes each deck button.png'),
+			dailyQuests = love.graphics.newImage('assets/instruction/daily quests button.png'),
+			howToPlay = love.graphics.newImage('assets/instruction/how to play button.png'),
+			instructionInGame = {
+				on = love.graphics.newImage('assets/instruction/instruction ingame ON.png'),
+				off = love.graphics.newImage('assets/instruction/instruction ingame OFF.png'),
+			},
+			levelGoal = love.graphics.newImage('assets/instruction/level goal button.png'),
+			others = love.graphics.newImage('assets/instruction/others button.png'),
+		},
+		-- instruction
+		textBox = love.graphics.newImage('assets/instruction/text box.png'),
 	},
 	gameIntros = {
-		bridgeTown = love.graphics.newImage('assets/gameIntro/bridgeTownTitle.png'),
-		mainGate = love.graphics.newImage('assets/gameIntro/mainGateTitle.png'),
-		monastery = love.graphics.newImage('assets/gameIntro/monasteryTitle.png'),
-		nightTavern = love.graphics.newImage('assets/gameIntro/nightTavernTitle.png'),
-		theBeginning = love.graphics.newImage('assets/gameIntro/theBeginningTitle.png'),
-		theRoyalFortress = love.graphics.newImage('assets/gameIntro/theRoyalFortressTitle.png'),
+		bridgeTown = {
+			love.graphics.newImage('assets/gameIntro/bridge town/bridgeTownTitle.png'),
+			love.graphics.newImage('assets/gameIntro/bridge town/1.png'),
+			love.graphics.newImage('assets/gameIntro/bridge town/2.png'),
+			love.graphics.newImage('assets/gameIntro/bridge town/3.png'),
+			love.graphics.newImage('assets/gameIntro/bridge town/4.png'),
+			love.graphics.newImage('assets/gameIntro/bridge town/5.png'),
+			love.graphics.newImage('assets/gameIntro/bridge town/5.5.png'),
+		}, 
+		mainGate = {
+			love.graphics.newImage('assets/gameIntro/main gate/mainGateTitle.png'),
+			love.graphics.newImage('assets/gameIntro/main gate/1.png'),
+			love.graphics.newImage('assets/gameIntro/main gate/2.png'),
+			love.graphics.newImage('assets/gameIntro/main gate/3.png'),
+			love.graphics.newImage('assets/gameIntro/main gate/4.png'),
+			love.graphics.newImage('assets/gameIntro/main gate/5.png'),
+			love.graphics.newImage('assets/gameIntro/main gate/5.5.png'),
+		},
+		monastery = {
+			love.graphics.newImage('assets/gameIntro/monastery/monasteryTitle.png'),
+			love.graphics.newImage('assets/gameIntro/monastery/1.png'),
+			love.graphics.newImage('assets/gameIntro/monastery/2.png'),
+			love.graphics.newImage('assets/gameIntro/monastery/3.png'),
+			love.graphics.newImage('assets/gameIntro/monastery/4.png'),
+			love.graphics.newImage('assets/gameIntro/monastery/5.png'),
+			love.graphics.newImage('assets/gameIntro/monastery/5.5.png'),
+		},
+		nightTavern = {
+			love.graphics.newImage('assets/gameIntro/night tavern/nightTavernTitle.png'),
+			love.graphics.newImage('assets/gameIntro/night tavern/1.png'),
+			love.graphics.newImage('assets/gameIntro/night tavern/2.png'),
+			love.graphics.newImage('assets/gameIntro/night tavern/3.png'),
+			love.graphics.newImage('assets/gameIntro/night tavern/4.png'),
+			love.graphics.newImage('assets/gameIntro/night tavern/5.png'),
+			love.graphics.newImage('assets/gameIntro/night tavern/5.5.png'),
+		}, 
+		theBeginning = {
+			love.graphics.newImage('assets/gameIntro/the beginning/theBeginningTitle.png'),
+			love.graphics.newImage('assets/gameIntro/the beginning/1.png'),
+			love.graphics.newImage('assets/gameIntro/the beginning/2.png'),
+			love.graphics.newImage('assets/gameIntro/the beginning/3.png'),
+			love.graphics.newImage('assets/gameIntro/the beginning/4.png'),
+			love.graphics.newImage('assets/gameIntro/the beginning/5.png'),
+			love.graphics.newImage('assets/gameIntro/the beginning/5.5.png'),
+		}, 
+		theRoyalFortress = {
+			love.graphics.newImage('assets/gameIntro/the royal fortress/theRoyalFortressTitle.png'),
+			love.graphics.newImage('assets/gameIntro/the royal fortress/1.png'),
+			love.graphics.newImage('assets/gameIntro/the royal fortress/2.png'),
+			love.graphics.newImage('assets/gameIntro/the royal fortress/3.png'),
+			love.graphics.newImage('assets/gameIntro/the royal fortress/4.png'),
+			love.graphics.newImage('assets/gameIntro/the royal fortress/5.png'),
+			love.graphics.newImage('assets/gameIntro/the royal fortress/5.5.png'),
+		},
+		warmUp = {
+			love.graphics.newImage('assets/gameIntro/warmup/warmUpTitle.png'),
+			love.graphics.newImage('assets/gameIntro/warmup/1.png'),
+			love.graphics.newImage('assets/gameIntro/warmup/2.png'),
+			love.graphics.newImage('assets/gameIntro/warmup/3.png'),
+			love.graphics.newImage('assets/gameIntro/warmup/4.png'),
+			love.graphics.newImage('assets/gameIntro/warmup/5.png'),
+			love.graphics.newImage('assets/gameIntro/warmup/5.5.png'),
+		}
 	},
 	
 	menu = {

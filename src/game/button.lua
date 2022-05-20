@@ -4,13 +4,15 @@ local inGameSpriteSize = 1
 local minSize = 0.92
 local maxSize = 1.1
 
-function Button:initialize(sprite, x, y, w, h, executeFunc)
+function Button:initialize(sprite, x, y, w, h, executeFunc, ox, oy)
 	assert(sprite, 'sprite is nil')
 	
 	self.sprite = sprite
 	self.color = {1, 1, 1}
 	self.x, self.y = x or 0, y or 0
 	self.w, self.h = w or sprite:getWidth() * inGameSpriteSize, h or sprite:getHeight() * inGameSpriteSize
+	self.spriteOx = ox or 0
+	self.spriteOy = oy or 0
 	
 	self.size = 1
 	self.targetSize = 1
@@ -49,7 +51,7 @@ function Button:draw()
 	love.graphics.setColor(self.color)
 	love.graphics.draw(self.sprite, self.x, self.y,
 			0, self.size * inGameSpriteSize, self.size * inGameSpriteSize,
-			self.sprite:getWidth() / 2, self.sprite:getHeight() / 2)
+			self.sprite:getWidth() / 2 + self.spriteOx, self.sprite:getHeight() / 2 + self.spriteOy)
 end
 
 function Button:mousemoved(x, y)

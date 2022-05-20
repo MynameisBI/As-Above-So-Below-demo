@@ -8,6 +8,8 @@ local PauseFrame = require 'src.game.pauseFrame'
 local InstructionFrame = require 'src.game.instructionFrame'
 local Button = require 'src.game.button'
 local EquipmentManager = require 'src.game.equipmentManager'
+local Instruction = require 'src.game.instruction'
+local PregameFrame = require 'src.game.pregameFrame'
 
 local Manager = require 'src.game.manager'
 
@@ -16,7 +18,9 @@ local Game = Class('Game', State)
 function Game:enter(from, background, cardsNum, baseDeck, wildCards, startingPoint)
 	State.initialize(self)
 
-	self:fadeToBright(nil, 1.2, Sprites.gameIntros[background])
+	self:fadeToBright(function()
+				Gamestate.current().pregameFrame:onIntroDone()
+			end, 1.2, Sprites.gameIntros[background][1])
 
 	self.args = {
 		background = background,
@@ -54,7 +58,12 @@ function Game:enter(from, background, cardsNum, baseDeck, wildCards, startingPoi
 				self.instructionFrame:setActive(true)
 			end)
 	
+	self.pregameFrame = PregameFrame(background)
+	
 	self:setupGame(cardsNum)
+	
+	self.signal = Signal.new()
+	self.instruction = Instruction()
 	
 	AudioManager:play('bgm', background)
 end
@@ -177,13 +186,15 @@ function Game:resume()
 end
 
 function Game:isAnyFrameActive()
-	if not (self.resultFrame.isActive or self.pauseFrame.isActive or self.instructionFrame.isActive) then
+	if not (self.resultFrame.isActive or self.pauseFrame.isActive
+			or self.instructionFrame.isActive or self.pregameFrame.isActive) then
 		return false
 	else return true
 	end
 end
 
 function Game:_update(dt)
+	self.pregameFrame:update(dt)
 	self.pauseFrame:update(dt)
 	self.instructionFrame:update(dt)
 	self.resultFrame:update(dt)
@@ -216,7 +227,9 @@ function Game:_draw()
 	
 	self.pauseButton:draw()
 	self.instructionButton:draw()
+	self.instruction:draw()
 	
+	self.pregameFrame:draw()
 	self.resultFrame:draw()
 	self.pauseFrame:draw()
 	self.instructionFrame:draw()
@@ -228,6 +241,7 @@ function Game:mousemoved(x, y)
 	self.pauseFrame:mousemoved(x, y)
 	self.instructionFrame:mousemoved(x, y)
 	self.resultFrame:mousemoved(x, y)
+	self.pregameFrame:mousemoved(x, y)
 	
 	if self:isAnyFrameActive() then return end
 	
@@ -247,6 +261,7 @@ function Game:mousepressed(x, y, button)
 	self.pauseFrame:mousepressed(x, y, button)
 	self.resultFrame:mousepressed(x, y, button)
 	self.instructionFrame:mousepressed(x, y, button)
+	self.pregameFrame:mousepressed(x, y, button)
 	
 	if self:isAnyFrameActive() then return end
 	
@@ -266,6 +281,7 @@ function Game:mousereleased(x, y, button)
 	self.pauseFrame:mousereleased(x, y, button)
 	self.instructionFrame:mousereleased(x, y, button)
 	self.resultFrame:mousereleased(x, y, button)
+	self.pregameFrame:mousereleased(x, y, button)
 
 	if self:isAnyFrameActive() then return end
 	

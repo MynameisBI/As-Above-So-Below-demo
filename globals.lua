@@ -4,6 +4,7 @@ Timer = require 'libs.timer'
 Suit = require 'libs.suit'
 Camera = require 'libs.camera'
 Anim8 = require 'libs.anim8'
+Signal = require 'libs.signal'
 
 Settings = {
 	isDebug = false,
