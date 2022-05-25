@@ -208,12 +208,12 @@ function TutorialLevel:enter()
 
 	self.icons = Manager(
 			Icon(Sprites.levels.tutorial.t1.normal, Sprites.levels.tutorial.t1.hovered, 823, 1890, nil, dialogues[1]),
-			Icon(Sprites.levels.tutorial.t2.normal, Sprites.levels.tutorial.t2.hovered, 1149, 1684, nil, function() self:fadeToDark(function() print('hello') end) end),
-			Icon(Sprites.levels.tutorial.t3.normal, Sprites.levels.tutorial.t3.hovered, 840, 1480, nil, function() self:fadeToDark(function() print('hello') end) end),
-			Icon(Sprites.levels.tutorial.t4.normal, Sprites.levels.tutorial.t4.hovered, 855, 1172, nil, function() self:fadeToDark(function() print('hello') end) end),
-			Icon(Sprites.levels.tutorial.t5.normal, Sprites.levels.tutorial.t5.hovered, 1135, 978, nil, function() self:fadeToDark(function() print('hello') end) end),
-			Icon(Sprites.levels.tutorial.t6.normal, Sprites.levels.tutorial.t6.hovered, 1072, 659, nil, function() self:fadeToDark(function() print('hello') end) end),
-			Icon(Sprites.levels.tutorial.t7.normal, Sprites.levels.tutorial.t7.hovered, 789, 465, nil, function() self:fadeToDark(function() print('hello') end) end),
+			Icon(Sprites.levels.tutorial.t2.normal, Sprites.levels.tutorial.t2.hovered, 1149, 1684, nil, dialogues[2]),
+			Icon(Sprites.levels.tutorial.t3.normal, Sprites.levels.tutorial.t3.hovered, 840, 1480, nil, dialogues[3]),
+			Icon(Sprites.levels.tutorial.t4.normal, Sprites.levels.tutorial.t4.hovered, 855, 1172, nil, dialogues[4]),
+			Icon(Sprites.levels.tutorial.t5.normal, Sprites.levels.tutorial.t5.hovered, 1135, 978, nil, dialogues[5]),
+			Icon(Sprites.levels.tutorial.t6.normal, Sprites.levels.tutorial.t6.hovered, 1072, 659, nil, dialogues[6]),
+			Icon(Sprites.levels.tutorial.t7.normal, Sprites.levels.tutorial.t7.hovered, 789, 465, nil, dialogues[7]),
 			Icon(Sprites.levels.tutorial.warmUp, nil, 954, 213, warmUpUI))
 	
 	self.camera = Camera.new()

@@ -3,7 +3,7 @@ local Instruction = Class('Instruction')
 local orange, red, white = {211/255, 125/255, 58/255}, {195/255, 52/255, 70/255}, {1, 1, 1}
 
 function Instruction:initialize()
-	self.isEnabled = false
+	self.isEnabled = true
 	self.text = {}
 	
 	local signal = Gamestate.current().signal
@@ -44,7 +44,7 @@ function Instruction:initialize()
 						red,    string.upper(card.triType),
 						white,  ' Principle.\nYou get the ',
 						red,    '',
-						white   ' principle flame.'
+						white,  ' principle flame.'
 					}
 					if card.triType == 'body' then self.text[8] = 'WHITE'
 					elseif card.triType == 'soul' then self.text[8] = 'RED'
@@ -75,19 +75,19 @@ function Instruction:initialize()
 					self.text = {
 						white, 'It is an element card, its name is ',
 						red,   card.name,
-						white, '. Poor you.',
+						white, '.\n Poor you.',
 					}
 				elseif card.group == 'gold' then
 					self.text = {
 						white, 'It is a '..card.type..' card, its name is ',
 						red,   card.name,
-						white, '. Poor you.',
+						white, '.\n Poor you.',
 					}
 				elseif card.group == 'black' then
 					self.text = {
 						white, 'It is a '..card.type..' card, its name is ',
 						red,   card.name,
-						white, '. Bless you.',
+						white, '.\n Bless you.',
 					}
 				end
 			end)
@@ -123,7 +123,12 @@ function Instruction:draw()
 	love.graphics.setColor(1, 1, 1)
 	love.graphics.draw(Sprites.instruction.textBox, 0, 802)
 	
-	love.graphics.printf(self.text, Fonts.dialogue_small, 20, 912, 640)
+	local f = Fonts.dialogue_small
+	love.graphics.setFont(f)
+	local width, lines = f:getWrap(self.text, 640)
+	for i = 1, #lines do
+		love.graphics.print(lines[i], 20, 908 + (f:getHeight(t) + 4) * (-#lines/2 + i))
+	end
 end
 
 return Instruction

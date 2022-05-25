@@ -9,7 +9,7 @@ function SettingsFrame:initialize()
 	
 	self:addButton('XButton', Button(Sprites.menu.XButton, 1815, 96, 122, 122,
 			function() self:setActive(false) end))
-	self:addButton('exitLevel', Button(Sprites.menu.settingsFrame.exitLevel, 770, 535, 120, 120, function() self:setActive(false) end))
+	self:addButton('exitLevel', Button(Sprites.menu.settingsFrame.exitLevel, 770, 535, 120, 120, function() love.event.quit() end))
 	self:addButton('sound', Button(Sprites.menu.settingsFrame.sound, 960, 535, 120, 120, function() print('toggle sound') end))
 	self:addButton('bgm', Button(Sprites.menu.settingsFrame.bgm, 1150, 535, 120, 120, function() print('toggle bgm') end))
 end

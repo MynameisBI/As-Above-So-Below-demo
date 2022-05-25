@@ -2,10 +2,22 @@ Sprites = {
 	cards = {
 		back = love.graphics.newImage('assets/cards/backside.png'),
 		front = {
-			fire = love.graphics.newImage('assets/cards/fire_element.png'),
-			water = love.graphics.newImage('assets/cards/water_element.png'),
-			earth = love.graphics.newImage('assets/cards/earth_element.png'),
-			air = love.graphics.newImage('assets/cards/air_element.png'),
+			fire1 = love.graphics.newImage('assets/cards/fire element 1.png'),
+			fire2 = love.graphics.newImage('assets/cards/fire element 2.png'),
+			fire3 = love.graphics.newImage('assets/cards/fire element 3.png'),
+			fire4 = love.graphics.newImage('assets/cards/fire element 4.png'),
+			water1 = love.graphics.newImage('assets/cards/water element 1.png'),
+			water2 = love.graphics.newImage('assets/cards/water element 2.png'),
+			water3 = love.graphics.newImage('assets/cards/water element 3.png'),
+			water4 = love.graphics.newImage('assets/cards/water element 4.png'),
+			earth1 = love.graphics.newImage('assets/cards/earth element 1.png'),
+			earth2 = love.graphics.newImage('assets/cards/earth element 2.png'),
+			earth3 = love.graphics.newImage('assets/cards/earth element 3.png'),
+			earth4 = love.graphics.newImage('assets/cards/earth element 4.png'),
+			air1 = love.graphics.newImage('assets/cards/air element 1.png'),
+			air2 = love.graphics.newImage('assets/cards/air element 2.png'),
+			air3 = love.graphics.newImage('assets/cards/air element 3.png'),
+			air4 = love.graphics.newImage('assets/cards/air element 4.png'),
 			gold = love.graphics.newImage('assets/cards/gold.png'),
 			['gold event body'] = love.graphics.newImage('assets/cards/gold_event_Body.png'),
 			['gold event soul'] = love.graphics.newImage('assets/cards/gold_event_Soul.png'),
@@ -42,14 +54,13 @@ Sprites = {
 			},
 		},
 	},
-	background = love.graphics.newImage('assets/game_background.png'),
 	backgrounds = {
 		bridgeTown = love.graphics.newImage('assets/gameBackgrounds/bridgeTown.png'),
 		mainGate = love.graphics.newImage('assets/gameBackgrounds/mainGate.png'),
 		monastery = love.graphics.newImage('assets/gameBackgrounds/monastery.png'),
 		nightTavern = love.graphics.newImage('assets/gameBackgrounds/nightTavern.png'),
 		theBeginning = love.graphics.newImage('assets/gameBackgrounds/theBeginning.png'),
-		warmUp = love.graphics.newImage('assets/gameBackgrounds/theBeginning.png'),
+		warmUp = love.graphics.newImage('assets/gameBackgrounds/warmUp.png'),
 		theRoyalFortress = love.graphics.newImage('assets/gameBackgrounds/theRoyalFortress.png'),
 	},
 	result = {
@@ -465,12 +476,12 @@ Animators = {
 		draw = newAnimator('assets/animations/drawCard.png', 256, 256, 4, {1, '1-4'}, 0.133, 'pauseAtStart'),
 		stab = newAnimator('assets/animations/stabCard.png', 256, 250, 4, nil, 0.133, 'pauseAtStart'),
 	},
-	loadingSymbol = newAnimator('assets/animations/loadingSymbol.png', 287, 550, 26, nil, 0.15,'pauseAtEnd'),
 }
 
 Videos = {
 	intro = love.graphics.newVideo('assets/intro/intro.ogv'),
-	pIntro = love.graphics.newVideo('assets/intro/playerIntro.ogv')
+	pIntro = love.graphics.newVideo('assets/intro/playerIntro.ogv'),
+	loadingSymbol = love.graphics.newVideo('assets/loadingScreen/loadingSymbol.ogv')
 }
 
 Audios = {
@@ -511,13 +522,13 @@ Audios = {
 	
 	otherSounds = {
 		button = love.audio.newSource('assets/audio/other sounds/button.mp3', 'static'),
-		europeLevel = love.audio.newSource('assets/audio/other sounds/button.mp3', 'static'),
-		lost = love.audio.newSource('assets/audio/other sounds/button.mp3', 'static'),
-		map = love.audio.newSource('assets/audio/other sounds/button.mp3', 'static'),
-		replay = love.audio.newSource('assets/audio/other sounds/button.mp3', 'static'),
-		tradings = love.audio.newSource('assets/audio/other sounds/button.mp3', 'static'),
-		win = love.audio.newSource('assets/audio/other sounds/button.mp3', 'static'),
-		worldMapWonder = love.audio.newSource('assets/audio/other sounds/button.mp3', 'static'),
+		europeLevel = love.audio.newSource('assets/audio/other sounds/europeLevel.mp3', 'static'),
+		lost = love.audio.newSource('assets/audio/other sounds/lost.mp3', 'static'),
+		map = love.audio.newSource('assets/audio/other sounds/map.mp3', 'static'),
+		replay = love.audio.newSource('assets/audio/other sounds/replay.mp3', 'static'),
+		tradings = love.audio.newSource('assets/audio/other sounds/tradings.mp3', 'static'),
+		win = love.audio.newSource('assets/audio/other sounds/win.mp3', 'static'),
+		worldMapWonder = love.audio.newSource('assets/audio/other sounds/worldMapWonder.mp3', 'static'),
 	},
 }
 

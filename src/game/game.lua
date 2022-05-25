@@ -17,6 +17,8 @@ local Game = Class('Game', State)
 
 function Game:enter(from, background, cardsNum, baseDeck, wildCards, startingPoint)
 	State.initialize(self)
+	
+	self.from = from
 
 	self:fadeToBright(function()
 				Gamestate.current().pregameFrame:onIntroDone()

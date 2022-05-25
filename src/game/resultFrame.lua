@@ -12,7 +12,7 @@ function ResultFrame:initialize(args)
 	self:addButton('openLevelMap', Button(Sprites.result.openLevelMap, 183, 864, 274, 442,
 			function() Gamestate.current():fadeToDark(function() Gamestate.switch(Level); AudioManager:play('otherSounds', 'map') end) end))
 	self:addButton('openTrading', Button(Sprites.result.openTradingPlace, 1725, 895, 470, 370,
-			function() self:fadeToDark(function() Gamestate.switch(Trading); AudioManager:play('otherSounds', 'tradings') end) end))
+			function() Gamestate.current():fadeToDark(function() Gamestate.switch(Trading); AudioManager:play('otherSounds', 'tradings') end) end))
 end
 
 function ResultFrame:setResultInfo(result, score, reward)
@@ -65,12 +65,12 @@ function ResultFrame:draw()
 	love.graphics.draw(Sprites.result.background)
 
 	if self.result == 'win' then
-		self:print('You succeeded the work.', Fonts.result_small, {1, 1, 1}, 960, 44)
+		self:print('You succeeded The Great Work.', Fonts.result_small, {1, 1, 1}, 960, 44)
 		self:print('New highscore', Fonts.result_small, {0.576, 0.447, 0.467}, 960, 190)
 		self:print(tostring(self.score), Fonts.result_number, {1, 1, 1}, 960, 270)
 		
 	elseif self.result == 'lose' then
-		self:print('You failed the work.', Fonts.result_small, {0.506, 0.176, 0.263}, 954, 50)
+		self:print('You failed The Great Work.', Fonts.result_small, {0.506, 0.176, 0.263}, 954, 50)
 		self:print('Lost', Fonts.result_big, {0.765, 0.204, 0.275}, 960, 270)
 		
 	end

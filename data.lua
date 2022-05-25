@@ -1,25 +1,7 @@
 return {
-	deck = {
-		base = {
-			--'b', 'be',
-		},
-		mixed = {
-			--'ge', 'ge', 'ge',
-			--'g', 'g', 'g', 'g', 'g',
-			--'f1', 'f2', 'f3', 'f4',
-			--'w1', 'w2', 'w3', 'w4',
-			--'e1', 'e2', 'e3', 'e4',
-			--'a1', 'a2', 'a3', 'a4',
-			
-			'f1', 'w1', 'e1', 'a1',
-			'he', 'ch', 'ha', 'a2',
-			--'g', 'geBo', 'geSo', 'geSp'
-		}
-	},
-	
 	levels = {
 		warmUp = {
-			background = 'theBeginning',
+			background = 'warmUp',
 			cardsNum = 2,
 			baseDeck = {'b'},
 			wildCards = {'f1', 'f2', 'f3', 'f4'},
@@ -78,28 +60,28 @@ return {
 			value = 1,
 			group = 'element',
 			type = 'fire',
-			sprite = 'fire',
+			sprite = 'fire1',
 		},
 		f2 = {
 			name = 'Fire 2',
 			value = 2,
 			group = 'element',
 			type = 'fire',
-			sprite = 'fire',
+			sprite = 'fire2',
 		},
 		f3 = {
 			name = 'Fire 3',
 			value = 3,
 			group = 'element',
 			type = 'fire',
-			sprite = 'fire',
+			sprite = 'fire3',
 		},
 		f4 = {
 			name = 'Fire 4',
 			value = 4,
 			group = 'element',
 			type = 'fire',
-			sprite = 'fire',
+			sprite = 'fire4',
 		},
 
 		w1 = {
@@ -107,28 +89,28 @@ return {
 			value = 1,
 			group = 'element',
 			type = 'water',
-			sprite = 'water',
+			sprite = 'water1',
 		},
 		w2 = {
 			name = 'Water 2',
 			value = 2,
 			group = 'element',
 			type = 'water',
-			sprite = 'water',
+			sprite = 'water2',
 		},
 		w3 = {
 			name = 'Water 3',
 			value = 3,
 			group = 'element',
 			type = 'water',
-			sprite = 'water',
+			sprite = 'water3',
 		},
 		w4 = {
 			name = 'Water 4',
 			value = 4,
 			group = 'element',
 			type = 'water',
-			sprite = 'water',
+			sprite = 'water4',
 		},
 
 		e1 = {
@@ -136,28 +118,28 @@ return {
 			value = 1,
 			group = 'element',
 			type = 'earth',
-			sprite = 'earth',
+			sprite = 'earth1',
 		},
 		e2 = {
 			name = 'Earth 2',
 			value = 2,
 			group = 'element',
 			type = 'earth',
-			sprite = 'earth',
+			sprite = 'earth2',
 		},
 		e3 = {
 			name = 'Earth 3',
 			value = 3,
 			group = 'element',
 			type = 'earth',
-			sprite = 'earth',
+			sprite = 'earth3',
 		},
 		e4 = {
 			name = 'Earth 4',
 			value = 4,
 			group = 'element',
 			type = 'earth',
-			sprite = 'earth',
+			sprite = 'earth4',
 		},
 
 		a1 = {
@@ -165,28 +147,28 @@ return {
 			value = 1,
 			group = 'element',
 			type = 'air',
-			sprite = 'air',
+			sprite = 'air1',
 		},
 		a2 = {
 			name = 'Air 2',
 			value = 2,
 			group = 'element',
 			type = 'air',
-			sprite = 'air',
+			sprite = 'air2',
 		},
 		a3 = {
 			name = 'Air 3',
 			value = 3,
 			group = 'element',
 			type = 'air',
-			sprite = 'air',
+			sprite = 'air3',
 		},
 		a4 = {
 			name = 'Air 4',
 			value = 4,
 			group = 'element',
 			type = 'air',
-			sprite = 'air',
+			sprite = 'air4',
 		},
 
 		g = {
