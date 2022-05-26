@@ -1,6 +1,8 @@
 local MenuButton = require 'src.menu.menuButton'
 local SettingsFrame = require 'src.menu.settingsFrame'
 local CreditsFrame = require 'src.menu.creditsFrame'
+local CardsCollectionFrame = require 'src.menu.cardsCollectionFrame'
+local InventoryFrame = require 'src.menu.inventoryFrame'
 
 local Menu = Class('Menu', State)
 
@@ -11,18 +13,20 @@ function Menu:enter()
 
 	self.settingsFrame = SettingsFrame()
 	self.creditsFrame = CreditsFrame()
+	self.inventoryFrame = InventoryFrame()
+	self.cardsCollectionFrame = CardsCollectionFrame()
 
 	self.buttons = {
 		achievements = MenuButton(Sprites.menu.achievements.normal, Sprites.menu.achievements.hovered,
-				252, 872, 252, 292, 0, -74, function() self.inDevFrame:setActive(true) end),
+				252, 872, 252, 292, 0, -74, function() self:fadeToDark(function() Gamestate.switch(Achievements) end) end),
 		authorsInformation = MenuButton(Sprites.menu.authorsInformation.normal, Sprites.menu.authorsInformation.hovered,
 				224, 57, 114, 114, 0, -20, function() self.creditsFrame:setActive(true); self.creditsFrame.isHovered = false end),
 		cardsCollection = MenuButton(Sprites.menu.cardsCollection.normal, Sprites.menu.cardsCollection.hovered,
-				1627, 796, 370, 348, 0, -20, function() self.inDevFrame:setActive(true) end),
+				1627, 796, 370, 348, 0, -20, function() self.cardsCollectionFrame:setActive(true) end),
 		dailyChallenges = MenuButton(Sprites.menu.dailyChallenges.normal, Sprites.menu.dailyChallenges.hovered,
 				1333, 813, 206, 366, 0, -64, function() self.inDevFrame:setActive(true) end),
 		inventory = MenuButton(Sprites.menu.inventory.normal, Sprites.menu.inventory.hovered,
-				1439, 428, 522, 388, 0, -20, function() self.inDevFrame:setActive(true) end),
+				1439, 428, 522, 388, 0, -20, function() self.inventoryFrame:setActive(true) end),
 		settings = MenuButton(Sprites.menu.settings.normal, Sprites.menu.settings.hovered,
 				1703, 57, 114, 114, 0, -20, function() self.settingsFrame:setActive(true); self.settingsFrame.isHovered = false end),
 		tradings = MenuButton(Sprites.menu.tradings.normal, Sprites.menu.tradings.hovered,
@@ -61,19 +65,18 @@ function Menu:enter()
 end
 
 function Menu:leave()
-	print('what now?')
 	AudioManager:stop('bgm', 'menu')
 end
 
 function Menu:isAnyFrameActive()
-	if not (self.settingsFrame.isActive or self.creditsFrame.isActive) then
+	if not (self.settingsFrame.isActive or self.creditsFrame.isActive or self.inventoryFrame.isActive or self.cardsCollectionFrame.isActive) then
 		return false
 	else return true
 	end
 end
 
 function Menu:_update(dt)
-	if not self.settingsFrame.isActive and not self.creditsFrame.isActive then
+	if not self:isAnyFrameActive() then
 		for _, button in pairs(self.buttons) do
 			button:update(dt)
 		end
@@ -81,6 +84,8 @@ function Menu:_update(dt)
 
 	self.settingsFrame:update(dt)
 	self.creditsFrame:update(dt)
+	self.inventoryFrame:update(dt)
+	self.cardsCollectionFrame:update(dt)
 end
 
 function Menu:_draw()
@@ -98,11 +103,15 @@ function Menu:_draw()
 	
 	self.settingsFrame:draw()
 	self.creditsFrame:draw()
+	self.inventoryFrame:draw()
+	self.cardsCollectionFrame:draw()
 end
 
 function Menu:mousemoved(x, y)
 	self.settingsFrame:mousemoved(x, y)
 	self.creditsFrame:mousemoved(x, y)
+	self.inventoryFrame:mousemoved(x, y)
+	self.cardsCollectionFrame:mousemoved(x, y)
 
 	if self:isAnyFrameActive() then return end
 
@@ -114,6 +123,8 @@ end
 function Menu:mousepressed(x, y, button)
 	self.settingsFrame:mousepressed(x, y, button)
 	self.creditsFrame:mousepressed(x, y, button)
+	self.inventoryFrame:mousepressed(x, y, button)
+	self.cardsCollectionFrame:mousepressed(x, y, button)
 
 	if not self:isAnyFrameActive() then
 		for _, button in pairs(self.buttons) do
@@ -125,6 +136,8 @@ end
 function Menu:mousereleased(x, y, button)
 	self.settingsFrame:mousereleased(x, y, button)
 	self.creditsFrame:mousereleased(x, y, button)
+	self.inventoryFrame:mousereleased(x, y, button)
+	self.cardsCollectionFrame:mousereleased(x, y, button)
 
 	if self:isAnyFrameActive() then return end
 

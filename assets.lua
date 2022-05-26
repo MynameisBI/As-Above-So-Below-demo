@@ -217,7 +217,11 @@ Sprites = {
 			bgm = love.graphics.newImage('assets/menu/settings/bgm button.png'),
 			exitLevel = love.graphics.newImage('assets/menu/settings/exit level button.png'),
 			sound = love.graphics.newImage('assets/menu/settings/sound button.png'),
-		}
+		},
+		
+		cardsCollectionBg = love.graphics.newImage('assets/menu/cardsCollectionBg.png'),
+		inventoryBg = love.graphics.newImage('assets/menu/inventoryBg.png'),
+		XButtonCopy = love.graphics.newImage('assets/menu/X button - Copy.png'),
 	},
 	
 	world = {
@@ -312,7 +316,12 @@ Sprites = {
 			normal = love.graphics.newImage('assets/trading/trading.png'),
 			hovered = love.graphics.newImage('assets/trading/trading (after).png')
 		},
-		
+		details = {
+			top = love.graphics.newImage('assets/trading/details/topBg.png'),
+			mid = love.graphics.newImage('assets/trading/details/midBg.png'),
+			bot = love.graphics.newImage('assets/trading/details/botBg.png'),
+			back = love.graphics.newImage('assets/trading/details/back.png'),
+		}
 	},
 	
 	inDevelopment = love.graphics.newImage('assets/inDevelopment.png'),
@@ -428,6 +437,33 @@ Sprites = {
 			},
 		}
 	},
+	
+	achievements = {
+		elixir = {
+			normal = love.graphics.newImage('assets/achievements/elixir of immortality.png'),
+			hovered = love.graphics.newImage('assets/achievements/elixir of immortality (after).png')
+		},
+		emeraldTablet = {
+			normal = love.graphics.newImage('assets/achievements/emerald tablet.png'),
+			hovered = love.graphics.newImage('assets/achievements/emerald tablet (after).png')
+		},
+		homunculus = {
+			normal = love.graphics.newImage('assets/achievements/homunculus.png'),
+			hovered = love.graphics.newImage('assets/achievements/homunculus (after).png')
+		},
+		ouroboros = {
+			normal = love.graphics.newImage('assets/achievements/ouroboros.png'),
+			hovered = love.graphics.newImage('assets/achievements/ouroboros (after).png')
+		},
+		pancea = {
+			normal = love.graphics.newImage('assets/achievements/pancea.png'),
+			hovered = love.graphics.newImage('assets/achievements/pancea (after).png')
+		},
+		philosopherStone = {
+			normal = love.graphics.newImage('assets/achievements/philosophersStone.png'),
+			hovered = love.graphics.newImage('assets/achievements/philosophersStone (after).png')
+		},
+	}
 }
 
 function newAnimator(imagePath, frameWidth, frameHeight, frameAmmount, frameIndexes, durations, onLoop)
@@ -481,7 +517,8 @@ Animators = {
 Videos = {
 	intro = love.graphics.newVideo('assets/intro/intro.ogv'),
 	pIntro = love.graphics.newVideo('assets/intro/playerIntro.ogv'),
-	loadingSymbol = love.graphics.newVideo('assets/loadingScreen/loadingSymbol.ogv')
+	loadingSymbol = love.graphics.newVideo('assets/loadingScreen/loadingSymbol.ogv'),
+	achievementsBg = love.graphics.newVideo('assets/achievements/achievementsBg.ogv')
 }
 
 Audios = {

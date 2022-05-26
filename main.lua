@@ -15,6 +15,7 @@ Trading = require 'src.trading.trading'
 Load = require 'src.load.load'
 Tutorial = require 'src.tutorial.tutorial'
 Game = require 'src.game.game'
+Achievements = require 'src.achievements.achievements'
 
 
 Dialogue = require 'src.dialogue'
@@ -27,8 +28,8 @@ function love.load()
 
 	--Gamestate.registerEvents()
 	--Gamestate.switch(Intro)
-	--Gamestate.switch(Level)
-	Gamestate.switch(Game, 'theBeginning', 2, {'geSp'}, {}, 7)
+	Gamestate.switch(Menu)
+	--Gamestate.switch(Game, 'theBeginning', 2, {'geSp'}, {}, 7)
 end
 
 function love.update(dt)
