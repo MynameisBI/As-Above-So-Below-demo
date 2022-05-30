@@ -14,7 +14,7 @@ function Dialogue:initialize()
 	self.currentTutorialIndex = 1
 	self.currentOverlayIndex = 1
 	
-	self.skipButton = Button(Sprites.dialogue.skipButton, 1780, 734, nil, nil, function() self:skipAll() end)
+	self.skipButton = Button(Sprites.dialogue.skipButton, 1542, 660, nil, nil, function() self:skipAll() end)
 	
 	self.isActive = false
 end
@@ -105,12 +105,16 @@ function Dialogue:draw()
 
 	love.graphics.setColor(1, 1, 1)
 	if self.isTutorial == false then
-		love.graphics.draw(Sprites.dialogue.textBox, 0, 628)
+		love.graphics.draw(Sprites.dialogue.textBox, 0, 0)
 		
 		self.skipButton.y = 734
 		self.skipButton:draw()
 		
-		love.graphics.draw(Sprites.dialogue.oppy[self.currentOppyIndex], 20, 628)
+		if self.currentOppyIndex ~= 0 then
+			local oppy = Sprites.dialogue.oppy[self.currentOppyIndex]
+			love.graphics.draw(oppy, 960, 456,
+					0, 1, 1, oppy:getWidth()/2, oppy:getHeight()/2)
+		end
 		
 		local t = string.sub(self.lines[self.currentLineIndex].text, 1, self.currentLineLength)
 		local f = Fonts.dialogue
@@ -118,13 +122,13 @@ function Dialogue:draw()
 		love.graphics.setFont(f)
 		local width, lines = f:getWrap(t, 1230)
 		for i = 1, #lines do
-			love.graphics.print(lines[i], 510, 816 + (f:getHeight(t) + 4) * (-#lines/2 + i))
+			love.graphics.printf(lines[i], 0, 852 + (f:getHeight(t) + 4) * (-#lines/2 + i), 1920, 'center')
 		end
 		
 	elseif self.isTutorial == true then
 		love.graphics.draw(Sprites.dialogue.tutorials[self.currentTutorialIndex][self.currentOverlayIndex])
 	
-		love.graphics.draw(Sprites.dialogue.textBox, 0, 854, 0, 1, 0.5)
+		love.graphics.draw(Sprites.dialogue.tutorials.textBox, 0, 854, 0, 1, 0.5)
 		
 		self.skipButton.y = 960
 		self.skipButton:draw()
@@ -163,6 +167,16 @@ function Dialogue:mousemoved(x, y)
 	if not self.isActive then return false end
 
 	self.skipButton:mousemoved(x, y)
+	
+	return true
+end
+
+function Dialogue:keypressed(key, scancode, isRepeat)
+	if not self.isActive then return false end
+
+	if scancode == 'space' then
+		self:nextLine()
+	end
 	
 	return true
 end

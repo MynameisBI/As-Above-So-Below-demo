@@ -46,7 +46,12 @@ function World:enter(from)
 				Line("Europe has the current great development of alchemy, but there are also many negative stereotypes about it.", 5),
 				Line("On the path you chose, it was necessary to explore the world with different views on alchemy."),
 				
-				Line("You can afford to explore on your own. We will meet again later. Good luck on your journey.", 1))
+				Line("You can afford to explore on your own. We will meet again later. Good luck on your journey.", 1),
+				
+				Line("Ah, I forgot to tell you.", 0),
+				Line("Your partners have being on their journeys all around the world. "),
+				
+				Line("So, pick up the pace !", 5))
 	end
 	
 	AudioManager:play('bgm', 'worldMap')

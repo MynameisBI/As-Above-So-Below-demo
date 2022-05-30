@@ -89,5 +89,10 @@ function love.wheelmoved(x, y)
 end	
 
 function love.keypressed(key, scancode, isRepeat)
-	if Gamestate.current().keypressed then Gamestate.current():keypressed(key, scancode, isRepeat) end
+	local state = Gamestate.current()
+	if state ~= nil then
+		if not _dialogue:keypressed(key, scancode, isRepeat) then
+			if state.keypressed then state:keypressed(key, scancode, isRepeat) end
+		end
+	end
 end

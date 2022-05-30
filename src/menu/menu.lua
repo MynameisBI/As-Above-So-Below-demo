@@ -39,8 +39,12 @@ function Menu:enter()
 	if not Settings.hasEnteredMenu then
 		Settings.hasEnteredMenu = true
 		_dialogue:setNewLines(
-				Line('Hey, wake up.', 2),
-				Line("Don't tell me you forgot who I am."),
+				Line('...', 0),
+				Line('...'),
+			
+				Line('Hey, wake up.', 6),
+				
+				Line("Don't tell me you forgot who I am.", 2),
 				
 				Line('My name is Magnum Opus. Just call me Opus for short.', 1),
 				Line('I am the guide to the beginning of your journey.'),
@@ -49,7 +53,12 @@ function Menu:enter()
 				Line("Remember yet?", 4),
 				Line("You are an alchemist."),
 				Line("You were blessed to fulfill your own mission, as an alchemist."),
-				Line("Not coincidentally, the higher beings believed that your blessing was something worthy of taking a big step forward for humankind."),
+				
+				Line("Not coincidentally, the higher beings believed that your blessing was something worthy of taking a big step forward for humankind.", 5),
+				
+				Line("Lol but you’re not the only one they chose.", 6),
+				
+				Line('Any alchemist who starts wondering "As Above So Below" term will be given the bless to fulfill his goal.', 5),
 				
 				Line("What that mission is, you have to figure it out for yourself. It is inside you.", 3),
 				

@@ -24,13 +24,80 @@ function Level:enter()
 	self.frames = Manager(UIs.fortress, UIs.monastery, UIs.tavern,
 			UIs.bridge,	UIs.mainGate, UIs.beginning)
 
-	self.icons = Manager(Icon(Sprites.level.castleLevel, 960, 460, UIs.fortress),
-			Icon(Sprites.level.normalLevelChurch, 730, 690, UIs.monastery),
-			Icon(Sprites.level.normalLevelTavern, 1170, 690, UIs.tavern),
-			Icon(Sprites.level.normalLevelBridge, 960, 810, UIs.bridge),
-			Icon(Sprites.level.normalLevelGate, 960, 1130, UIs.mainGate),
-			Icon(Sprites.level.tutorialLevel, 780, 1400, UIs.beginning),
-			Icon(Sprites.level.tradingPlace, 1150, 1320, nil, function() self:fadeToDark(function() Gamestate.switch(Trading) end) end))
+	self.icons = Manager(
+		Icon(Sprites.level.castleLevel, 960, 460, UIs.fortress,
+				function()
+					if not Settings.hasOpenedTheRoyalFortressUI then
+						Settings.hasOpenedTheRoyalFortressUI = true
+						
+						_dialogue:setNewLines(
+								Line("We were able to approach near to the lord's castle thanks to the information and reputation we had gained.", 4),
+								Line("To gain the facilities for alchemical research, you needed trust."),
+								
+								Line("You're done if you fail. On the contrary, you will be one step closer to alchemy's achievements.", 3))
+					end
+				end),
+		Icon(Sprites.level.normalLevelChurch, 730, 690, UIs.monastery,
+				function()
+					if not Settings.hasOpenedTheMonasteryUI then
+						Settings.hasOpenedTheMonasteryUI = true
+						
+						_dialogue:setNewLines(
+								Line("Perhaps the most difficult thing to deal with is belief.", 5),
+								Line("They despise anything that is not Christian in origin."),
+								
+								Line("Alchemist like you are no exception.", 6),
+								Line("You will be burnt alive if you are found out."))
+					end
+				end),
+		Icon(Sprites.level.normalLevelTavern, 1170, 690, UIs.tavern,
+				function()
+				if not Settings.hasOpenedTheNightTavernUI then
+						Settings.hasOpenedTheNightTavernUI = true
+						
+						_dialogue:setNewLines(
+								Line("It is a mess here. ", 2),
+								Line("On the other hand, you might have fun and gamble."),
+								Line("Watch out or you will lose your hand and have to quit performing the ritual."))
+					end
+				end),
+		Icon(Sprites.level.normalLevelBridge, 960, 810, UIs.bridge,
+				function()
+					if not Settings.hasOpenedTheBridgeTownUI then
+						Settings.hasOpenedTheBridgeTownUI = true
+						
+						_dialogue:setNewLines(
+								Line("I didn't expect the fertile territory to have such a rotten place.", 2),
+								Line("The lord abandoned this location."),
+								
+								Line("We can use this place as a shelter.", 1),
+								Line("Be careful with the polluted environment here, and the thieves as well."))
+					end
+				end),
+		Icon(Sprites.level.normalLevelGate, 960, 1130, UIs.mainGate,
+				function()
+					if not Settings.hasOpenedTheMainGateUI then
+						Settings.hasOpenedTheMainGateUI = true
+						
+						_dialogue:setNewLines(
+								Line("This massive city gate must be passed through in order to enter the land.", 5),
+								Line("The guards are the problem here."),
+								Line("We can buy them off with valuable metals."))
+					end
+				end),
+		Icon(Sprites.level.tutorialLevel, 780, 1400, UIs.beginning,
+				function()
+					if not Settings.hasOpenedTheBeginningUI then
+						Settings.hasOpenedTheBeginningUI = true
+						
+						_dialogue:setNewLines(
+								Line("We intend to infiltrate a European fortress.", 1),
+								Line("This is where we'll begin."),
+								Line("Make your decision."))
+					end
+				end),
+		Icon(Sprites.level.tradingPlace, 1150, 1320, nil, function() self:fadeToDark(function() Gamestate.switch(Trading) end) end)
+	)
 	
 	self.camera = Camera.new()
 	self.backgroundHeight = Sprites.level.levelMap:getHeight()

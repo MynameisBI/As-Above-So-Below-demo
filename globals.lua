@@ -16,5 +16,11 @@ Settings = {
 	hasReturnedFromTutorialLevel = false,
 	hasWon = false,
 	hasLost = false,
-	hasSeenResult = false
+	hasSeenResult = false,
+	hasOpenedTheBeginningUI = false,
+	hasOpenedTheMainGateUI = false,
+	hasOpenedTheBridgeTownUI = false,
+	hasOpenedTheMonasteryUI = false,
+	hasOpenedTheNightTavernUI = false,
+	hasOpenedTheRoyalFortressUI = false,
 }

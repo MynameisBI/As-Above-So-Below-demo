@@ -356,6 +356,7 @@ Sprites = {
 		},
 		skipButton = love.graphics.newImage('assets/dialogue/skip button.png'),
 		tutorials = {
+			textBox = love.graphics.newImage('assets/dialogue/tutorial/text box.png'),
 			[1] = {
 				[1] = love.graphics.newImage('assets/dialogue/tutorial/1/1.png'),
 				[2] = love.graphics.newImage('assets/dialogue/tutorial/1/2.png'),
@@ -578,6 +579,6 @@ Fonts = {
 	result_big = love.graphics.newFont('assets/fonts/JMH Beda.ttf', 180),
 	result_number = love.graphics.newFont('assets/fonts/Olondon_.otf', 254),
 	
-	dialogue = love.graphics.newFont('assets/fonts/JMH Beda.ttf', 46),
+	dialogue = love.graphics.newFont('assets/fonts/JMH Beda.ttf', 42),
 	dialogue_small = love.graphics.newFont('assets/fonts/JMH Beda.ttf', 32),
 }

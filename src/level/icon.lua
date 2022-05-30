@@ -72,7 +72,8 @@ function Icon:hit(x, y, button)
 	if self.levelUI ~= nil then
 		self.levelUI:setActive(true)
 		AudioManager:play('otherSounds', 'europeLevel')
-	elseif self.func ~= nil then
+	end
+	if self.func ~= nil then
 		self.func()
 	end
 end
