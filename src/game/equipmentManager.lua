@@ -8,7 +8,7 @@ function EquipmentManager:initialize()
 	
 	local x = 1482
 	for id, info in pairs(DATA.equipments) do
-		self:add(Equipment(Sprites.equipments[info.sprite],
+		self:add(Equipment(info.name, Sprites.equipments[info.sprite],
 				x, 1036, info.onHit, info.drawCardOnNextDeckHit))
 		x = x + 172
 	end
@@ -30,6 +30,8 @@ end
 function EquipmentManager:onDeckHit(deck)
 	self.activeEquipment.onHit(self.activeEquipment, Gamestate.current().decks.entities, deck)
 	self.activeEquipment = nil
+	
+	AudioManager:play('cardSounds', 'equipmentUse')
 end
 
 function EquipmentManager:update(dt)

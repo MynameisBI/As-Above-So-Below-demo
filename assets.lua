@@ -403,7 +403,7 @@ Sprites = {
 				[3.3] = love.graphics.newImage('assets/dialogue/tutorial/4/3.3.png'),
 				[4.1] = love.graphics.newImage('assets/dialogue/tutorial/4/4.1.png'),
 				[4.2] = love.graphics.newImage('assets/dialogue/tutorial/4/4.2.png'),
-				[4.3] = love.graphics.newImage('assets/dialogue/tutorial/4/3.3.png'),
+				[4.3] = love.graphics.newImage('assets/dialogue/tutorial/4/4.3.png'),
 			},
 			[5] = {
 				[1.1] = love.graphics.newImage('assets/dialogue/tutorial/5/1.1.png'),
@@ -542,6 +542,7 @@ Audios = {
 		titleIntro = love.audio.newSource('assets/audio/bgm/title intro bgm.mp3', 'stream'),
 		tradings = love.audio.newSource('assets/audio/bgm/tradings bgm.mp3', 'stream'),
 		worldMap = love.audio.newSource('assets/audio/bgm/worldmap bgm.mp3', 'stream'),
+		achievements = love.audio.newSource('assets/audio/bgm/achievements bgm.mp3', 'stream'),
 	},
 	
 	cardSounds = {
@@ -556,6 +557,8 @@ Audios = {
 		remove = love.audio.newSource('assets/audio/card sounds/remove.mp3', 'static'),
 		select = love.audio.newSource('assets/audio/card sounds/select.mp3', 'static'),
 		tearInHalf = love.audio.newSource('assets/audio/card sounds/tear in half.mp3', 'static'),
+		equipmentHit = love.audio.newSource('assets/audio/card sounds/equipment hit.mp3', 'static'),
+		equipmentUse = love.audio.newSource('assets/audio/card sounds/equipment use.mp3', 'static'),
 	},
 	
 	otherSounds = {
@@ -567,6 +570,10 @@ Audios = {
 		tradings = love.audio.newSource('assets/audio/other sounds/tradings.mp3', 'static'),
 		win = love.audio.newSource('assets/audio/other sounds/win.mp3', 'static'),
 		worldMapWonder = love.audio.newSource('assets/audio/other sounds/worldMapWonder.mp3', 'static'),
+		achievementsCardHit = love.audio.newSource('assets/audio/other sounds/achievements card hit.mp3', 'static'),
+		openTradingDrawer = love.audio.newSource('assets/audio/other sounds/achievements card hit.mp3', 'static'),
+		inTradingDrawer = love.audio.newSource('assets/audio/other sounds/achievements card hit.mp3', 'static'),
+		exitTradingDrawer = love.audio.newSource('assets/audio/other sounds/achievements card hit.mp3', 'static'),
 	},
 }
 
@@ -580,5 +587,5 @@ Fonts = {
 	result_number = love.graphics.newFont('assets/fonts/Olondon_.otf', 254),
 	
 	dialogue = love.graphics.newFont('assets/fonts/JMH Beda.ttf', 42),
-	dialogue_small = love.graphics.newFont('assets/fonts/JMH Beda.ttf', 32),
+	dialogue_small = love.graphics.newFont('assets/fonts/JMH Beda.ttf', 28),
 }

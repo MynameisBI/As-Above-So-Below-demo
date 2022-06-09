@@ -67,7 +67,9 @@ function ResultFrame:draw()
 	if self.result == 'win' then
 		self:print('You succeeded The Great Work.', Fonts.result_small, {1, 1, 1}, 960, 44)
 		self:print('New highscore', Fonts.result_small, {0.576, 0.447, 0.467}, 960, 190)
-		self:print(tostring(self.score), Fonts.result_number, {1, 1, 1}, 960, 270)
+		for i = -5, 5 do
+			self:print(tostring(self.score), Fonts.result_number, {1, 1, 1}, 960 + (i-3), 270)
+		end
 		
 	elseif self.result == 'lose' then
 		self:print('You failed The Great Work.', Fonts.result_small, {0.506, 0.176, 0.263}, 954, 50)
@@ -82,8 +84,8 @@ end
 
 function ResultFrame:print(text, font, color, x, y)
 	love.graphics.setColor(color or {1, 1, 1})
-		love.graphics.setFont(font)
-		love.graphics.print(text, x, y, 0, 1, 1, font:getWidth(text) / 2)
+	love.graphics.setFont(font)
+	love.graphics.print(text, x, y, 0, 1, 1, font:getWidth(text) / 2)
 end
 
 return ResultFrame

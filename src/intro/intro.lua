@@ -6,6 +6,7 @@ function Intro:enter()
 	State.initialize(self)
 	
 	self.currentDrawable = nil
+	self.currentDrawable2 = nil
 	self:next()
 	
 	self.isFading = false
@@ -74,6 +75,9 @@ end
 function Intro:_draw()
 	love.graphics.setColor(1, 1, 1)
 	love.graphics.draw(self.currentDrawable, 0, 0)
+	if self.currentDrawable2 ~= nil then
+		love.graphics.draw(self.currentDrawable2, 0, 0)
+	end
 end
 
 function Intro:mousepressed()

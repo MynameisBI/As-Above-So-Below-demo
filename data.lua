@@ -239,6 +239,7 @@ return {
 		ha = {
 			name = 'Hard Labor',
 			value = 0,
+			score = 0,
 			group = 'black',
 			type = 'black event',
 			event = function(self, deck)

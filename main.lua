@@ -27,9 +27,9 @@ function love.load()
 	math.randomseed(os.time())
 
 	--Gamestate.registerEvents()
-	--Gamestate.switch(Intro)
-	Gamestate.switch(Menu)
-	--Gamestate.switch(Game, 'theBeginning', 2, {'geSp'}, {}, 7)
+	Gamestate.switch(Intro)
+	--Gamestate.switch(Level)
+	--Gamestate.switch(Game, 'theBeginning', 2, {'g'}, {}, 7)
 end
 
 function love.update(dt)
@@ -46,11 +46,9 @@ function love.mousemoved(x, y)
 	local state = Gamestate.current()
 	if state ~= nil then
 		local inDevFrame = state.inDevFrame
-		if inDevFrame ~= nil then
+		if inDevFrame.isActive then
 			inDevFrame:mousemoved(x, y)
-		end
-		
-		if not _dialogue:mousemoved(x, y) then
+		elseif not _dialogue:mousemoved(x, y) then
 			if state.mousemoved then state:mousemoved(x, y) end
 		end
 	end
@@ -60,11 +58,9 @@ function love.mousepressed(x, y, button)
 	local state = Gamestate.current()
 	if state ~= nil then
 		local inDevFrame = state.inDevFrame
-		if inDevFrame ~= nil then
+		if inDevFrame.isActive then
 			inDevFrame:mousepressed(x, y, button)
-		end
-		
-		if not _dialogue:mousepressed(x, y, button) then
+		elseif not _dialogue:mousepressed(x, y, button) then
 			if state.mousepressed then state:mousepressed(x, y, button) end
 		end
 	end
@@ -74,11 +70,9 @@ function love.mousereleased(x, y, button)
 	local state = Gamestate.current()
 	if state ~= nil then
 		local inDevFrame = state.inDevFrame
-		if inDevFrame ~= nil then
+		if inDevFrame.isActive then
 			inDevFrame:mousereleased(x, y, button)
-		end
-		
-		if not _dialogue:mousereleased(x, y, button) then
+		elseif not _dialogue:mousereleased(x, y, button) then
 			if state.mousereleased then state:mousereleased(x, y, button) end
 		end
 	end
@@ -86,7 +80,7 @@ end
 
 function love.wheelmoved(x, y)
 	if Gamestate.current().wheelmoved then Gamestate.current():wheelmoved(x, y) end
-end	
+end
 
 function love.keypressed(key, scancode, isRepeat)
 	local state = Gamestate.current()

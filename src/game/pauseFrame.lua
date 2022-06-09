@@ -29,7 +29,10 @@ function PauseFrame:initialize()
 					end))
 					
 	self:addButton('exitLevel', Button(Sprites.pause.exitLevel, 770, 535, 120, 120,
-			function() Gamestate.current():fadeToDark(function() Gamestate.switch(Gamestate.current().from) end) end))
+			function()
+				local fromFrom = Gamestate.current().fromFrom
+				Gamestate.current():fadeToDark(function() Gamestate.switch(fromFrom) end)
+			end))
 	self:addButton('resume', Button(Sprites.pause.continue, 960, 535, 120, 120,
 			function() Gamestate.current():resume() end))
 	self:addButton('replay', Button(Sprites.pause.replay, 1150, 535, 120, 120,
@@ -37,7 +40,7 @@ function PauseFrame:initialize()
 				AudioManager:play('otherSounds', 'replay')
 				Gamestate.current():fadeToDark(function()
 							local args = Gamestate.current().args
-							Gamestate.switch(Load, args.background, args.cardsNum, args.baseDeck, args.wildCards, args.startingPoints)
+							Gamestate.switch(Load, args.background, args.cardsNum, args.baseDeck, args.wildCards, args.startingPoint, Game)
 						end)
 			end))
 	

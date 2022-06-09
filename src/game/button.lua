@@ -4,7 +4,7 @@ local inGameSpriteSize = 1
 local minSize = 0.92
 local maxSize = 1.1
 
-function Button:initialize(sprite, x, y, w, h, executeFunc, ox, oy)
+function Button:initialize(sprite, x, y, w, h, executeFunc, ox, oy, sound)
 	assert(sprite, 'sprite is nil')
 	
 	self.sprite = sprite
@@ -22,6 +22,8 @@ function Button:initialize(sprite, x, y, w, h, executeFunc, ox, oy)
 	self.isEnabled = true
 	
 	self.executeFunc = executeFunc or function(self, mx, my, button) end
+	
+	self.sound = sound
 	
 	self.isEnabled = true
 end
@@ -66,6 +68,7 @@ function Button:mousepressed(x, y, button)
 	if self.x - self.w / 2 <= x and x <= self.x + self.w / 2 and
 			self.y - self.h / 2 <= y and y <= self.y + self.h / 2 then
 		self.isActive = true
+		return true
 	end
 end
 
@@ -74,12 +77,18 @@ function Button:mousereleased(x, y, button)
 			self.x - self.w / 2 <= x and x <= self.x + self.w / 2 and
 			self.y - self.h / 2 <= y and y <= self.y + self.h / 2 then
 		self:hit(x, y, button)
+		self.isActive = false
+		return true
 	end
 	self.isActive = false
 end
 
 function Button:hit(x, y, button)
-	AudioManager:play('otherSounds', 'button')
+	if self.sound ~= nil then
+		AudioManager:play(self.sound[1], self.sound[2])
+	else
+		AudioManager:play('otherSounds', 'button')
+	end
 
 	self.executeFunc(self, x, y, button)
 end

@@ -5,13 +5,19 @@ function Load:enter(from, background, cardsNum, baseDeck, wildCards, startingPoi
 
 	self.to = to or Game
 	if self.to == Game then
-		self.loadingScreen = Sprites.loadingScreens[math.random(1, 2)]
+		local index = math.random(1, 3)
+		if index == 3 then index = 4 end
+		self.loadingScreen = Sprites.loadingScreens[index]
+		
 	elseif self.to == Menu then
 		if from == Intro then
 			self.loadingScreen = Sprites.intro.loadingScreen
 		else
 			self.loadingScreen = Sprites.loadingScreens[math.random(3, 4)]
 		end
+		
+	elseif self.to == Trading then
+		self.loadingScreen = Sprites.loadingScreens[math.random(2, 3)]
 	end
 	
 	self.background, self.cardsNum, self.baseDeck, self.wildCards = background, cardsNum, baseDeck, wildCards
@@ -23,6 +29,8 @@ function Load:enter(from, background, cardsNum, baseDeck, wildCards, startingPoi
 	
 	Videos.loadingSymbol:rewind()
 	Videos.loadingSymbol:play()
+	
+	self.from = from
 	
 	self.isAnimationEnded = false
 end

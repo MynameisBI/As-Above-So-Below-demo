@@ -41,7 +41,9 @@ function ScoreManager:draw()
 	love.graphics.setColor(1, 1, 1)
 	love.graphics.setFont(Fonts.score)
 	local t, f = tostring(self.score), love.graphics.getFont()
-	love.graphics.print(t, self.x - f:getWidth(t)/2, self.y - f:getHeight()/2)
+	for i = -3, 3 do
+		love.graphics.print(t, self.x - f:getWidth(t)/2 + i / 3, self.y - f:getHeight()/2)
+	end
 end
 
 return ScoreManager

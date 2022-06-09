@@ -62,7 +62,7 @@ end
 function Tracker:getGoldEventNum()
 	local num = 0
 	for _, point in pairs(self.goldEventFlipped) do
-		num = num + point
+		if point > 0 then num = num + 1 end
 	end
 	return num
 end
@@ -87,7 +87,7 @@ end
 function Tracker:getElementNum()
 	local num = 0
 	for _, point in pairs(self.elementFlipped) do
-		num = num + point
+		if point > 0 then num = num + 1 end
 	end
 	return num
 end

@@ -3,7 +3,7 @@ local Instruction = Class('Instruction')
 local orange, red, white = {211/255, 125/255, 58/255}, {195/255, 52/255, 70/255}, {1, 1, 1}
 
 function Instruction:initialize()
-	self.isEnabled = true
+	self.isEnabled = false
 	self.text = {}
 	
 	local signal = Gamestate.current().signal
@@ -94,21 +94,22 @@ function Instruction:initialize()
 			
 	signal:register('hover equipment',
 			function(equipment)
+				local name, description
+				if equipment.name == 'Alembic' then
+					name = 'ALEMBIC'
+					description = '.\nIt transforms a face-down card into another card within the limit of cardtypes of the level.'
+				elseif equipment.name == 'Mortar and Pestle' then
+					name = 'MORTAR & PESTLE'
+					description = '.\nYou can see a face-down card at the top of a deck.'
+				elseif equipment.name == "Philosopher's Stone" then
+					name = 'PHILOSOPHER\'S STONE'
+					description = '.\nThe score of the next card you draw will be tripled.'
+				end
 				self.text = {
 					white,  'It is an equipment card, its name is ',
-					red,    '',
-					white,  '',
+					red,    name,
+					white,  description,
 				}			
-				if equipment.name == 'Alembic' then
-					self.text[4] = 'ALEMBIC'
-					self.text[6] = '.\nIt transforms a face-down card into another card within the limit of cardtypes of the level.'
-				elseif equipment.name == 'Mortar and Pestle' then
-					self.text[4] = 'MORTAR & PESTLE'
-					self.text[6] = '.\nYou can see a face-down card at the top of a deck.'
-				elseif equipment.name == "Philosopher's Stone" then
-					self.text[4] = 'PHILOSOPHER\'S STONE'
-					self.text[6] = '.\nThe score of the next card you draw will be tripled.'
-				end
 			end)
 			
 	signal:register('use equipment',
@@ -125,10 +126,8 @@ function Instruction:draw()
 	
 	local f = Fonts.dialogue_small
 	love.graphics.setFont(f)
-	local width, lines = f:getWrap(self.text, 640)
-	for i = 1, #lines do
-		love.graphics.print(lines[i], 20, 908 + (f:getHeight(t) + 4) * (-#lines/2 + i))
-	end
+	local width, lines = f:getWrap(self.text, 575)
+	love.graphics.printf(self.text, f, 20, 920 + (f:getHeight() + 4) * (-#lines/2 + 1), 575)
 end
 
 return Instruction

@@ -13,6 +13,10 @@ function Frame:setActive(isActive)
 	self.isActive = isActive 
 end
 
+function Frame:toggleActive()
+	self.isActive = not self.isActive
+end
+
 function Frame:update(dt)
 	--if not self.isActive then return end
 

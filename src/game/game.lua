@@ -18,7 +18,11 @@ local Game = Class('Game', State)
 function Game:enter(from, background, cardsNum, baseDeck, wildCards, startingPoint)
 	State.initialize(self)
 	
-	self.from = from
+	if background == 'warmUp' then
+		self.fromFrom = TutorialLevel
+	else
+		self.fromFrom = Level
+	end
 
 	self:fadeToBright(function()
 				Gamestate.current().pregameFrame:onIntroDone()
@@ -76,8 +80,6 @@ end
 
 function Game:setupGame(cardsNum)
 	local decks, typeHints, valueHints = {}, {}, {}
-
---232, 315   116, 157.5
 
 	-- Initialize all the decks
 	if cardsNum == 2 then

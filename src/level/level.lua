@@ -179,7 +179,7 @@ function Level:mousepressed(x, y, button)
 
 	self.icons:mousepressed(worldX, worldY, button)
 	
-	self.returnButton:mousepressed(x, y, button)
+	self.returnButton:mousepressed(worldX, worldY, button)
 end
 
 function Level:mousereleased(x, y, button)
@@ -191,7 +191,7 @@ function Level:mousereleased(x, y, button)
 
 	self.icons:mousereleased(worldX, worldY, button)
 	
-	self.returnButton:mousereleased(x, y, button)
+	self.returnButton:mousereleased(worldX, worldY, button)
 end
 
 function Level:wheelmoved(x, y)

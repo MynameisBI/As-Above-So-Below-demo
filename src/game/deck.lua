@@ -88,7 +88,7 @@ function Deck:shuffle()
 end
 
 function Deck:addActionToTop(action)
-	table.insert(self.actionQueue, 1, action)
+	table.insert(self.actionQueue, 2, action)
 	
 	if not self.isInAction then
 		self.isInAction = true
@@ -202,10 +202,6 @@ function Deck:executeNextAction()
 						if self.currentFlippedCard.event ~= nil then
 							self.currentFlippedCard:event(self)
 						end
-						
-						if score < 0 then
-							self:addActionToTop('end and lose')
-						end
 					end
 					
 					self:onActionEnded()
@@ -217,20 +213,22 @@ function Deck:executeNextAction()
 		else delay = 0.05
 		end
 		
-		if self.currentFlippedCard.name == 'Black 4' then
-			AudioManager:play('cardSounds', 'black')
-		elseif self.currentFlippedCard.name == 'Charlatan' then
-			AudioManager:play('cardSounds', 'charlatan')
-		elseif self.currentFlippedCard.name == 'Hard Labor' then
-			AudioManager:play('cardSounds', 'hardLabor')
-		elseif self.currentFlippedCard.name == 'Heresy' then
-			AudioManager:play('cardSounds', 'heresy')
-		elseif self.currentFlippedCard.name == 'Gold 4' then
-			AudioManager:play('cardSounds', 'gold')
-		elseif self.currentFlippedCard.type == 'gold event' then
-			AudioManager:play('cardSounds', 'goldEvent')
-		elseif self.currentFlippedCard.group == 'element' then
-			AudioManager:play('cardSounds', 'element')
+		if self.currentFlippedCard ~= nil then
+			if self.currentFlippedCard.name == 'Black 4' then
+				AudioManager:play('cardSounds', 'black')
+			elseif self.currentFlippedCard.name == 'Charlatan' then
+				AudioManager:play('cardSounds', 'charlatan')
+			elseif self.currentFlippedCard.name == 'Hard Labor' then
+				AudioManager:play('cardSounds', 'hardLabor')
+			elseif self.currentFlippedCard.name == 'Heresy' then
+				AudioManager:play('cardSounds', 'heresy')
+			elseif self.currentFlippedCard.name == 'Gold 4' then
+				AudioManager:play('cardSounds', 'gold')
+			elseif self.currentFlippedCard.type == 'gold event' then
+				AudioManager:play('cardSounds', 'goldEvent')
+			elseif self.currentFlippedCard.group == 'element' then
+				AudioManager:play('cardSounds', 'element')
+			end
 		end
 		
 		self.timer:after(delay, 
@@ -250,15 +248,13 @@ function Deck:executeNextAction()
 											self.currentFlippedCardOy = 0
 											self.currentFlippedSprite = nil
 											
-											local isAllDeckEmpty = self:isAllDeckEmpty()
-											if isAllDeckEmpty then
-												local score = Gamestate.current().scoreManager.score
-												if score >= 0 then self:addActionToBottom('end and win')
-												elseif score < 0 then self:addActionToBottom('end and lose')
-												end
-											else
-												self.isFlipping = false
+											local score = Gamestate.current().scoreManager.score
+											if score < 0 then
+												self:addActionToTop('end and lose')
+											elseif self:isAllDeckEmpty() and score >= 0 then
+												self:addActionToTop('end and win')
 											end
+											self.isFlipping = false
 											
 											self:onActionEnded()
 											self:emitOnCardChangedEvent()
@@ -294,12 +290,8 @@ function Deck:executeNextAction()
 											self.currentFlippedCardOy = 0
 											self.currentFlippedSprite = nil
 											
-											local isAllDeckEmpty = self:isAllDeckEmpty()
-											if isAllDeckEmpty then
-												self:addActionToBottom('end and win')
-											else
-												self.isFlipping = false
-											end
+											local score = Gamestate.current().scoreManager.score
+											self.isFlipping = false
 											
 											self:onActionEnded()
 											self:emitOnCardChangedEvent()
@@ -308,7 +300,7 @@ function Deck:executeNextAction()
 				end)
 				
 	elseif action == 'end and win' or action == 'end and lose' then
-		self.timer:after(1.65, function()
+		self.timer:after(0.7, function()
 					self.isFlipping = false
 					if action == 'end and win' then
 						Gamestate.current():endGame('win')
@@ -381,22 +373,27 @@ function Deck:draw()
 				sprite:getWidth(), 0)
 	end
 	
+	-- Card
 	if self.currentFlippedCard ~= nil then
 		self.mesh:setVertices(self.vertices)
 		if self.currentFlippedSprite == nil then
 			self.mesh:setTexture(Sprites.cards.back)
 		else
 			love.graphics.setCanvas(self.canvas)
+				-- Card sprite
 				love.graphics.setColor(1, 1, 1)
 				love.graphics.draw(self.currentFlippedSprite, 0, 0,
 						0, self.w / self.currentFlippedCard.sprite:getWidth(), self.h / self.currentFlippedCard.sprite:getHeight())						
-						
+					
+				-- Card value	
 				local defaultFont = love.graphics.getFont()
 				love.graphics.setColor(self.currentFlippedCard.valueTextColor)
 				love.graphics.setFont(Fonts.cardValue)
-				love.graphics.print(tostring(self.currentFlippedCard.value), 45, 273, -- 206, 15 dep hon
-						0, 1, 1,
-						Fonts.cardValue:getWidth(tostring(self.currentFlippedCard.value))/2, 0)
+				for i = -3, 3 do
+					love.graphics.print(tostring(self.currentFlippedCard.value), 48 + i / 4, 266, -- 206, 15 dep hon
+							0, 1, 1,
+							Fonts.cardValue:getWidth(tostring(self.currentFlippedCard.value))/2, 0)  -- Optimizable
+				end
 				love.graphics.setFont(defaultFont)
 			love.graphics.setCanvas()
 			self.mesh:setTexture(self.canvas)
@@ -407,7 +404,7 @@ function Deck:draw()
 		self.halfs:draw(self.mesh)
 	end
 	
-	
+	-- Cards left
 	local t = string.format('%d', #self.cards)
 	love.graphics.setFont(Fonts.cardsLeft)
 	love.graphics.setColor(1, 1, 1)
@@ -433,7 +430,6 @@ function Deck:mousepressed(x, y, button)
 	local activeEquipment = equipmentManager.activeEquipment
 	if activeEquipment ~= nil then
 		equipmentManager:onDeckHit(self)
-		print(activeEquipment.drawCardOnNextDeckHit)
 		if activeEquipment.drawCardOnNextDeckHit == false then
 			return
 		end

@@ -1,6 +1,7 @@
 local Equipment = Class('Equipment')
 
-function Equipment:initialize(sprite, x, y, onHit, drawCardOnNextDeckHit)
+function Equipment:initialize(name, sprite, x, y, onHit, drawCardOnNextDeckHit)
+	self.name = name
 	self.sprite = sprite
 	self.color = {1, 1, 1}
 	self.x, self.y = x, y
@@ -48,13 +49,14 @@ function Equipment:draw()
 end
 
 function Equipment:mousemoved(x, y)
-	self.isHovered = false
 	if self.x - self.w / 2 <= x and x <= self.x + self.w / 2 and
 			self.y - self.h / 2 <= y and y <= self.y + self.h / 2 then
 		if self.isHovered == false then
 			Gamestate.current().signal:emit('hover equipment', self)
 		end
 		self.isHovered = true
+	else
+		self.isHovered = false
 	end
 end
 
@@ -78,7 +80,9 @@ function Equipment:hit(x, y, button)
 	Gamestate.current().signal:emit('use equipment')
 
 	Gamestate.current().equipmentManager:setActiveEquipment(self)
-
+	
+	AudioManager:play('cardSounds', 'equipmentHit')
+	
 	decks = Gamestate.current().decks.entities
 	
 	for _, deck in ipairs(decks) do
