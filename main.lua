@@ -27,8 +27,8 @@ function love.load()
 	math.randomseed(os.time())
 
 	--Gamestate.registerEvents()
-	--Gamestate.switch(Intro)
-	Gamestate.switch(Menu)
+	Gamestate.switch(Intro)
+	--Gamestate.switch(Menu)
 	--Gamestate.switch(Game, 'theBeginning', 2, {'g'}, {}, 7)
 end
 

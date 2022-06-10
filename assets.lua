@@ -321,6 +321,33 @@ Sprites = {
 			mid = love.graphics.newImage('assets/trading/details/midBg.png'),
 			bot = love.graphics.newImage('assets/trading/details/botBg.png'),
 			back = love.graphics.newImage('assets/trading/details/back.png'),
+			items = {
+				alembic = {
+					normal = love.graphics.newImage('assets/trading/details/trading items/alembic item.png'),
+					hovered = love.graphics.newImage('assets/trading/details/trading items/alembic item (after).png'),
+				},
+				mortarAndPestle = {
+					normal = love.graphics.newImage('assets/trading/details/trading items/mortar pestle item.png'),
+					hovered = love.graphics.newImage('assets/trading/details/trading items/mortar pestle item (after).png'),
+				},
+				pStone = {
+					normal = love.graphics.newImage('assets/trading/details/trading items/pstone item.png'),
+					hovered = love.graphics.newImage('assets/trading/details/trading items/pstone item (after).png'),
+				},
+				------
+				silver = {
+					normal = love.graphics.newImage('assets/trading/details/trading items/silver item.png'),
+					hovered = love.graphics.newImage('assets/trading/details/trading items/silver item (after).png'),
+				},
+				gold = {
+					normal = love.graphics.newImage('assets/trading/details/trading items/gold item.png'),
+					hovered = love.graphics.newImage('assets/trading/details/trading items/gold item (after).png'),
+				},
+				iron = {
+					normal = love.graphics.newImage('assets/trading/details/trading items/iron item.png'),
+					hovered = love.graphics.newImage('assets/trading/details/trading items/iron item (after).png'),
+				}
+			}
 		}
 	},
 	
@@ -546,36 +573,36 @@ Audios = {
 	},
 	
 	cardSounds = {
-		black = love.audio.newSource('assets/audio/card sounds/black.mp3', 'static'),
-		flip = love.audio.newSource('assets/audio/card sounds/card flip.mp3', 'static'),
-		charlatan = love.audio.newSource('assets/audio/card sounds/charlatan.mp3', 'static'),
-		element = love.audio.newSource('assets/audio/card sounds/element.mp3', 'static'),
-		goldEvent = love.audio.newSource('assets/audio/card sounds/gold event.mp3', 'static'),
-		gold = love.audio.newSource('assets/audio/card sounds/gold.mp3', 'static'),
-		hardLabor = love.audio.newSource('assets/audio/card sounds/hard labor.mp3', 'static'),
-		heresy = love.audio.newSource('assets/audio/card sounds/heresy.mp3', 'static'),
-		remove = love.audio.newSource('assets/audio/card sounds/remove.mp3', 'static'),
-		select = love.audio.newSource('assets/audio/card sounds/select.mp3', 'static'),
-		tearInHalf = love.audio.newSource('assets/audio/card sounds/tear in half.mp3', 'static'),
-		equipmentHit = love.audio.newSource('assets/audio/card sounds/equipment hit.mp3', 'static'),
-		equipmentUse = love.audio.newSource('assets/audio/card sounds/equipment use.mp3', 'static'),
+		black = love.audio.newSource('assets/audio/cardSounds/black.mp3', 'static'),
+		flip = love.audio.newSource('assets/audio/cardSounds/card flip.mp3', 'static'),
+		charlatan = love.audio.newSource('assets/audio/cardSounds/charlatan.mp3', 'static'),
+		element = love.audio.newSource('assets/audio/cardSounds/element.mp3', 'static'),
+		goldEvent = love.audio.newSource('assets/audio/cardSounds/gold event.mp3', 'static'),
+		gold = love.audio.newSource('assets/audio/cardSounds/gold.mp3', 'static'),
+		hardLabor = love.audio.newSource('assets/audio/cardSounds/hard labor.mp3', 'static'),
+		heresy = love.audio.newSource('assets/audio/cardSounds/heresy.mp3', 'static'),
+		remove = love.audio.newSource('assets/audio/cardSounds/remove.mp3', 'static'),
+		select = love.audio.newSource('assets/audio/cardSounds/select.mp3', 'static'),
+		tearInHalf = love.audio.newSource('assets/audio/cardSounds/tear in half.mp3', 'static'),
+		equipmentHit = love.audio.newSource('assets/audio/cardSounds/equipment hit.mp3', 'static'),
+		equipmentUse = love.audio.newSource('assets/audio/cardSounds/equipment use.mp3', 'static'),
 	},
 	
 	otherSounds = {
-		button = love.audio.newSource('assets/audio/other sounds/button.mp3', 'static'),
-		europeLevel = love.audio.newSource('assets/audio/other sounds/europeLevel.mp3', 'static'),
-		lost = love.audio.newSource('assets/audio/other sounds/lost.mp3', 'static'),
-		map = love.audio.newSource('assets/audio/other sounds/map.mp3', 'static'),
-		replay = love.audio.newSource('assets/audio/other sounds/replay.mp3', 'static'),
-		tradings = love.audio.newSource('assets/audio/other sounds/tradings.mp3', 'static'),
-		win = love.audio.newSource('assets/audio/other sounds/win.mp3', 'static'),
-		worldMapWonder = love.audio.newSource('assets/audio/other sounds/worldMapWonder.mp3', 'static'),
-		achievementsCardHit = love.audio.newSource('assets/audio/other sounds/achievements card hit.mp3', 'static'),
-		openTradingDrawer = love.audio.newSource('assets/audio/other sounds/openTradingDrawer.mp3', 'static'),
-		inTradingDrawer = love.audio.newSource('assets/audio/other sounds/inTradingDrawer.mp3', 'static'),
-		exitTradingDrawer = love.audio.newSource('assets/audio/other sounds/exitTradingDrawer.mp3', 'static'),
-		inventory = love.audio.newSource('assets/audio/other sounds/inventory.mp3', 'static'),
-		cardsCollection = love.audio.newSource('assets/audio/other sounds/cardsCollection.mp3', 'static'),
+		button = love.audio.newSource('assets/audio/otherSounds/button.mp3', 'static'),
+		europeLevel = love.audio.newSource('assets/audio/otherSounds/europeLevel.mp3', 'static'),
+		lost = love.audio.newSource('assets/audio/otherSounds/lost.mp3', 'static'),
+		map = love.audio.newSource('assets/audio/otherSounds/map.mp3', 'static'),
+		replay = love.audio.newSource('assets/audio/otherSounds/replay.mp3', 'static'),
+		tradings = love.audio.newSource('assets/audio/otherSounds/tradings.mp3', 'static'),
+		win = love.audio.newSource('assets/audio/otherSounds/win.mp3', 'static'),
+		worldMapWonder = love.audio.newSource('assets/audio/otherSounds/worldMapWonder.mp3', 'static'),
+		achievementsCardHit = love.audio.newSource('assets/audio/otherSounds/achievements card hit.mp3', 'static'),
+		openTradingDrawer = love.audio.newSource('assets/audio/otherSounds/openTradingDrawer.mp3', 'static'),
+		inTradingDrawer = love.audio.newSource('assets/audio/otherSounds/inTradingDrawer.mp3', 'static'),
+		exitTradingDrawer = love.audio.newSource('assets/audio/otherSounds/exitTradingDrawer.mp3', 'static'),
+		inventory = love.audio.newSource('assets/audio/otherSounds/inventory.mp3', 'static'),
+		cardsCollection = love.audio.newSource('assets/audio/otherSounds/cardsCollection.mp3', 'static'),
 	},
 }
 

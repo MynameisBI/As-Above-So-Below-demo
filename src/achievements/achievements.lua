@@ -11,17 +11,18 @@ function Achievements:enter()
 	self.buttons = Manager()
 	
 	self.buttons:add(MenuButton(Sprites.achievements.philosopherStone.normal, Sprites.achievements.philosopherStone.hovered,
-			870, 40, 185, 245, -30, -40, nil, {'otherSounds', 'achievementsCardHit'}))
+			930, 115, 185, 245, -30, -40, nil, {'otherSounds', 'achievementsCardHit'}))
 	self.buttons:add(MenuButton(Sprites.achievements.pancea.normal, Sprites.achievements.pancea.hovered,
-			1295, 235, 185, 245, -30, -40, nil, {'otherSounds', 'achievementsCardHit'}))
+			1355, 310, 185, 245, -30, -40, nil, {'otherSounds', 'achievementsCardHit'}))
 	self.buttons:add(MenuButton(Sprites.achievements.ouroboros.normal, Sprites.achievements.ouroboros.hovered,
-			1295, 625, 185, 245, -30, -40, nil, {'otherSounds', 'achievementsCardHit'}))
+			1355, 700, 185, 245, -30, -40, nil, {'otherSounds', 'achievementsCardHit'}))
 	self.buttons:add(MenuButton(Sprites.achievements.elixir.normal, Sprites.achievements.elixir.hovered,
-			870, 800, 185, 245, -30, -40, nil, {'otherSounds', 'achievementsCardHit'}))
+			930, 885, 185, 245, -30, -40, nil, {'otherSounds', 'achievementsCardHit'}))
 	self.buttons:add(MenuButton(Sprites.achievements.homunculus.normal, Sprites.achievements.homunculus.hovered,
-			445, 625, 185, 245, -30, -40, nil, {'otherSounds', 'achievementsCardHit'}))
+			505, 700, 185, 245, -30, -40, nil, {'otherSounds', 'achievementsCardHit'}))
 	self.buttons:add(MenuButton(Sprites.achievements.emeraldTablet.normal, Sprites.achievements.emeraldTablet.hovered,
-			445, 235, 185, 245, -30, -40, nil, {'otherSounds', 'achievementsCardHit'}))
+			505, 310, 185, 245, -30, -40, nil, {'otherSounds', 'achievementsCardHit'}))
+			
 	self.buttons:add(Button(Sprites.result.XButton,
 			1815, 94, 120, 120, function() Gamestate.switch(Menu) end))
 			
