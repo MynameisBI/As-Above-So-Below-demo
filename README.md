@@ -1,2 +1,3 @@
-# K-DA-Tot-Nghiep
- 
+# As Above So Below demo
+
+A demo of a card puzzle game
