@@ -27,8 +27,6 @@ function Trading:enter(from)
 	self.backButton = Button(Sprites.trading.details.back, 1350, 100, nil, nil,
 			function() self.currentFrame = nil end, 0, 0, {'otherSounds', 'exitTradingDrawer'})	
 		
-	AudioManager:play('otherSounds', 'tradings')
-		
 	AudioManager:play('bgm', 'tradings')
 end
 

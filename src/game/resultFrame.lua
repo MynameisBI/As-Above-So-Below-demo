@@ -25,16 +25,16 @@ function ResultFrame:setResultInfo(result, score, reward)
 			Settings.hasWon = true
 			_dialogue:setNewLines(
 					Line('First time and you nailed it! You are clearly gifted in alchemy! Keep it up.', 6))
-			AudioManager:play('otherSounds', 'win')
 		end
+		AudioManager:play('otherSounds', 'win')
 	
 	elseif result == 'lose' then
 		if Settings.hasLost == false then
 			Settings.hasLost = true
 			_dialogue:setNewLines(
 					Line("It's a bit disappointing. You can try again, but remember that everything has its price.", 2))
-			AudioManager:play('otherSounds', 'lost')
 		end
+		AudioManager:play('otherSounds', 'lost')
 	end
 	
 	if Settings.hasSeenResult == false then

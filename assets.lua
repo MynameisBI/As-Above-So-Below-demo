@@ -571,9 +571,11 @@ Audios = {
 		win = love.audio.newSource('assets/audio/other sounds/win.mp3', 'static'),
 		worldMapWonder = love.audio.newSource('assets/audio/other sounds/worldMapWonder.mp3', 'static'),
 		achievementsCardHit = love.audio.newSource('assets/audio/other sounds/achievements card hit.mp3', 'static'),
-		openTradingDrawer = love.audio.newSource('assets/audio/other sounds/achievements card hit.mp3', 'static'),
-		inTradingDrawer = love.audio.newSource('assets/audio/other sounds/achievements card hit.mp3', 'static'),
-		exitTradingDrawer = love.audio.newSource('assets/audio/other sounds/achievements card hit.mp3', 'static'),
+		openTradingDrawer = love.audio.newSource('assets/audio/other sounds/openTradingDrawer.mp3', 'static'),
+		inTradingDrawer = love.audio.newSource('assets/audio/other sounds/inTradingDrawer.mp3', 'static'),
+		exitTradingDrawer = love.audio.newSource('assets/audio/other sounds/exitTradingDrawer.mp3', 'static'),
+		inventory = love.audio.newSource('assets/audio/other sounds/inventory.mp3', 'static'),
+		cardsCollection = love.audio.newSource('assets/audio/other sounds/cardsCollection.mp3', 'static'),
 	},
 }
 
