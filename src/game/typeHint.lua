@@ -21,8 +21,8 @@ function TypeHint:onCardChanged()
 end
 
 function TypeHint:getHint(leftCard, rightCard)
-	if leftCard.type == rightCard.type then return '='
-	elseif leftCard.group == rightCard.group then return '~'
+	if leftCard.group == rightCard.group then return '='
+	elseif leftCard.type == rightCard.type then return '~'
 	else return '=/='
 	end
 end

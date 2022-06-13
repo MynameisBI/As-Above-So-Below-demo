@@ -116,6 +116,7 @@ function Dialogue:draw()
 					0, 1, 1, oppy:getWidth()/2, oppy:getHeight()/2)
 		end
 		
+		print(self.currentLineLength)
 		local t = string.sub(self.lines[self.currentLineIndex].text, 1, self.currentLineLength)
 		local f = Fonts.dialogue
 		if t == nil then return end

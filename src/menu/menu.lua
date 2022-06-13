@@ -64,7 +64,7 @@ function Menu:enter()
 				
 				Line("Not coincidentally, the higher beings believed that your blessing was something worthy of taking a big step forward for humankind.", 5),
 				
-				Line("Lol but you’re not the only one they chose.", 6),
+				Line("Lol but you're not the only one they chose.", 6),
 				
 				Line('Any alchemist who starts wondering "As Above So Below" term will be given the bless to fulfill his goal.', 5),
 				
