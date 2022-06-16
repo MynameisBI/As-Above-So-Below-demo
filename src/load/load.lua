@@ -1,6 +1,6 @@
 local Load = Class('Load', State)
 
-function Load:enter(from, background, cardsNum, baseDeck, wildCards, startingPoint, to)
+function Load:enter(from, background, cardsNum, baseDeck, wildCards, startingPoint, minimumPoint, to)
 	State.initialize(self)
 
 	self.to = to or Game
@@ -22,6 +22,7 @@ function Load:enter(from, background, cardsNum, baseDeck, wildCards, startingPoi
 	
 	self.background, self.cardsNum, self.baseDeck, self.wildCards = background, cardsNum, baseDeck, wildCards
 	self.startingPoint = startingPoint
+	self.minimumPoint = minimumPoint
 	
 	self.progress = 0
 	self.timer = Timer.new()

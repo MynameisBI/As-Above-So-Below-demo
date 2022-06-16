@@ -29,7 +29,7 @@ function love.load()
 	--Gamestate.registerEvents()
 	Gamestate.switch(Intro)
 	--Gamestate.switch(Menu)
-	--Gamestate.switch(Game, 'theBeginning', 2, {'g'}, {}, 7)
+	--Gamestate.switch(Game, 'theBeginning', 2, {'g'}, {}, 7, 10)
 end
 
 function love.update(dt)

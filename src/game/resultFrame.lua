@@ -8,7 +8,12 @@ function ResultFrame:initialize(args)
 	Frame.initialize(self)
 
 	self:addButton('replayButton', Button(Sprites.result.replay, 960, 1025, 540, 130,
-			function() Gamestate.current():fadeToDark(function() Gamestate.switch(Load, args.background, args.cardsNum, args.baseDeck, args.wildCards, Game); AudioManager:play('otherSounds', 'replay') end) end))
+			function()
+				Gamestate.current():fadeToDark(function()
+					Gamestate.switch(Load, args.background, args.cardsNum, args.baseDeck, args.wildCards, args.startingPoint, args.minimumPoint, Game)
+					AudioManager:play('otherSounds', 'replay')
+				end)
+			end))
 	self:addButton('openLevelMap', Button(Sprites.result.openLevelMap, 183, 864, 274, 442,
 			function() Gamestate.current():fadeToDark(function() Gamestate.switch(Level); AudioManager:play('otherSounds', 'map') end) end))
 	self:addButton('openTrading', Button(Sprites.result.openTradingPlace, 1725, 895, 470, 370,

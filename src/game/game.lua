@@ -15,7 +15,7 @@ local Manager = require 'src.game.manager'
 
 local Game = Class('Game', State)
 
-function Game:enter(from, background, cardsNum, baseDeck, wildCards, startingPoint)
+function Game:enter(from, background, cardsNum, baseDeck, wildCards, startingPoint, minimumPoint)
 	State.initialize(self)
 	
 	if background == 'warmUp' then
@@ -34,6 +34,7 @@ function Game:enter(from, background, cardsNum, baseDeck, wildCards, startingPoi
 		baseDeck = baseDeck,
 		wildCards = wildCards,
 		startingPoint = startingPoint,
+		minimumPoint = minimumPoint or 0,
 	}
 
 	self.background = Sprites.backgrounds[background]

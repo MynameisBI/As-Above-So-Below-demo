@@ -13,7 +13,8 @@ function LevelUI:initialize(sprite, levelId)
 				Gamestate.current():fadeToDark(function()
 							local levelInfo = DATA.levels[levelId]
 							Gamestate.switch(Load, levelInfo.background, levelInfo.cardsNum,
-									levelInfo.baseDeck, levelInfo.wildCards, levelInfo.startingPoint)
+									levelInfo.baseDeck, levelInfo.wildCards, levelInfo.startingPoint,
+									levelInfo.minimumPoint)
 						end)
 			end))
 	self:addButton('equipment', Button(Sprites.level.levelsUI.equipmentCards, 1374, 902, 262, 262,

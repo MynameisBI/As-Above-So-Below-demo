@@ -40,7 +40,7 @@ function PauseFrame:initialize()
 				AudioManager:play('otherSounds', 'replay')
 				Gamestate.current():fadeToDark(function()
 							local args = Gamestate.current().args
-							Gamestate.switch(Load, args.background, args.cardsNum, args.baseDeck, args.wildCards, args.startingPoint, Game)
+							Gamestate.switch(Load, args.background, args.cardsNum, args.baseDeck, args.wildCards, args.startingPoint, args.minimumPoint, Game)
 						end)
 			end))
 	

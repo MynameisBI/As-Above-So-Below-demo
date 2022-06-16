@@ -249,10 +249,13 @@ function Deck:executeNextAction()
 											self.currentFlippedSprite = nil
 											
 											local score = Gamestate.current().scoreManager.score
+											local minimumPoint = Gamestate.current().args.minimumPoint
 											if score < 0 then
 												self:addActionToTop('end and lose')
-											elseif self:isAllDeckEmpty() and score >= 0 then
-												self:addActionToTop('end and win')
+											elseif self:isAllDeckEmpty() then
+												if score >= minimumPoint then	self:addActionToTop('end and win')
+												else self:addActionToTop('end and lose')
+												end
 											end
 											self.isFlipping = false
 											
@@ -291,6 +294,12 @@ function Deck:executeNextAction()
 											self.currentFlippedSprite = nil
 											
 											local score = Gamestate.current().scoreManager.score
+											local minimumPoint = Gamestate.current().args.minimumPoint
+											if self:isAllDeckEmpty() then
+												if score >= minimumPoint then	self:addActionToTop('end and win')
+												else self:addActionToTop('end and lose')
+												end
+											end
 											self.isFlipping = false
 											
 											self:onActionEnded()

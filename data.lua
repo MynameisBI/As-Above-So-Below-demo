@@ -27,7 +27,7 @@ return {
 			baseDeck = {'b', 'g'},
 			wildCards = {'w1', 'w2', 'w3', 'a1', 'a2', 'a3', 'e1', 'e2', 'e3'},
 			startingPoint = 3,
-			goal = 15
+			minimumPoint = 15,
 		},
 		monastery = {
 			background = 'monastery',
@@ -51,6 +51,7 @@ return {
 					'e1', 'e2', 'e3', 'a1', 'a2', 'a3', 'a4',
 					'g', 'he', 'he', 'ch', 'ch'},
 			startingPoint = 5,
+			minimumPoint = 30,
 		},
 	},
 	
