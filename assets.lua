@@ -64,10 +64,18 @@ Sprites = {
 		theRoyalFortress = love.graphics.newImage('assets/gameBackgrounds/theRoyalFortress.png'),
 	},
 	result = {
-		background = love.graphics.newImage('assets/result/result UI bg.png'),
-		openLevelMap = love.graphics.newImage('assets/result/open level map shortcut.png'),
-		openTradingPlace = love.graphics.newImage('assets/result/open trading place shortcut.png'),
-		replay = love.graphics.newImage('assets/result/replay.png'),
+		win = {
+			background = love.graphics.newImage('assets/result/win result UI bg.png'),
+			openLevelMap = love.graphics.newImage('assets/result/win open level map shortcut.png'),
+			openTradingPlace = love.graphics.newImage('assets/result/win open trading place shortcut.png'),
+			replay = love.graphics.newImage('assets/result/win replay.png'),
+		},
+		lose = {
+			background = love.graphics.newImage('assets/result/lose result UI bg.png'),
+			openLevelMap = love.graphics.newImage('assets/result/lose open level map shortcut.png'),
+			openTradingPlace = love.graphics.newImage('assets/result/lose open trading place shortcut.png'),
+			replay = love.graphics.newImage('assets/result/lose replay.png'),
+		},
 		scrollBar = love.graphics.newImage('assets/result/scroll bar.png'),
 		scrollBox = love.graphics.newImage('assets/result/scroll box.png'),
 		shareButton = love.graphics.newImage('assets/result/share button.png'),
@@ -372,7 +380,8 @@ Sprites = {
 	},
 	
 	dialogue = {
-		textBox = love.graphics.newImage('assets/dialogue/text box.png'),
+		oppyTextBox = love.graphics.newImage('assets/dialogue/oppy text box.png'),
+		merchantTextBox = love.graphics.newImage('assets/dialogue/merchant text box.png'),
 		oppy = {
 			love.graphics.newImage('assets/dialogue/1.png'),
 			love.graphics.newImage('assets/dialogue/2.png'),

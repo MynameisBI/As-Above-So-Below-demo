@@ -6,18 +6,6 @@ local ResultFrame = Class('ResultFrame', Frame)
 
 function ResultFrame:initialize(args)
 	Frame.initialize(self)
-
-	self:addButton('replayButton', Button(Sprites.result.replay, 960, 1025, 540, 130,
-			function()
-				Gamestate.current():fadeToDark(function()
-					Gamestate.switch(Load, args.background, args.cardsNum, args.baseDeck, args.wildCards, args.startingPoint, args.minimumPoint, Game)
-					AudioManager:play('otherSounds', 'replay')
-				end)
-			end))
-	self:addButton('openLevelMap', Button(Sprites.result.openLevelMap, 183, 864, 274, 442,
-			function() Gamestate.current():fadeToDark(function() Gamestate.switch(Level); AudioManager:play('otherSounds', 'map') end) end))
-	self:addButton('openTrading', Button(Sprites.result.openTradingPlace, 1725, 895, 470, 370,
-			function() Gamestate.current():fadeToDark(function() Gamestate.switch(Trading); AudioManager:play('otherSounds', 'tradings') end) end))
 end
 
 function ResultFrame:setResultInfo(result, score, reward)
@@ -42,6 +30,18 @@ function ResultFrame:setResultInfo(result, score, reward)
 		AudioManager:play('otherSounds', 'lost')
 	end
 	
+	self:addButton('replayButton', Button(Sprites.result[self.result].replay, 960, 1025, 540, 130,
+			function()
+				Gamestate.current():fadeToDark(function()
+					Gamestate.switch(Load, args.background, args.cardsNum, args.baseDeck, args.wildCards, args.startingPoint, args.minimumPoint, Game)
+					AudioManager:play('otherSounds', 'replay')
+				end)
+			end))
+	self:addButton('openLevelMap', Button(Sprites.result[self.result].openLevelMap, 183, 864, 274, 442,
+			function() Gamestate.current():fadeToDark(function() Gamestate.switch(Level); AudioManager:play('otherSounds', 'map') end) end))
+	self:addButton('openTrading', Button(Sprites.result[self.result].openTradingPlace, 1725, 895, 470, 370,
+			function() Gamestate.current():fadeToDark(function() Gamestate.switch(Trading); AudioManager:play('otherSounds', 'tradings') end) end))
+			
 	if Settings.hasSeenResult == false then
 		Settings.hasSeenResult = true
 		_dialogue:addLines(
@@ -67,17 +67,22 @@ function ResultFrame:draw()
 	if not self.isActive then return end
 
 	love.graphics.setColor(1, 1, 1)
-	love.graphics.draw(Sprites.result.background)
+	love.graphics.draw(Sprites.result[self.result].background)
 
 	if self.result == 'win' then
+		love.graphics.setColor(52/255, 31/255, 68/255)
 		self:print('You succeeded The Great Work.', Fonts.result_small, {1, 1, 1}, 960, 44)
+		love.graphics.setColor(195/255, 52/255, 70/255)
 		self:print('New highscore', Fonts.result_small, {0.576, 0.447, 0.467}, 960, 190)
+		love.graphics.setColor(7/255, 4/255, 15/255)
 		for i = -5, 5 do
 			self:print(tostring(self.score), Fonts.result_number, {1, 1, 1}, 960 + (i-3), 270)
 		end
 		
 	elseif self.result == 'lose' then
+		love.graphics.setColor(0.96, 0.95, 0.98)
 		self:print('You failed The Great Work.', Fonts.result_small, {0.506, 0.176, 0.263}, 954, 50)
+		love.graphics.setColor(1, 1, 1)
 		self:print('Lost', Fonts.result_big, {0.765, 0.204, 0.275}, 960, 270)
 		
 	end

@@ -11,6 +11,10 @@ Settings = {
 	cardAutomaticallyFadeAway = false,
 	
 	hasEnteredMenu = false,
+	hasOpenedTrading = false,
+	hasOpenedTopDrawer = false,
+	hasOpenedMidDrawer = false,
+	hasOpenedBotDrawer = false,
 	hasEnteredWorld = false,
 	hasEnteredTutorialLevel = false,	
 	hasReturnedFromTutorialLevel = false,

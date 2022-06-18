@@ -105,12 +105,16 @@ function Dialogue:draw()
 
 	love.graphics.setColor(1, 1, 1)
 	if self.isTutorial == false then
-		love.graphics.draw(Sprites.dialogue.textBox, 0, 0)
+		if self.currentOppyIndex ~= 'merchant' then
+			love.graphics.draw(Sprites.dialogue.oppyTextBox, 0, 0)
+		elseif self.currentOppyIndex == 'merchant' then
+			love.graphics.draw(Sprites.dialogue.merchantTextBox, 0, 0)
+		end
 		
 		self.skipButton.y = 734
 		self.skipButton:draw()
 		
-		if self.currentOppyIndex ~= 0 then
+		if self.currentOppyIndex ~= 0 and self.currentOppyIndex ~= 'merchant' then
 			local oppy = Sprites.dialogue.oppy[self.currentOppyIndex]
 			love.graphics.draw(oppy, 960, 456,
 					0, 1, 1, oppy:getWidth()/2, oppy:getHeight()/2)
